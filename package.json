@@ -17,6 +17,9 @@
     "url": "https://github.com/komed3/ebay-sales-manager/issues"
   },
   "type": "module",
+  "scripts": {
+    "start": "node src/app.js"
+  },
   "dependencies": {
     "express": "^5.1.0",
     "pug": "^3.0.3"
