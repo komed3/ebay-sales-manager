@@ -1,0 +1,19 @@
+{
+  "name": "@komed3/ebay-sales-manager",
+  "private": true,
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Paul Köhler (komed3)",
+    "url": "https://komed3.de",
+    "email": "webmaster@komed3.de"
+  },
+  "homepage": "https://github.com/komed3/ebay-sales-manager",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/komed3/ebay-sales-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/komed3/ebay-sales-manager/issues"
+  }
+}
