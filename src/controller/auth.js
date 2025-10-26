@@ -1,9 +1,13 @@
 import { config } from '../config.js';
 import bcrypt from 'bcrypt';
 
-export function get ( _, res ) { res.render( 'login' ) }
+export function login ( _, res ) { res.render( 'login' ) }
 
-export async function post ( req, res ) {
+export function logout ( req, res ) { req.session.destroy(
+    () => res.redirect( '/login/' )
+) }
+
+export async function auth ( req, res ) {
 
     const { username, password } = req.body;
 
