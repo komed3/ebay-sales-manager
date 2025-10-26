@@ -1,1 +1,1 @@
-export function dashboard ( req, res, next ) { res.render( 'dashboard' ) }
+export function dashboard ( req, res, next ) { res.render( 'dashboard', { title: 'Dashboard' } ) }
