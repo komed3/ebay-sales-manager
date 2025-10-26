@@ -30,3 +30,14 @@
     width: 72px;
     border-right: var( --box-border );
 }
+
+.wrapper {
+    margin: 72px 0 0 72px;
+    padding: 32px;
+}
+
+.footer {
+    margin: 32px 0;
+    font-size: 0.9em;
+    color: var( --text-muted );
+}
