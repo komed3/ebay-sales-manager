@@ -23,8 +23,9 @@
 :root {
     --text-color: #121212;
     --background-color: #f5f6f7;
+    --text-muted: #565758;
     --primary-color: #0a6fff;
-    --secondary-color: #06b6d4;
+    --secondary-color: #005bb5;
     --box-border: 1px solid #d5d6d7;
 }
 
@@ -48,10 +49,32 @@ a:hover, a:focus {
     text-decoration: underline;
 }
 
-input, textarea, select {
+input, textarea, select, button {
+    width: 100%;
+    padding: 12px;
     font-family: 'SUSE', sans-serif;
+    font-size: 1em;
     color: var( --text-color );
     background: var( --background-color );
     border: var( --box-border );
     border-radius: 4px;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: 2px solid var( --primary-color );
+}
+
+select, button {
+    cursor: pointer;
+}
+
+button {
+    font-weight: bold;
+    color: #fff;
+    background: var( --primary-color );
+    border: none;
+}
+
+button:hover, button:focus {
+    background: var( --secondary-color );
 }

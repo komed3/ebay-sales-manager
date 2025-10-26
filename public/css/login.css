@@ -1,48 +1,30 @@
 .login-container {
     width: 360px;
     margin: 100px auto;
-    padding: 30px;
+    padding: 32px;
     background: #fff;
     border: var( --box-border );
     border-radius: 5px;
 }
 
 .login-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    margin: 0 0 20px;
 }
 
 .login-container label {
     display: block;
-    margin-bottom: 8px;
+    margin: 16px 0 6px;
+    font-size: 14px;
     font-weight: bold;
 }
 
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-}
-
 .login-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.login-container button:hover {
-    background-color: #005bb5;
+    margin-top: 32px;
 }
 
 .login-credits {
-    text-align: center;
     margin-top: 15px;
+    text-align: center;
     font-size: 12px;
-    color: var(--muted);
+    color: var( --text-muted );
 }
