@@ -44,8 +44,7 @@
 }
 
 .login-credits {
-    margin-top: 15px;
     text-align: center;
-    font-size: 12px;
+    font-size: 0.76em;
     color: var( --text-muted );
 }
