@@ -1,1 +1,1 @@
-export function get ( req, res, next ) {}
+export function dashboard ( req, res, next ) {}
