@@ -1,11 +1,11 @@
-import { get as login } from './auth.js';
+import { get as login, post as auth } from './auth.js';
 import { get as dashboard } from './dashboard.js';
 import express from 'express';
 
 // Set up routes
 const routes = [
     { paths: '{/}', controller: { get: dashboard } },
-    { paths: '/login{/}', controller: { get: login } }
+    { paths: '/login{/}', controller: { get: login, post: auth } }
 ];
 
 // Init router
