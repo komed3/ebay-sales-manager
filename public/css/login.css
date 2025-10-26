@@ -1,6 +1,17 @@
-.login-container {
+.login-error {
+    margin: 60px auto -60px;
     width: 420px;
+    padding: 16px;
+    text-align: center;
+    color: var( --red );
+    background: #fff;
+    border: 2px solid var( --red );
+    border-radius: 5px;
+}
+
+.login-container {
     margin: 100px auto;
+    width: 420px;
     padding: 32px;
     background: #fff;
     border: var( --box-border );

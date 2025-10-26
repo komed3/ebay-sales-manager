@@ -10,7 +10,11 @@ html( lang= "de" )
     link( rel= "stylesheet", href= "/css/global.css" )
     link( rel= "stylesheet", href= "/css/login.css" )
 
-  body 
+  body.esm.login
+    if error
+      div.login-error
+        span= error
+
     div.login-container
       h2
         img( src= "/images/favicon.svg", alt= "eBay Sales Manager" )
