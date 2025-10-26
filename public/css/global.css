@@ -11,13 +11,13 @@
 
 @font-face {
     font-family: 'SUSE Mono';
-    src: url( '../fonts/SUSE-Mono.woff2' ) format( 'woff2' );
+    src: url( '../fonts/SUSEMono.woff2' ) format( 'woff2' );
 }
 
 @font-face {
     font-family: 'SUSE Mono';
     font-style: italic;
-    src: url( '../fonts/SUSE-Mono-Italic.woff2' ) format( 'woff2' );
+    src: url( '../fonts/SUSEMono-Italic.woff2' ) format( 'woff2' );
 }
 
 :root {
@@ -26,6 +26,8 @@
     --text-muted: #565758;
     --primary-color: #0a6fff;
     --secondary-color: #005bb5;
+    --font-sans: 'SUSE', sans-serif;
+    --font-mono: 'SUSE Mono', monospace;
     --box-border: 1px solid #d5d6d7;
 }
 
@@ -35,7 +37,7 @@
 
 html, body {
     margin: 0;
-    font-family: 'SUSE', sans-serif;
+    font-family: var( --font-sans );
     color: var( --text-color );
     background: var( --background-color );
 }
@@ -52,7 +54,7 @@ a:hover, a:focus {
 input, textarea, select, button {
     width: 100%;
     padding: 12px;
-    font-family: 'SUSE', sans-serif;
+    font-family: var( --font-mono );
     font-size: 1em;
     color: var( --text-color );
     background: var( --background-color );
@@ -69,6 +71,7 @@ select, button {
 }
 
 button {
+    font-family: var( --font-sans );
     font-weight: bold;
     color: #fff;
     background: var( --primary-color );
