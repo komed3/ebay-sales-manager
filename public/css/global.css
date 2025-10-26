@@ -19,3 +19,39 @@
     font-style: italic;
     src: url( '../fonts/SUSE-Mono-Italic.woff2' ) format( 'woff2' );
 }
+
+:root {
+    --text-color: #121212;
+    --background-color: #f5f6f7;
+    --primary-color: #0a6fff;
+    --secondary-color: #06b6d4;
+    --box-border: 1px solid #d5d6d7;
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    font-family: 'SUSE', sans-serif;
+    color: var( --text-color );
+    background: var( --background-color );
+}
+
+a, a:link, a:visited {
+    color: var( --primary-color );
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    text-decoration: underline;
+}
+
+input, textarea, select {
+    font-family: 'SUSE', sans-serif;
+    color: var( --text-color );
+    background: var( --background-color );
+    border: var( --box-border );
+    border-radius: 4px;
+}
