@@ -3,13 +3,18 @@ html( lang= "de" )
   head
     meta( charset= "UTF-8" )
     meta( name= "viewport", content= "width=device-width, initial-scale=1.0" )
+    meta( name= "theme-color", content= "#ffffff" )
+    link( rel= "icon", href= "/images/favicon.ico", sizes= "256x256", type= "image/x-icon" )
+    link( rel= "icon", href= "/images/favicon.svg", sizes= "any", type= "image/svg+xml" )
     title eBay Sales Manager - Login
     link( rel= "stylesheet", href= "/css/global.css" )
     link( rel= "stylesheet", href= "/css/login.css" )
 
   body 
     div.login-container
-      h2 Login
+      h2
+        img( src= "/images/favicon.svg", alt= "eBay Sales Manager" )
+        span eBay Sales Manager
       form( method= "POST" action= "/login" )
         label( for="username" ) Benutzername
         input( type="text" id="username" name="username" required )

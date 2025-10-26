@@ -1,5 +1,5 @@
 .login-container {
-    width: 360px;
+    width: 420px;
     margin: 100px auto;
     padding: 32px;
     background: #fff;
@@ -8,7 +8,17 @@
 }
 
 .login-container h2 {
-    margin: 0 0 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 32px;
+}
+
+.login-container h2 img {
+    height: 36px;
+    width: 36px;
 }
 
 .login-container label {
