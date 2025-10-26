@@ -1,5 +1,5 @@
-import { get as dashboard } from './dashboard.js';
 import { get as login } from './auth.js';
+import { get as dashboard } from './dashboard.js';
 import express from 'express';
 
 // Set up routes
