@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<rect width="48" height="48" fill="#fff" fill-opacity=".01"/>
+<path d="m44 31c0 5.5228-4.4772 10-10 10-1.7909 0-3.4719-0.4708-4.9259-1.2954-2.5598-1.4517-4.4162-4-4.9305-7.0063-0.0944-0.552-0.1436-1.1194-0.1436-1.6983 0-2.5677 0.9678-4.9094 2.5585-6.6802 1.8307-2.038 4.4864-3.3198 7.4415-3.3198 5.5228 0 10 4.4772 10 10z" fill="#2F88FF" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+<path d="m34 12v9c-2.9551 0-5.6108 1.2818-7.4415 3.3198-1.5907 1.7708-2.5585 4.1125-2.5585 6.6802 0 0.5789 0.0492 1.1463 0.1436 1.6983 0.5143 3.0063 2.3707 5.5546 4.9305 7.0063-2.6625 0.805-6.1965 1.2954-10.074 1.2954-8.2843 0-15-2.2386-15-5v-24" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+<path d="m34 12c0 2.7614-6.7157 5-15 5s-15-2.2386-15-5c0-2.7614 6.7157-5 15-5s15 2.2386 15 5z" fill="#2F88FF" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+<path d="m4 28c0 2.7614 6.7157 5 15 5 1.807 0 3.5393-0.1065 5.1436-0.3017" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+<path d="m4 20c0 2.7614 6.7157 5 15 5 2.7563 0 5.339-0.2478 7.5585-0.6802" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+<path d="m34 26v10m0 0 4-4m-4 4-4-4" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+</svg>
