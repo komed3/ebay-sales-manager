@@ -14,18 +14,18 @@ block content
 
   nav#nav.nav
     img.logo( src= "/images/favicon.svg", alt= "eBay Sales Manager" )
-    a( href= "/dashboard", title= "Dashboard" )
-      img( src= "/images/icons/app.svg", alt= "Dashboard" )
-    a( href= "/new", title= "Hinzufügen" )
-      img( src= "/images/icons/add.svg", alt= "Hinzufügen" )
-    a( href= "/orders", title= "Bestellungen" )
-      img( src= "/images/icons/table.svg", alt= "Bestellungen" )
-    a( href= "/charts", title= "Statistik" )
-      img( src= "/images/icons/chart.svg", alt= "Statistik" )
-    a( href= "/map", title= "Karte" )
-      img( src= "/images/icons/map.svg", alt= "Karte" )
-    a( href= "/reports", title= "Reporte & Export" )
-      img( src= "/images/icons/database.svg", alt= "Reporte & Export" )
+    -
+      var nav = [
+        { path: '/', label: 'Dashboard', icon: 'app.svg' },
+        { path: '/new', label: 'Hinzufügen', icon: 'add.svg' },
+        { path: '/orders', label: 'Bestellungen', icon: 'table.svg' },
+        { path: '/stats', label: 'Statistik', icon: 'chart.svg' },
+        { path: '/map', label: 'Karte', icon: 'map.svg' },
+        { path: '/reports', label: 'Reporte & Export', icon: 'database.svg' }
+      ]
+    each item in nav
+      a( href= item.path, title= item.label )
+        img( src= '/images/icons/' + item.icon, alt= item.label )
 
   div.wrapper
     main#main.main
