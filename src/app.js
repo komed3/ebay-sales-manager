@@ -8,7 +8,7 @@ const cwd = process.cwd();
 const app = express();
 
 // Environment
-const config = dotenv.config( { path: join( cwd, 'config.env' ) } ).parsed ?? {};
+const config = dotenv.config( { path: join( cwd, 'config.env' ), quiet: true } ).parsed ?? {};
 
 // Set up view engine
 app.set( 'views', join( cwd, 'views' ) );
@@ -30,15 +30,8 @@ app.use( '/images', serveStatic( join( cwd, 'public/images' ) ) );
 app.use( '/css', serveStatic( join( cwd, 'public/css' ) ) );
 app.use( '/js', serveStatic( join( cwd, 'public/js' ) ) );
 
-// Routing
-router.forEach( ( route ) => {
-
-    const { paths, controller: { get, post } } = route;
-
-    if ( post ) app.post( paths, post );
-    if ( get ) app.get( paths, get );
-
-} );
+// Mount router
+app.use( router );
 
 // Listen on port 3000
-app.listen( 3000 );
+app.listen( 3000, () => console.log( `Server is running!` ) );
