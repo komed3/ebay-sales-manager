@@ -9,9 +9,13 @@ block styles
 block content
   header#header.header
     h1= title + ' — eBay Sales Manager'
+    a.logout( href= "/logout", title= "Logout" )
+      img( src= "/images/icons/logout.svg", alt= "Logout" )
 
   nav#nav.nav
     img.logo( src= "/images/favicon.svg", alt= "eBay Sales Manager" )
+    a( href= "/dashboard", title= "Dashboard" )
+      img( src= "/images/icons/app.svg", alt= "Dashboard" )
 
   div.wrapper
     main#main.main

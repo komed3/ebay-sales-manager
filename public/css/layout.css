@@ -3,9 +3,18 @@
     top: 0;
     display: flex;
     align-items: center;
+    gap: 6px;
     padding: 10px;
     background: #fff;
     z-index: 999;
+}
+
+.header a, .nav a {
+    display: inline-block;
+    width: 52px;
+    height: 52px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .header {
@@ -22,6 +31,10 @@
     font-size: 1.4em;
 }
 
+.header .logout {
+    padding: 14px;
+}
+
 .nav {
     left: 0;
     bottom: 0;
@@ -29,6 +42,14 @@
     justify-content: flex-start;
     width: 72px;
     border-right: var( --box-border );
+}
+
+.nav .logo {
+    margin-bottom: 18px;
+}
+
+.nav a.active {
+    background: var( --background-color );
 }
 
 .wrapper {
