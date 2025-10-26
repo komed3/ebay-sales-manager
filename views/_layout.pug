@@ -3,6 +3,9 @@ extends ./_base
 block title
   title= title + ' — eBay Sales Manager'
 
+block styles
+  link( rel= "stylesheet", href= "/css/layout.min.css" )
+
 block content
   header#header.header
     h1= title + ' — eBay Sales Manager'
@@ -10,8 +13,9 @@ block content
   nav#nav.nav
     img.logo( src= "/images/favicon.svg", alt= "eBay Sales Manager" )
 
-  main#main.main
-    block main
+  div.wrapper
+    main#main.main
+      block main
 
-  footer#footer.footer
-    span Copyright &copy; 2025 <a href= "https://komed3.de" target="_blank">komed3</a>. Alle Rechte vorbehalten.
+    footer#footer.footer
+      span Copyright &copy; 2025 <a href= "https://komed3.de" target="_blank">komed3</a>. Alle Rechte vorbehalten.
