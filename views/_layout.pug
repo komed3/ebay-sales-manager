@@ -24,7 +24,7 @@ block content
         { path: '/reports', label: 'Reporte & Export', icon: 'database.svg' }
       ]
     each item in nav
-      a( href= item.path, title= item.label )
+      a( href= item.path, title= item.label, class= ( item.path == ( path || '' ) ? 'active' : '' ) )
         img( src= '/images/icons/' + item.icon, alt= item.label )
 
   div.wrapper
