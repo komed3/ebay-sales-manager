@@ -1,13 +1,28 @@
-import { join } from 'node:path';
-import express, { static as serveStatic } from 'express';
 import { router } from './controller/index.js';
+import { join } from 'node:path';
+import dotenv from 'dotenv';
+import express, { static as serveStatic } from 'express';
+import session from 'express-session';
 
 const cwd = process.cwd();
 const app = express();
 
+// Environment
+const config = dotenv.config( { path: join( cwd, 'config.env' ) } ).parsed ?? {};
+
 // Set up view engine
 app.set( 'views', join( cwd, 'views' ) );
 app.set( 'view engine', 'pug' );
+
+// Middlewares
+app.use( express.urlencoded( { extended: true } ) );
+app.use( express.json() );
+app.use( session( {
+    secret: config.SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 8.64e7 }
+} ) );
 
 // Serve static files
 app.use( '/fonts', serveStatic( join( cwd, 'public/fonts' ) ) );
