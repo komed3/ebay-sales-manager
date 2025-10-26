@@ -1,14 +1,11 @@
+import { cwd, config } from './config.js';
 import { router } from './controller/index.js';
 import { join } from 'node:path';
-import dotenv from 'dotenv';
 import express, { static as serveStatic } from 'express';
 import session from 'express-session';
 
-const cwd = process.cwd();
+// Express app
 const app = express();
-
-// Environment
-const config = dotenv.config( { path: join( cwd, 'config.env' ), quiet: true } ).parsed ?? {};
 
 // Set up view engine
 app.set( 'views', join( cwd, 'views' ) );
