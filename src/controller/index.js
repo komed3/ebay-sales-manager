@@ -8,9 +8,10 @@ const routes = [
     { paths: '/login{/}', controller: { get: login } }
 ];
 
-// Routing paths
+// Init router
 const router = express.Router();
 
+// Ensure secured login
 router.use( '/', ( req, res, next ) => {
 
     if ( ( ! req.session || ! req.session.user ) && ! req.path.startsWith( '/login' ) ) res.redirect( '/login/' );
@@ -18,6 +19,7 @@ router.use( '/', ( req, res, next ) => {
 
 } );
 
+// Routing paths
 routes.forEach( ( route ) => {
 
     const { paths, controller: { get, post } } = route;
