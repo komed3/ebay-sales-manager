@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'SUSE';
+    src: url( '../fonts/SUSE-Regular.woff2' ) format( 'woff2' );
+}
+
+@font-face {
+    font-family: 'SUSE';
+    font-style: italic;
+    src: url( '../fonts/SUSE-Italic.woff2' ) format( 'woff2' );
+}
+
+@font-face {
+    font-family: 'SUSE Mono';
+    src: url( '../fonts/SUSE-Mono.woff2' ) format( 'woff2' );
+}
+
+@font-face {
+    font-family: 'SUSE Mono';
+    font-style: italic;
+    src: url( '../fonts/SUSE-Mono-Italic.woff2' ) format( 'woff2' );
+}
