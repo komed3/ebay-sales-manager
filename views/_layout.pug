@@ -1,4 +1,5 @@
 extends ./_base
+include ./mixin/nav
 
 block title
   title= title + ' — eBay Sales Manager'
@@ -9,23 +10,23 @@ block styles
 block content
   header#header.header
     h1= title + ' — eBay Sales Manager'
-    a.logout( href= "/logout", title= "Abmelden" )
-      img( src= "/images/icons/logout.svg", alt= "Abmelden" )
+    div.header-actions
+      +icon_nav( [
+        { path: '/settings', label: 'Einstellungen', icon: 'settings.svg' },
+        { path: '/logout', label: 'Abmelden', icon: 'logout.svg' }
+      ] )
 
   nav#nav.nav
     img.logo( src= "/images/favicon.svg", alt= "eBay Sales Manager" )
-    -
-      var nav = [
-        { path: '/', label: 'Dashboard', icon: 'app.svg' },
-        { path: '/new', label: 'Hinzufügen', icon: 'add.svg' },
-        { path: '/orders', label: 'Bestellungen', icon: 'table.svg' },
-        { path: '/stats', label: 'Statistik', icon: 'chart.svg' },
-        { path: '/map', label: 'Karte', icon: 'map.svg' },
-        { path: '/reports', label: 'Reporte & Export', icon: 'database.svg' }
-      ]
-    each item in nav
-      a( href= item.path, title= item.label, class= ( item.path == ( path || '' ) ? 'active' : '' ) )
-        img( src= '/images/icons/' + item.icon, alt= item.label )
+    +icon_nav(  [
+      { path: '/', label: 'Dashboard', icon: 'app.svg' },
+      { path: '/new', label: 'Hinzufügen', icon: 'add.svg' },
+      { path: '/orders', label: 'Bestellungen', icon: 'table.svg' },
+      { path: '/stats', label: 'Statistik', icon: 'chart.svg' },
+      { path: '/comission', label: 'Komissionierung', icon: 'users.svg' },
+      { path: '/map', label: 'Karte', icon: 'map.svg' },
+      { path: '/reports', label: 'Reporte & Export', icon: 'database.svg' }
+    ] )
 
   div.wrapper
     main#main.main

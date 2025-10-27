@@ -30,7 +30,7 @@
     font-size: 1.4em;
 }
 
-.header .logout {
+.header-actions a {
     padding: 14px;
 }
 
