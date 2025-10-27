@@ -53,7 +53,7 @@ function mergeFields ( obj ) {
 
     if ( ! obj ) return [];
 
-    const fields = Object.keys( obj );
+    const fields = [ ...new Set( Object.keys( obj ).map( f => f.replace( /\[\d+\]/, '' ) ) ) ];
     const articles = [];
     let i = 0;
 
@@ -61,7 +61,7 @@ function mergeFields ( obj ) {
 
         let data = {};
 
-        for ( const field of fields ) { if ( obj[ `${field}[${i}]` ]?.length ) {
+        for ( const field of fields ) { if ( obj[ `${field}[${i}]` ] != '' ) {
             data[ field ] = numberOrAny( obj[ `${field}[${i}]` ] );
         } }
 
