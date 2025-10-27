@@ -56,6 +56,43 @@
     padding: 32px;
 }
 
+.column {
+    column-count: 2;
+    column-gap: 24px;
+}
+
+.box {
+    break-inside: avoid;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #fff;
+    border: var( --box-border );
+    border-radius: 5px;
+}
+
+.box h3 {
+    margin: 0 0 16px;
+    font-size: 1.1em;
+}
+
+.box h4 {
+    margin: 0;
+    font-size: 1em;
+}
+
+.box-row {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.box-col {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
+}
+
 .footer {
     margin: 32px 0;
     font-size: 0.9em;

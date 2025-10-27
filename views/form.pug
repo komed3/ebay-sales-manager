@@ -1,1 +1,68 @@
 extends ./_layout
+
+block main
+  form( method= "POST" action= "/form" )
+    div.box
+      h3 Bestelldaten
+      div.box-row
+        input(
+          type= "text", name= "orderNumber", required,
+          placeholder= "Bestellnummer",
+          value= data ? data.orderNumber : ''
+        )
+        input(
+          type= "text", name= "recordNumber", required,
+          placeholder= "Verkaufsprotokoll",
+          value= data ? data.recordNumber : ''
+        )
+        input(
+          type= "date", name= "orderDate", required,
+          value= data ? data.orderNumber : ''
+        )
+
+    div.column
+      div.box
+        h3 Artikel
+
+      div.box
+        h3 Kundendaten &amp; Lieferanschrift
+        div.box-col
+          input(
+            type= "text", name= "customer.nick", required,
+            placeholder= "Benutzername",
+            value= data && data.customer ? data.customer.nick : ''
+          )
+          input(
+            type= "text", name= "customer.name", required,
+            placeholder= "Name (Realname)",
+            value= data && data.customer ? data.customer.name : ''
+          )
+          input(
+            type= "tel", name= "customer.tel",
+            placeholder= "Telefonnummer",
+            value= data && data.customer ? data.customer.tel : ''
+          )
+          input(
+            type= "email", name= "customer.mail", required,
+            placeholder= "E-Mail-Adresse",
+            value= data && data.customer ? data.customer.mail : ''
+          )
+          h4 Lieferanschrift (bei Versand)
+          input(
+            type= "text", name= "customer.address.street",
+            placeholder= "Straße + Hausnr.",
+            value= data && data.customer && data.customer.address ? data.customer.address.street : ''
+          )
+          div.box-row
+            input(
+              type= "text", name= "customer.address.zipCode",
+              placeholder= "PLZ",
+              value= data && data.customer && data.customer.address ? data.customer.address.zipCode : ''
+            )
+            input(
+              type= "text", name= "customer.address.city",
+              placeholder= "Ort",
+              value= data && data.customer && data.customer.address ? data.customer.address.city : ''
+            )
+          select( name= "customer.address.country", required )
+            option( value= "de" ) Deutschland
