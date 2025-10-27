@@ -8,74 +8,76 @@ block main
         input(
           type= "text", name= "orderNumber", required,
           placeholder= "Bestellnummer",
-          value= data ? data.orderNumber : ''
+          value= data && data.orderNumber
         )
         input(
           type= "text", name= "recordNumber", required,
           placeholder= "Verkaufsprotokoll",
-          value= data ? data.recordNumber : ''
+          value= data && data.recordNumber
         )
         input(
           type= "date", name= "orderDate", required,
-          value= data ? data.orderNumber : ''
+          value= data && data.orderDate
         )
 
     div.column
       div.box
         h3 Kundendaten
         div.box-col
+          - var customer = data?.customer || {}
+          - var address = customer?.address || {}
           input(
             type= "text", name= "customer.nick", required,
             placeholder= "Benutzername",
-            value= data && data.customer ? data.customer.nick : ''
+            value= customer.nick || ''
           )
           input(
             type= "text", name= "customer.name", required,
             placeholder= "Name (Realname)",
-            value= data && data.customer ? data.customer.name : ''
+            value= customer.name || ''
           )
           input(
             type= "tel", name= "customer.tel",
             placeholder= "Telefonnummer",
-            value= data && data.customer ? data.customer.tel : ''
+            value= customer.tel || ''
           )
           input(
             type= "email", name= "customer.mail", required,
             placeholder= "E-Mail-Adresse",
-            value= data && data.customer ? data.customer.mail : ''
+            value= customer.mail || ''
           )
           h4 Lieferanschrift (bei Versand)
           input(
             type= "text", name= "customer.address.street",
             placeholder= "Straße + Hausnr.",
-            value= data && data.customer && data.customer.address ? data.customer.address.street : ''
+            value= address.street || ''
           )
           div.box-row
             input(
               type= "text", name= "customer.address.zipCode",
               placeholder= "PLZ",
-              value= data && data.customer && data.customer.address ? data.customer.address.zipCode : ''
+              value= address.zipCode || ''
             )
             input(
               type= "text", name= "customer.address.city",
               placeholder= "Ort",
-              value= data && data.customer && data.customer.address ? data.customer.address.city : ''
+              value= address.city || ''
             )
-          - var country = data && data.customer && data.customer.address ? data.customer.address.country : 'de'
+          - var country = address.country || 'de'
           select( name= "customer.address.country", required )
             option( value= "de", selected= ( country == 'de' ) ) Deutschland
 
       div.box
         h3 Versand
         div.box-col
-          - var orderType = data && data.orderType ? data.orderType : 'shipping'
+          - var orderType = data && data.orderType
           select( name= "orderType", required )
             option( value= "shipping", selected= ( orderType == 'shipping' ) ) Versand
             option( value= "pickup", selected= ( orderType == 'pickup' ) ) Abholung
           input(
             type= "number", name= "shipping", required,
             placeholder= "Versandkosten / Abholgebühr [€]", min= 0, step= 0.01,
-            value= data ? data.shipping : ''
+            value= data && data.shipping
           )
 
       div.box
@@ -84,56 +86,57 @@ block main
           input(
             type= "number", name= "revenue", required,
             placeholder= "Umsatz / Gesamtbetrag [€]", min= 0, step= 0.01,
-            value= data ? data.revenue : ''
+            value= data && data.revenue
           )
           input(
             type= "number", name= "fees", required,
             placeholder= "Gebühren (Werbekosten) [€]", min= 0, step= 0.01,
-            value= data ? data.fees : ''
+            value= data && data.fees
           )
           input(
             type= "number", name= "refund",
             placeholder= "Rückerstattung [€]", min= 0, step= 0.01,
-            value= data ? data.refund : ''
+            value= data && data.refund
           )
           input(
             type= "number", name= "profit", required,
             placeholder= "Bestelleinnahmen [€]", min= 0, step= 0.01,
-            value= data ? data.profit : ''
+            value= data && data.profit
           )
 
     div.box
       h3 Artikel
       div.box-col
-        each val in [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+        each val in [ 0, 1, 2, 3, 4, 5, 6, 7 ]
           div.box-col
             div.box-row
+              - var article = data?.article?.[ val ] || {}
               input(
                 type= "text", name= `article.number[${val}]`,
                 placeholder= "Artikelnr.",
-                value= data && data.article && data.article[ val ] ? data.article[ val ].number : ''
+                value= article.number || ''
               )
               input(
                 type= "text", name= `article.name[${val}]`,
                 placeholder= "Name",
-                value= data && data.article && data.article[ val ] ? data.article[ val ].name : ''
+                value= article.name || ''
               )
               input(
                 type= "number", name= `article.quantity[${val}]`,
                 placeholder= "Menge", min= 1, max= 99, step= 1,
-                value= data && data.article && data.article[ val ] ? data.article[ val ].quantity : ''
+                value= article.quantity || ''
               )
               input(
                 type= "number", name= `article.price[${val}]`,
                 placeholder= "Artikelpreis [€]", min= 0, step= 0.01,
-                value= data && data.article && data.article[ val ] ? data.article[ val ].price : ''
+                value= article.price || ''
               )
               input(
                 type= "number", name= `article.fee[${val}]`,
                 placeholder= "Gebühren [€]", min= 0, step= 0.01,
-                value= data && data.article && data.article[ val ] ? data.article[ val ].fee : ''
+                value= article.fee || ''
               )
-              - var commission = data && data.article && data.article[ val ] ? data.article[ val ].commission : ''
+              - var commission = article.commission || ''
               select( name= `article.commission[${val}]` )
                 option( value="" ) —
                 optgroup( label= "Kommissioniert für:" )
