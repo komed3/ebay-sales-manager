@@ -100,20 +100,20 @@ table {
     border-spacing: 0;
 }
 
-table th {
-    padding: 0 0 12px;
-    text-align: left;
-    border-bottom: var( --box-border );
-}
-
+table th,
 table td {
-    padding: 12px 0;
+    padding: 12px;
     text-align: left;
 }
 
 table th.right,
 table td.right {
     text-align: right;
+}
+
+table th {
+    padding-top: 0;
+    border-bottom: var( --box-border );
 }
 
 table tbody tr:nth-child( even ) td {
