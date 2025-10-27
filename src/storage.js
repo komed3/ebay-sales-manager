@@ -120,7 +120,7 @@ export function getOrderIndex ( uuid ) {
 export function getOrderData ( uuid ) {
 
     const orders = getOrders();
-    return orders.find( o => o.__uuid === uuid ) || {};
+    return orders.find( o => o.__uuid === uuid ) || null;
 
 }
 

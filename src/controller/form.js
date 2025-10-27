@@ -1,19 +1,24 @@
-import { getCoordinates, sanitizeData, updateOrder } from '../storage.js';
+import { getCoordinates, getOrderData, sanitizeData, updateOrder } from '../storage.js';
 
-export function form ( _, res ) { res.render( 'form', { path: '/form', title: 'Neue Bestellung' } ) }
+export function form ( req, res ) {
+
+    res.render( 'form', {
+        path: '/form', title: 'Neue Bestellung',
+        data: getOrderData( req.query.uuid ?? '' )
+    } );
+
+}
 
 export async function update ( req, res ) {
 
     const data = sanitizeData( req.body );
-    const address = [
+    const coords = await getCoordinates( [
         data.customer?.address?.street,
         data.customer?.address?.zipCode,
         data.customer?.address?.city
-    ].filter( Boolean ).join( ', ' );
+    ].filter( Boolean ).join( ', ' ) );
 
-    const coords = await getCoordinates( address );
     updateOrder( { ...data, ...{ location: coords } } );
-
     res.redirect( '/orders' );
 
 }
