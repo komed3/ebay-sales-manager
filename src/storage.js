@@ -1,8 +1,11 @@
 import { cwd } from './config.js';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import deepmerge from 'deepmerge';
 import fetch from 'node-fetch';
 import { v4 as uuidv4 } from 'uuid';
+
+const ordersFile = join( cwd, 'data/orders.json' );
 
 function numberOrAny( value ) {
 
@@ -94,9 +97,6 @@ export async function getCoordinates ( address ) {
 export function sanitizeData ( raw ) {
 
     const data = expandDotNotation( raw );
-
-    data.__uuid ||= uuidv4();
-    data.__updated = new Date().toISOString();
     data.article = mergeFields( data.article );
 
     return data;
@@ -105,33 +105,42 @@ export function sanitizeData ( raw ) {
 
 export function getOrders () {
 
-    const fileName = join( cwd, 'data/orders.json' );
-    return JSON.parse( readFileSync( fileName, 'utf8' ) || '[]' );
+    return JSON.parse( readFileSync( ordersFile, 'utf8' ) || '[]' );
 
 }
 
-export function getOrderIndex ( uuid ) {
-
-    const orders = getOrders();
-    return orders.findIndex( o => o.__uuid === uuid ) || -1;
-
-}
-
-export function getOrderData ( uuid ) {
+export function getOrder ( uuid ) {
 
     const orders = getOrders();
     return orders.find( o => o.__uuid === uuid ) || null;
 
 }
 
-export function updateOrder ( data ) {
+export async function updateOrder ( raw ) {
 
+    const data = sanitizeData( raw );
     const orders = getOrders();
-    const idx = getOrderIndex( data.__uuid );
+    const idx = orders.findIndex( o => o.__uuid == data.__uuid ) ?? null;
+    const now = new Date().toISOString();
 
-    if ( idx >= 0 ) orders[ idx ] = data;
-    else orders.push( data );
+    data.__updated = now;
 
-    writeFileSync( fileName, JSON.stringify( orders, null, 2 ), 'utf8' );
+    if ( idx >= 0 ) orders[ idx ] = deepmerge( orders[ idx ], data );
+    else {
+
+        const coords = await getCoordinates( [
+            data.customer?.address?.street,
+            data.customer?.address?.zipCode,
+            data.customer?.address?.city
+        ].filter( Boolean ).join( ', ' ) );
+
+        orders.push( { ...data, ...{
+            __created: now, __uuid: uuidv4(),
+            location: coords
+        } } );
+
+    }
+
+    writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
 
 }

@@ -2,6 +2,9 @@ extends ./_layout
 
 block main
   form( method= "POST" action= "/form" )
+    if data && data.__uuid
+      input( type= "hidden", name= "__uuid", value= data.__uuid )
+
     div.box
       h3 Bestelldaten
       div.box-row
