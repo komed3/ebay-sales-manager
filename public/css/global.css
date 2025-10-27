@@ -83,3 +83,7 @@ button {
 button:hover, button:focus {
     background: var( --secondary-color );
 }
+
+button.alert, button.alert:hover, button.alert:focus {
+    background: var( --red );
+}

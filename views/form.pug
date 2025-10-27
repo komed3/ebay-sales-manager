@@ -136,3 +136,7 @@ block main
               - var commission = data && data.article && data.article[ val ] ? data.article[ val ].commission : ''
               select( name= `article[${val}].commission` )
                 option( disabled, selected ) Kommission?
+
+    div.box-row
+      button( type= "submit" ) Speichern
+      button( onclick= "location.href='/orders'", class= "alert" ) Abbrechen
