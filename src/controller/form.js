@@ -9,7 +9,7 @@ export async function update ( req, res ) {
         data.customer?.address?.street,
         data.customer?.address?.zipCode,
         data.customer?.address?.city
-    ].filter( Boolean ).join( ' ' );
+    ].filter( Boolean ).join( ', ' );
 
     const coords = await getCoordinates( address );
     updateOrder( { ...data, ...{ location: coords } } );
