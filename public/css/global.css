@@ -89,6 +89,15 @@ button.alert, button.alert:hover, button.alert:focus {
     background: var( --red );
 }
 
+button.icon {
+    width: 52px;
+    height: 52px;
+    padding: 10px;
+    color: none;
+    background: none;
+    border: 0;
+}
+
 number, money {
     font-family: var( --font-mono );
 }

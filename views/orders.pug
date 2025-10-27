@@ -17,6 +17,8 @@ block main
         type= "date", name= "to", value= query && query.to
         placeholder= "bis"
       )
+      button.icon( type= "submit", title= "Filtern" )
+        img( src= "/images/icons/check.svg", alt= "Filtern" )
       a( href= "/orders", title= "Filter löschen" )
         img( src= "/images/icons/clear.svg", alt= "Zurücksetzen" )
 
