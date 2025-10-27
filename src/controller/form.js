@@ -1,3 +1,12 @@
-export function form ( req, res, next ) { res.render( 'form', { path: '/form', title: 'Neue Bestellung' } ) }
+import { sanitizeData, updateOrder } from '../storage';
 
-export function update ( req, res, next ) { res.redirect( '/orders' ) }
+export function form ( _, res ) { res.render( 'form', { path: '/form', title: 'Neue Bestellung' } ) }
+
+export function update ( req, res ) {
+
+    const data = sanitizeData( req.body );
+    updateOrder( data );
+
+    res.redirect( '/orders' );
+
+}
