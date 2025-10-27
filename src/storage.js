@@ -107,8 +107,8 @@ export function getOrders ( query ) {
 
     return JSON.parse( readFileSync( ordersFile, 'utf8' ) || '[]' ).filter( o =>
         JSON.stringify( o ).match( new RegExp( query.search?.length ? query.search : '', 'i' ) ) &&
-        o.orderDate >= ( query.from?.length ? query.form : '1900-01-01' ) &&
-        o.orderDate <= ( query.to?.length ? query.to : '2100-12-31' )
+        new Date( o.orderDate ).getTime() >= new Date( query.from?.length ? query.from : '1900-01-01' ).getTime() &&
+        new Date( o.orderDate ).getTime() <= new Date( query.to?.length ? query.to : '2100-12-31' ).getTime()
     );
 
 }
