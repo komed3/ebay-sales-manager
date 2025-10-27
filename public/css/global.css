@@ -11,7 +11,7 @@
 
 @font-face {
     font-family: 'SUSE Mono';
-    src: url( '../fonts/SUSEMono.woff2' ) format( 'woff2' );
+    src: url( '../fonts/SUSEMono-Regular.woff2' ) format( 'woff2' );
 }
 
 @font-face {
@@ -86,4 +86,8 @@ button:hover, button:focus {
 
 button.alert, button.alert:hover, button.alert:focus {
     background: var( --red );
+}
+
+number, money {
+    font-family: var( --font-mono );
 }

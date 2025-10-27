@@ -11,10 +11,10 @@ block main
           th Datum
           th Kunde
           th Lieferung
-          th Umsatz
-          th Gebühren
-          th Versand
-          th Gewinn
+          th.right Umsatz
+          th.right Gebühren
+          th.right Versand
+          th.right Gewinn
       tbody
         each order in data
           tr
@@ -24,7 +24,7 @@ block main
             td: date= order.orderDate
             td= order.customer.name + ' (@' + order.customer.nick + ')'
             td= { shipping: 'Versand', pickup: 'Abholung' }[ order.orderType ]
-            td: money= order.revenue
-            td: money= order.fees
-            td: money= order.shipping
-            td: money= order.profit
+            td.right: money= order.revenue
+            td.right: money= order.fees
+            td.right: money= order.shipping
+            td.right: b: money= order.profit

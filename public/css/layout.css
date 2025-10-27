@@ -94,6 +94,32 @@
     gap: 16px;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table th {
+    padding: 0 0 12px;
+    text-align: left;
+    border-bottom: var( --box-border );
+}
+
+table td {
+    padding: 12px 0;
+    text-align: left;
+}
+
+table th.right,
+table td.right {
+    text-align: right;
+}
+
+table tbody tr:nth-child( even ) td {
+    background: var( --background-color );
+}
+
 .footer {
     margin: 32px 0;
     font-size: 0.9em;
