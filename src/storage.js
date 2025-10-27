@@ -103,9 +103,13 @@ export function sanitizeData ( raw ) {
 
 }
 
-export function getOrders () {
+export function getOrders ( query ) {
 
-    return JSON.parse( readFileSync( ordersFile, 'utf8' ) || '[]' );
+    return JSON.parse( readFileSync( ordersFile, 'utf8' ) || '[]' ).filter( o =>
+        JSON.stringify( o ).match( new RegExp( query.search?.length ? query.search : '', 'i' ) ) &&
+        o.orderDate >= ( query.from?.length ? query.form : '1900-01-01' ) &&
+        o.orderDate <= ( query.to?.length ? query.to : '2100-12-31' )
+    );
 
 }
 

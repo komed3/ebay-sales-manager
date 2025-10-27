@@ -1,10 +1,11 @@
 import { getOrder, getOrders, isOrder } from '../storage.js';
 
-export function orders ( _, res ) {
+export function orders ( req, res ) {
 
     res.render( 'orders', {
         path: '/orders', title: 'Bestellungen',
-        data: getOrders()
+        query: req.query ?? {},
+        data: getOrders( req.query ?? {} )
     } );
 
 }
