@@ -103,11 +103,30 @@ export function sanitizeData ( raw ) {
 
 }
 
-export function updateOrder ( data ) {
+export function getOrders () {
 
     const fileName = join( cwd, 'data/orders.json' );
-    const orders = JSON.parse( readFileSync( fileName, 'utf8' ) || '[]' );
-    const idx = orders.findIndex( o => o.__uuid === data.__uuid ) || -1;
+    return JSON.parse( readFileSync( fileName, 'utf8' ) || '[]' );
+
+}
+
+export function getOrderIndex ( uuid ) {
+
+    const orders = getOrders();
+    return orders.findIndex( o => o.__uuid === uuid ) || -1;
+
+}
+
+export function getOrderData ( uuid ) {
+
+    const orders = getOrders();
+    return orders.find( o => o.__uuid === uuid ) || {};
+
+}
+
+export function updateOrder ( data ) {
+
+    const idx = getOrderIndex( data.__uuid );
 
     if ( idx >= 0 ) orders[ idx ] = data;
     else orders.push( data );
