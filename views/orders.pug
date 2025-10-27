@@ -1,1 +1,30 @@
 extends ./_layout
+
+block main
+  div.box
+
+  div.box
+    table#orders
+      thead
+        tr
+          th Bestellnummer
+          th Datum
+          th Kunde
+          th Lieferung
+          th Umsatz
+          th Gebühren
+          th Versand
+          th Gewinn
+      tbody
+        each order in data
+          tr
+            td: a(
+              href= '/order?uuid=' + order.__uuid
+            )= order.orderNumber
+            td: date= order.orderDate
+            td= order.customer.name + ' (@' + order.customer.nick + ')'
+            td= { shipping: 'Versand', pickup: 'Abholung' }[ order.orderType ]
+            td: money= order.revenue
+            td: money= order.fees
+            td: money= order.shipping
+            td: money= order.profit

@@ -14,7 +14,7 @@ export function order ( req, res ) {
     const order = getOrder( req.query.uuid ?? '' );
 
     if ( isOrder( order ) ) res.render( 'orders', {
-        path: '/orders', title: 'Bestellungen',
+        path: '/order', title: order.orderNumber,
         data: order
     } );
 
