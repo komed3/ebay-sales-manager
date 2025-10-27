@@ -1,7 +1,7 @@
 extends ./_layout
 
 block main
-  form( method= "POST" action= "/form" )
+  form( method= "POST" action= "/form", enctype= "multipart/form-data" )
     if data && data.__uuid
       input( type= "hidden", name= "__uuid", value= data.__uuid )
 
@@ -24,6 +24,50 @@ block main
         )
 
     div.column
+      div.box
+        h3 Rechnung (PDF)
+        if data && data.invoicePDF
+          span (Datei wurde bereit hochgeladen)
+        else
+          input( type= "file", name= "invoicePDF", accept= ".pdf" )
+
+      div.box
+        h3 Versand
+        div.box-col
+          - var orderType = data && data.orderType
+          select( name= "orderType", required )
+            option( value= "shipping", selected= ( orderType == 'shipping' ) ) Versand
+            option( value= "pickup", selected= ( orderType == 'pickup' ) ) Abholung
+          input(
+            type= "number", name= "shipping", required,
+            placeholder= "Versandkosten / Abholgebühr [€]", min= 0, step= 0.01,
+            value= data && data.shipping
+          )
+
+      div.box
+        h3 Umsatz &amp; Gebühren
+        div.box-col
+          input(
+            type= "number", name= "revenue", required,
+            placeholder= "Umsatz / Gesamtbetrag zzgl. Versand [€]", min= 0, step= 0.01,
+            value= data && data.revenue
+          )
+          input(
+            type= "number", name= "fees", required,
+            placeholder= "Gebühren (Werbekosten) [€]", min= 0, step= 0.01,
+            value= data && data.fees
+          )
+          input(
+            type= "number", name= "refund",
+            placeholder= "Rückerstattung [€]", min= 0, step= 0.01,
+            value= data && data.refund
+          )
+          input(
+            type= "number", name= "profit", required,
+            placeholder= "Bestelleinnahmen [€]", min= 0, step= 0.01,
+            value= data && data.profit
+          )
+
       div.box
         h3 Kundendaten
         div.box-col
@@ -69,43 +113,6 @@ block main
           - var country = address.country || 'de'
           select( name= "customer.address.country", required )
             option( value= "de", selected= ( country == 'de' ) ) Deutschland
-
-      div.box
-        h3 Versand
-        div.box-col
-          - var orderType = data && data.orderType
-          select( name= "orderType", required )
-            option( value= "shipping", selected= ( orderType == 'shipping' ) ) Versand
-            option( value= "pickup", selected= ( orderType == 'pickup' ) ) Abholung
-          input(
-            type= "number", name= "shipping", required,
-            placeholder= "Versandkosten / Abholgebühr [€]", min= 0, step= 0.01,
-            value= data && data.shipping
-          )
-
-      div.box
-        h3 Umsatz &amp; Gebühren
-        div.box-col
-          input(
-            type= "number", name= "revenue", required,
-            placeholder= "Umsatz / Gesamtbetrag [€]", min= 0, step= 0.01,
-            value= data && data.revenue
-          )
-          input(
-            type= "number", name= "fees", required,
-            placeholder= "Gebühren (Werbekosten) [€]", min= 0, step= 0.01,
-            value= data && data.fees
-          )
-          input(
-            type= "number", name= "refund",
-            placeholder= "Rückerstattung [€]", min= 0, step= 0.01,
-            value= data && data.refund
-          )
-          input(
-            type= "number", name= "profit", required,
-            placeholder= "Bestelleinnahmen [€]", min= 0, step= 0.01,
-            value= data && data.profit
-          )
 
     div.box
       h3 Artikel
