@@ -81,6 +81,11 @@
     font-size: 1em;
 }
 
+.box img {
+    width: 32px;
+    height: 32px;
+}
+
 .box-row {
     display: flex;
     flex-flow: row nowrap;

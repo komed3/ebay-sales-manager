@@ -1,7 +1,24 @@
 extends ./_layout
 
 block main
-  div.box
+  form.box( method= "GET", action= "/orders" )
+    div.box-row
+      img( src= "/images/icons/filter.svg", alt= "Filter" )
+      input(
+        type= "text", name= "search", value= query && query.search
+        placeholder= "Suche nach …"
+      )
+      span Zeitraum:
+      input(
+        type= "date", name= "from", value= query && query.from
+        placeholder= "von"
+      )
+      input(
+        type= "date", name= "to", value= query && query.to
+        placeholder= "bis"
+      )
+      a( href= "/orders", title= "Filter löschen" )
+        img( src= "/images/icons/clear.svg", alt= "Zurücksetzen" )
 
   div.box
     table#orders
