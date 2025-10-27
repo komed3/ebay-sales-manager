@@ -135,7 +135,7 @@ block main
               )
               - var commission = data && data.article && data.article[ val ] ? data.article[ val ].commission : ''
               select( name= `article.commission[${val}]` )
-                option() —
+                option( value="" ) —
                 optgroup( label= "Kommissioniert für:" )
 
     div.box-row

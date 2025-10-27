@@ -1,11 +1,18 @@
-import { sanitizeData, updateOrder } from '../storage';
+import { getCoordinates, sanitizeData, updateOrder } from '../storage.js';
 
 export function form ( _, res ) { res.render( 'form', { path: '/form', title: 'Neue Bestellung' } ) }
 
-export function update ( req, res ) {
+export async function update ( req, res ) {
 
     const data = sanitizeData( req.body );
-    updateOrder( data );
+    const address = [
+        data.customer?.address?.street,
+        data.customer?.address?.zipCode,
+        data.customer?.address?.city
+    ].filter( Boolean ).join( ' ' );
+
+    const coords = await getCoordinates( address );
+    updateOrder( { ...data, ...{ location: coords } } );
 
     res.redirect( '/orders' );
 
