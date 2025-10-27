@@ -109,32 +109,32 @@ block main
           div.box-col
             div.box-row
               input(
-                type= "text", name= `article[${val}].number`,
+                type= "text", name= `article.number[${val}]`,
                 placeholder= "Artikelnr.",
                 value= data && data.article && data.article[ val ] ? data.article[ val ].number : ''
               )
               input(
-                type= "text", name= `article[${val}].name`,
+                type= "text", name= `article.name[${val}]`,
                 placeholder= "Name",
                 value= data && data.article && data.article[ val ] ? data.article[ val ].name : ''
               )
               input(
-                type= "number", name= `article[${val}].quantity`,
+                type= "number", name= `article.quantity[${val}]`,
                 placeholder= "Menge", min= 1, max= 99, step= 1,
                 value= data && data.article && data.article[ val ] ? data.article[ val ].quantity : ''
               )
               input(
-                type= "number", name= `article[${val}].price`,
+                type= "number", name= `article.price[${val}]`,
                 placeholder= "Artikelpreis [€]", min= 0, step= 0.01,
                 value= data && data.article && data.article[ val ] ? data.article[ val ].price : ''
               )
               input(
-                type= "number", name= `article[${val}].fee`,
+                type= "number", name= `article.fee[${val}]`,
                 placeholder= "Gebühren [€]", min= 0, step= 0.01,
                 value= data && data.article && data.article[ val ] ? data.article[ val ].fee : ''
               )
               - var commission = data && data.article && data.article[ val ] ? data.article[ val ].commission : ''
-              select( name= `article[${val}].commission` )
+              select( name= `article.commission[${val}]` )
                 option() —
                 optgroup( label= "Kommissioniert für:" )
 
