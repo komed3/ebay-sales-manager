@@ -126,6 +126,7 @@ export function getOrderData ( uuid ) {
 
 export function updateOrder ( data ) {
 
+    const orders = getOrders();
     const idx = getOrderIndex( data.__uuid );
 
     if ( idx >= 0 ) orders[ idx ] = data;
