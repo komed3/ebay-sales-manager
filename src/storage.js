@@ -109,7 +109,7 @@ export function getOrders ( query ) {
         JSON.stringify( o ).match( new RegExp( query.search?.length ? query.search : '', 'i' ) ) &&
         new Date( o.orderDate ).getTime() >= new Date( query.from?.length ? query.from : '1900-01-01' ).getTime() &&
         new Date( o.orderDate ).getTime() <= new Date( query.to?.length ? query.to : '2100-12-31' ).getTime()
-    );
+    ).slice( query.offset ?? 0, query.limit ?? 32 );
 
 }
 
