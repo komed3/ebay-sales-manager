@@ -4,13 +4,18 @@ import { join } from 'node:path';
 import fetch from 'node-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
-export function expandDotNotation ( obj ) {
+function numberOrAny( value ) {
+
+    const n = Number( value );
+    return isNaN( n ) ? value : n;
+
+}
+
+function expandDotNotation ( obj ) {
 
     const result = {};
 
     for ( const [ key, value ] of Object.entries( obj ) ) {
-
-        if ( key.startsWith( 'article.' ) ) continue;
 
         if ( key.includes( '.' ) ) {
 
@@ -21,7 +26,7 @@ export function expandDotNotation ( obj ) {
 
                 const p = parts[ i ];
 
-                if ( i === parts.length - 1 ) current[ p ] = value;
+                if ( i === parts.length - 1 ) current[ p ] = numberOrAny( value );
                 else {
 
                     if ( typeof current[ p ] !== 'object' || current[ p ] === null ) current[ p ] = {};
@@ -33,7 +38,7 @@ export function expandDotNotation ( obj ) {
 
         }
 
-        else result[ key ] = value;
+        else result[ key ] = numberOrAny( value );
 
     }
 
@@ -41,39 +46,26 @@ export function expandDotNotation ( obj ) {
 
 }
 
-export function mergeArticles ( obj ) {
+function mergeFields ( obj ) {
 
-    const articleKeys = Object.keys( obj ).filter( k => k.startsWith( 'article.' ) );
-    const fields = {};
-
-    if ( articleKeys.length === 0 ) return [];
-
-    for ( const key of articleKeys ) {
-
-        const field = key.split( '.' )[ 1 ];
-        fields[ field ] = Array.isArray( obj[ key ] ) ? obj[ key ] : [ obj[ key ] ];
-
-    }
-
-    const maxLen = Math.max( ...Object.values( fields ).map( a => a.length ) );
+    const fields = Object.keys( obj );
     const articles = [];
+    let i = 0;
 
-    for ( let i = 0; i < maxLen; i++ ) {
+    while ( true ) {
 
-        const article = {};
+        let data = {};
 
-        for ( const [ field, arr ] of Object.entries( fields ) ) {
+        for ( const field of fields ) { if ( obj[ field ]?.[ i ]?.length ) {
+            data[ field ] = numberOrAny( obj[ field ][ i ] );
+        } }
 
-            const val = arr[ i ]?.toString().trim() ?? '';
-            if ( val !== '' ) article[ field ] = val;
+        if ( Object.keys( data ).length ) articles.push( data );
+        else return articles;
 
-        }
-
-        articles.push( article );
+        i++;
 
     }
-
-    return articles;
 
 }
 
@@ -105,7 +97,7 @@ export function sanitizeData ( raw ) {
 
     data.__uuid ||= uuidv4();
     data.__updated = new Date().toISOString();
-    data.article = mergeArticles( data );
+    data.article = mergeFields( data.article );
 
     return data;
 
