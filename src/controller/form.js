@@ -15,7 +15,7 @@ export function form ( req, res ) {
 
 export async function update ( req, res ) {
 
-    await updateOrder( req.body );
+    await updateOrder( req.body, req.files );
     res.redirect( '/orders' );
 
 }

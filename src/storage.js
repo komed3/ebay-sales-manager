@@ -10,7 +10,7 @@ const ordersFile = join( cwd, 'data/orders.json' );
 function numberOrAny( value ) {
 
     const n = Number( value );
-    return isNaN( n ) || Math.abs( n ) > 1e6 ? value : n;
+    return [ '', null, undefined ].includes( value ) || isNaN( n ) || Math.abs( n ) > 1e6 ? value : n;
 
 }
 
@@ -51,6 +51,8 @@ function expandDotNotation ( obj ) {
 
 function mergeFields ( obj ) {
 
+    if ( ! obj ) return [];
+
     const fields = Object.keys( obj );
     const articles = [];
     let i = 0;
@@ -59,8 +61,8 @@ function mergeFields ( obj ) {
 
         let data = {};
 
-        for ( const field of fields ) { if ( obj[ field ]?.[ i ]?.length ) {
-            data[ field ] = numberOrAny( obj[ field ][ i ] );
+        for ( const field of fields ) { if ( obj[ `${field}[${i}]` ]?.length ) {
+            data[ field ] = numberOrAny( obj[ `${field}[${i}]` ] );
         } }
 
         if ( Object.keys( data ).length ) articles.push( data );
@@ -103,9 +105,15 @@ export function sanitizeData ( raw ) {
 
 }
 
-export function getOrders ( query ) {
+export function getOrders () {
 
-    return JSON.parse( readFileSync( ordersFile, 'utf8' ) || '[]' ).filter( o =>
+    return JSON.parse( readFileSync( ordersFile, 'utf8' ) || '[]' );
+
+}
+
+export function filterOrders ( query ) {
+
+    return getOrders().filter( o =>
         JSON.stringify( o ).match( new RegExp( query.search?.length ? query.search : '', 'i' ) ) &&
         new Date( o.orderDate ).getTime() >= new Date( query.from?.length ? query.from : '1900-01-01' ).getTime() &&
         new Date( o.orderDate ).getTime() <= new Date( query.to?.length ? query.to : '2100-12-31' ).getTime()
@@ -126,16 +134,29 @@ export function isOrder ( order ) {
 
 }
 
-export async function updateOrder ( raw ) {
+export async function updateOrder ( raw, files ) {
 
     const data = sanitizeData( raw );
     const orders = getOrders();
     const idx = orders.findIndex( o => o.__uuid == data.__uuid ) ?? null;
     const now = new Date().toISOString();
 
+    if ( files?.invoicePDF?.size ) {
+
+        const pdfName = `${ uuidv4() }.pdf`;
+        const pdfPath = join( cwd, 'data/upload', pdfName );
+
+        files.invoicePDF.mv( pdfPath );
+        data.invoicePDF = pdfName;
+
+    }
+
     data.__updated = now;
 
-    if ( idx >= 0 ) orders[ idx ] = deepmerge( orders[ idx ], data );
+    if ( idx >= 0 ) orders[ idx ] = deepmerge( orders[ idx ], data, {
+        arrayMerge: ( _, source ) => source
+    } );
+
     else {
 
         const coords = await getCoordinates( [
