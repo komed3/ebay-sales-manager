@@ -3,7 +3,7 @@ import { commission } from './commission.js';
 import { dashboard } from './dashboard.js';
 import { form, update } from './form.js';
 import { map } from './map.js';
-import { orders } from './orders.js';
+import { orders, order } from './orders.js';
 import { reports } from './reports.js';
 import { settings } from './settings.js';
 import { stats } from './stats.js';
@@ -17,6 +17,7 @@ const routes = [
     { paths: '/settings{/}', controller: { get: settings } },
     { paths: '/form{/}', controller: { get: form, post: update } },
     { paths: '/orders{/}', controller: { get: orders } },
+    { paths: '/order{/}', controller: { get: order } },
     { paths: '/stats{/}', controller: { get: stats } },
     { paths: '/map{/}', controller: { get: map } },
     { paths: '/commission{/}', controller: { get: commission } },
