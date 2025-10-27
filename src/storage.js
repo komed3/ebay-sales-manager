@@ -10,7 +10,7 @@ const ordersFile = join( cwd, 'data/orders.json' );
 function numberOrAny( value ) {
 
     const n = Number( value );
-    return isNaN( n ) ? value : n;
+    return isNaN( n ) || Math.abs( n ) > 1e6 ? value : n;
 
 }
 
