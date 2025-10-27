@@ -22,10 +22,7 @@ block main
 
     div.column
       div.box
-        h3 Artikel
-
-      div.box
-        h3 Kundendaten &amp; Lieferanschrift
+        h3 Kundendaten
         div.box-col
           input(
             type= "text", name= "customer.nick", required,
@@ -64,5 +61,47 @@ block main
               placeholder= "Ort",
               value= data && data.customer && data.customer.address ? data.customer.address.city : ''
             )
+          - var country = data && data.customer && data.customer.address ? data.customer.address.country : 'de'
           select( name= "customer.address.country", required )
-            option( value= "de" ) Deutschland
+            option( value= "de", selected= ( country == 'de' ) ) Deutschland
+
+      div.box
+        h3 ...
+
+      div.box
+        h3 ...
+
+    div.box
+      h3 Artikel
+      div.box-col
+        each val in [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+          div.box-col
+            div.box-row
+              input(
+                type= "text", name= `article[${val}].number`,
+                placeholder= "Artikelnr.",
+                value= data && data.article && data.article[ val ] ? data.article[ val ].number : ''
+              )
+              input(
+                type= "text", name= `article[${val}].name`,
+                placeholder= "Name",
+                value= data && data.article && data.article[ val ] ? data.article[ val ].name : ''
+              )
+              input(
+                type= "number", name= `article[${val}].quantity`,
+                placeholder= "Menge", min= 1, max= 99, step= 1,
+                value= data && data.article && data.article[ val ] ? data.article[ val ].quantity : ''
+              )
+              input(
+                type= "price", name= `article[${val}].price`,
+                placeholder= "Artikelpreis [€]", min= 0, step= 0.01,
+                value= data && data.article && data.article[ val ] ? data.article[ val ].price : ''
+              )
+              input(
+                type= "fee", name= `article[${val}].fee`,
+                placeholder= "Gebühren [€]", min= 0, step= 0.01,
+                value= data && data.article && data.article[ val ] ? data.article[ val ].fee : ''
+              )
+              - var commission = data && data.article && data.article[ val ] ? data.article[ val ].commission : ''
+              select( name= `article[${val}].commission` )
+                option( disabled, selected ) Kommission?
