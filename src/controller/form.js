@@ -1,11 +1,15 @@
-import { getOrder, updateOrder } from '../storage.js';
+import { getOrder, isOrder, updateOrder } from '../storage.js';
 
 export function form ( req, res ) {
 
-    res.render( 'form', {
+    const order = getOrder( req.query.uuid ?? '' );
+
+    if ( ! req.query.uuid || isOrder( order ) ) res.render( 'form', {
         path: '/form', title: 'Neue Bestellung',
-        data: getOrder( req.query.uuid ?? '' )
+        data: order
     } );
+
+    else res.redirect( '/form' );
 
 }
 

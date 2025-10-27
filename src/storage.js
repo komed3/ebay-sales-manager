@@ -116,6 +116,12 @@ export function getOrder ( uuid ) {
 
 }
 
+export function isOrder ( order ) {
+
+    return order && typeof order === 'object' && order.__uuid;
+
+}
+
 export async function updateOrder ( raw ) {
 
     const data = sanitizeData( raw );
