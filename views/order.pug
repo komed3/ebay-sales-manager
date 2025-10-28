@@ -69,3 +69,30 @@ block main
             div.box-row
               span Telefon:
               strong= data.customer.tel
+
+      if data.customer.address && data.location
+        div.box
+          h3 Adresse
+
+  if data.article && data.article.length
+    div.box
+      table
+        thead
+          tr
+            th Artikelnr.
+            th Name
+            th Kommission
+            th.right Menge
+            th.right Artikelpreis
+            th.right Gebühren
+            th.right Profit
+        tbody
+          each article in data.article
+            tr
+              td: number= article.number
+              td= article.name
+              td= article.commission || '—'
+              td.right: number= article.quantity
+              td.right: money= article.price
+              td.right: money= article.fee
+              td.right: money= article.price - article.fee
