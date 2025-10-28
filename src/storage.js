@@ -241,6 +241,7 @@ export function updateOrderStats () {
         stats.averageProfit = stats.totalProfit / stats.orderCount;
         stats.averageItems = stats.totalItems / stats.orderCount;
         stats.averageItemPrice = ( stats.totalRevenue - stats.totalShipping ) / stats.totalItems;
+        stats.profitMargin = stats.totalProfit / stats.totalRevenue * 100;
 
     }
 
