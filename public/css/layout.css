@@ -136,6 +136,37 @@
     gap: 16px;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.pagination * {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 5px;
+}
+
+.pagination strong {
+    color: #fff;
+    background: var( --primary-color );
+}
+
+.pagination a {
+    color: inherit;
+    background: #fff;
+}
+
+.pagination a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
