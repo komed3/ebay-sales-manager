@@ -1,13 +1,15 @@
 extends ./_layout
+include ./mixin/nav
 
 block main
   div.box
     div.box-row
       h2 Bestellübersicht ##{data.orderNumber}
-      a( href= `/form?uuid=${data.__uuid}`, title= "Bearbeiten" )
-        img( src= "/images/icons/edit.svg", alt= "Bearbeiten" )
-      a( href= `/del?uuid=${data.__uuid}`, title= "Löschen" )
-        img( src= "/images/icons/trash.svg", alt= "Löschen" )
+      +icon_nav( [
+        { path: '/export?uuid=' + data.__uuid, label: 'Herunterladen', icon: 'download.svg' },
+        { path: '/form?uuid=' + data.__uuid, label: 'Bearbeiten', icon: 'tool.svg' },
+        { path: '/delete?uuid=' + data.__uuid, label: 'Löschen', icon: 'trash.svg' }
+      ] )
 
   div.column
     div.box
