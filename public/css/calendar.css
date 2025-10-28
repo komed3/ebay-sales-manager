@@ -1,0 +1,37 @@
+.calendar {
+    display: grid;
+    grid-template-columns: repeat( 6, 1fr );
+    gap: 24px;
+}
+
+.calendar-label {
+    margin: 0 0 8px;
+    font-weight: 600;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat( 7, 1fr );
+    gap: 6px;
+    text-align: center;
+}
+
+.calendar-wd {
+    font-size: 0.8em;
+    font-weight: 500;
+    color: var( --text-muted );
+}
+
+.calendar-day {
+    aspect-ratio: 1 / 1;
+    background: #fff;
+    border-radius: 3px;
+}
+
+.calendar-day.empty {
+    background: transparent;
+}
+
+.calendar-day.marked {
+    background: var( --primary-color );
+}

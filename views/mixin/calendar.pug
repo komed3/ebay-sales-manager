@@ -1,0 +1,31 @@
+mixin calendar( dates )
+  -
+    const now = new Date()
+    const months = []
+    for ( let i = 11; i >= 0; i-- ) {
+      const d = new Date( now.getFullYear(), now.getMonth() - i, 1 )
+      months.push( d )
+    }
+
+  div.calendar
+    each month in months
+      -
+        const y = month.getFullYear()
+        const m = month.getMonth()
+        const first = new Date( y, m, 1 )
+        const last = new Date( y, m + 1, 0 )
+        const startDay = ( first.getDay() + 6 ) % 7
+        const total = startDay + last.getDate()
+      div.month
+        h4.calendar-label= month.toLocaleString( 'default', { month: 'short', year: 'numeric' } )
+        div.calendar-grid
+          each wd in [ 'M', 'D', 'M', 'D', 'F', 'S', 'S' ]
+            div.calendar-wd= wd
+          - for (let i = 0; i < total; i++) {
+            - const dayNum = i - startDay + 1
+            if i < startDay
+              div.calendar-day.empty
+            else
+              - const dateStr = `${y}-${ String( m + 1 ).padStart( 2, '0' ) }-${ String( dayNum ).padStart( 2, '0' ) }`
+              div.calendar-day( class= dates.includes( dateStr ) ? 'marked' : '' )
+          - }

@@ -1,8 +1,13 @@
 extends ./_layout
+include ./mixin/calendar
 include ./mixin/stats
 
 append styles
+  link( rel= "stylesheet", href= "/css/calendar.min.css" )
   link( rel= "stylesheet", href= "/css/stats.min.css" )
 
 block main
+  h2 Statistik
   +stats( stats )
+  h2 Kalender
+  +calendar( [] )
