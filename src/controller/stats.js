@@ -1,1 +1,10 @@
-export function stats ( req, res, next ) { res.render( 'stats', { path: '/stats', title: 'Statistik' } ) }
+import { getOrderStats } from '../storage.js';
+
+export function stats ( _, res ) {
+
+    res.render( 'stats', {
+        path: '/stats', title: 'Statistik',
+        stats: getOrderStats()
+    } );
+
+}
