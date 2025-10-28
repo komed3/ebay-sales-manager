@@ -54,7 +54,10 @@ block main
         div.box-col
           div.box-row
             span Benutzername:
-            strong= data.customer.nick
+            strong: a(
+              href= 'https://www.ebay.de/usr/' + data.customer.nick,
+              target= "_blank"
+            )= data.customer.nick
           div.box-row
             span Name:
             strong= data.customer.name
