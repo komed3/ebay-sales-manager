@@ -1,11 +1,16 @@
-import { filterOrders, getOrder, isOrder } from '../storage.js';
+import { filterOrders, getOrder, getOrderStats, isOrder } from '../storage.js';
 
 export function orders ( req, res ) {
 
     res.render( 'orders', {
         path: '/orders', title: 'Bestellungen',
         query: req.query ?? {},
-        data: filterOrders( req.query ?? {} )
+        data: filterOrders( req.query ?? {} ),
+        pagination: {
+            max: getOrderStats().orderCount || 0,
+            limit: req.query?.limit || 32,
+            offset: req.query?.offset || 0
+        }
     } );
 
 }

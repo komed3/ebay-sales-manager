@@ -6,6 +6,7 @@ import fetch from 'node-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 const ordersFile = join( cwd, 'data/orders.json' );
+const statsFile = join( cwd, 'data/stats.json' );
 
 function numberOrAny( value ) {
 
@@ -173,5 +174,11 @@ export async function updateOrder ( raw, files ) {
     }
 
     writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
+
+}
+
+export function getOrderStats () {
+
+    return JSON.parse( readFileSync( statsFile, 'utf8' ) );
 
 }

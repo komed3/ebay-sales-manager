@@ -1,4 +1,5 @@
 extends ./_layout
+include ./mixin/pagination
 
 block main
   form.box( method= "GET", action= "/orders" )
@@ -47,3 +48,6 @@ block main
             td.right: money= order.fees
             td.right: money= order.shipping
             td.right: b: money= order.profit
+
+  if pagination
+    +pagination( pagination.max, pagination.limit, pagination.offset )

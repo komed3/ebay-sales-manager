@@ -1,0 +1,16 @@
+mixin pagination( max, limit, offset )
+  - var maxPage = Math.ceil( max / limit )
+  - var curPage = offset / limit + 1
+  if maxPage > 1
+    - var raw = [ 1, curPage - 2, curPage - 1, curPage, curPage + 1, curPage + 2, maxPage ]
+    - var pages = [ ...new Set( raw.filter( p => p >= 1 && p <= maxPage ) ) ]
+    - var last = 1
+    div.pagination
+      each page in pages
+        if last + 1 < page
+          span …
+        if page == curPage
+          strong= page
+        else
+          a( href= '?offset=' + ( page - 1 ) * limit )= page
+        - last = page
