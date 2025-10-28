@@ -50,4 +50,4 @@ block main
             td.right: b: money= order.profit
 
   if pagination
-    +pagination( pagination.max, pagination.limit, pagination.offset )
+    +pagination( query, pagination.max, pagination.limit, pagination.offset )
