@@ -47,3 +47,30 @@ block main
         div.box-row
           span Bestelleinnahmen:
           strong: money= data.profit
+
+    if data.customer
+      div.box
+        h3 Kundendaten
+        div.box-col
+          div.box-row
+            span Benutzername:
+            strong= data.customer.nick
+          div.box-row
+            span Name:
+            strong= data.customer.name
+          div.box-row
+            span E-Mail:
+            strong= data.customer.mail
+          if data.customer.tel
+            div.box-row
+              span Telefon:
+              strong= data.customer.tel
+          if data.customer.address
+            - var address = data.customer.address
+            hr
+            div.box-row
+              span Adresse:
+              strong= address.street + ', ' + address.zipCode + ' ' + address.city
+            div.box-row
+              span Land:
+              strong= { de: 'Deutschland' }[ address.country ]
