@@ -182,11 +182,69 @@ export async function updateOrder ( raw, files ) {
     }
 
     writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
+    updateOrderStats();
+
+    return data.__uuid;
 
 }
 
 export function getOrderStats () {
 
     return JSON.parse( readFileSync( statsFile, 'utf8' ) );
+
+}
+
+export function updateOrderStats () {
+
+    const orders = getOrders();
+    const customers = new Set();
+    const stats = {
+        orderCount: 0,
+        customerCount: 0,
+        shippingCount: 0,
+        pickupCount: 0,
+        totalRevenue: 0,
+        totalShipping: 0,
+        totalFees: 0,
+        totalRefund: 0,
+        totalProfit: 0,
+        totalItems: 0
+    };
+
+    orders.forEach( o => {
+
+        stats.orderCount++;
+        stats[ `${o.orderType}Count` ]++;
+        stats.totalRevenue += Number( o.revenue );
+        stats.totalShipping += Number( o.shipping );
+        stats.totalFees += Number( o.fees );
+        stats.totalRefund += Number( o.refund );
+        stats.totalProfit += Number( o.profit );
+
+        if ( o.article && Array.isArray( o.article ) ) {
+            stats.totalItems += o.article.reduce( ( sum, a ) => sum + ( Number( a.quantity ) || 0 ), 0 );
+        }
+
+        if ( ! customers.has( o.customer.nick ) ) {
+            stats.customerCount++;
+            customers.add( o.customer.nick );
+        }
+
+    } );
+
+    if ( stats.orderCount ) {
+
+        stats.averageRevenue = stats.totalRevenue / stats.orderCount;
+        stats.averageShipping = stats.totalShipping / stats.orderCount;
+        stats.averageFees = stats.totalFees / stats.orderCount;
+        stats.averageRefund = stats.totalRefund / stats.orderCount;
+        stats.averageProfit = stats.totalProfit / stats.orderCount;
+        stats.averageItems = stats.totalItems / stats.orderCount;
+        stats.averageItemPrice = ( stats.totalRevenue - stats.totalShipping ) / stats.totalItems;
+
+    }
+
+    for ( const [ key, val ] of Object.entries( stats ) ) stats[ key ] = Number( Number( val ).toFixed( 2 ) );
+    writeFileSync( statsFile, JSON.stringify( stats, null, 2 ), 'utf8' );
 
 }
