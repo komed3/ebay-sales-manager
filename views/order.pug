@@ -6,8 +6,9 @@ block main
     div.box-row
       h2 Bestellübersicht ##{data.orderNumber}
       if data.invoicePDF
-        a( href= '/upload/' + data.invoicePDF, target= "_blank", title= "Rechnung" )
-          img( src= "/images/icons/report.svg", alt= "Rechnung" )
+        +icon_nav( [
+          { path: '/upload/' + data.invoicePDF, label: 'Rechnung', icon: 'report.svg' }
+        ] )
       +icon_nav( [
         { path: '/export?uuid=' + data.__uuid, label: 'Herunterladen', icon: 'download.svg' },
         { path: '/form?uuid=' + data.__uuid, label: 'Bearbeiten', icon: 'tool.svg' },
