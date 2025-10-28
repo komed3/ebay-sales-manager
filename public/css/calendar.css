@@ -24,6 +24,11 @@
 
 .calendar-day {
     aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    color: var( --text-muted );
     background: #fff;
     border-radius: 3px;
 }
@@ -33,5 +38,7 @@
 }
 
 .calendar-day.marked {
+    font-weight: 600;
+    color: #fff;
     background: var( --primary-color );
 }
