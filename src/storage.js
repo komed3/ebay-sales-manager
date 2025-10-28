@@ -6,6 +6,7 @@ import fetch from 'node-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 const ordersFile = join( cwd, 'data/orders.json' );
+const calendarFile = join( cwd, 'data/calendar.json' );
 const statsFile = join( cwd, 'data/stats.json' );
 
 function numberOrAny( value ) {
@@ -198,6 +199,7 @@ export function updateOrderStats () {
 
     const orders = getOrders();
     const customers = new Set();
+    const dates = new Set();
     const stats = {
         orderCount: 0,
         customerCount: 0,
@@ -212,6 +214,8 @@ export function updateOrderStats () {
     };
 
     orders.forEach( o => {
+
+        dates.add( o.orderDate );
 
         stats.orderCount++;
         stats[ `${o.orderType}Count` ]++;
@@ -245,7 +249,11 @@ export function updateOrderStats () {
 
     }
 
-    for ( const [ key, val ] of Object.entries( stats ) ) stats[ key ] = Number( Number( val ).toFixed( 2 ) );
+    for ( const [ key, val ] of Object.entries( stats ) ) {
+        stats[ key ] = Number( Number( val ).toFixed( 2 ) );
+    }
+
+    writeFileSync( calendarFile, JSON.stringify( [ ...dates ], null, 2 ), 'utf8' );
     writeFileSync( statsFile, JSON.stringify( stats, null, 2 ), 'utf8' );
 
 }
