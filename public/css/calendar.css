@@ -4,25 +4,25 @@
     gap: 24px;
 }
 
-.calendar-label {
+.calendar .label {
     margin: 0 0 8px;
     font-weight: 600;
 }
 
-.calendar-grid {
+.calendar .grid {
     display: grid;
     grid-template-columns: repeat( 7, 1fr );
     gap: 6px;
     text-align: center;
 }
 
-.calendar-wd {
+.calendar .wd {
     font-size: 0.8em;
     font-weight: 500;
     color: var( --text-muted );
 }
 
-.calendar-day {
+.calendar .day {
     aspect-ratio: 1 / 1;
     display: flex;
     justify-content: center;
@@ -33,11 +33,11 @@
     border-radius: 3px;
 }
 
-.calendar-day.empty {
+.calendar .day.empty {
     background: transparent;
 }
 
-.calendar-day.marked {
+.calendar .day.marked {
     font-weight: 600;
     color: #fff;
     background: var( --primary-color );

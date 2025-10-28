@@ -17,20 +17,20 @@ mixin calendar( dates )
         const startDay = ( first.getDay() + 6 ) % 7
         const total = startDay + last.getDate()
       div.month
-        h4.calendar-label= month.toLocaleString( 'default', { month: 'short', year: 'numeric' } )
-        div.calendar-grid
+        h4.label= month.toLocaleString( 'default', { month: 'short', year: 'numeric' } )
+        div.grid
           each wd in [ 'M', 'D', 'M', 'D', 'F', 'S', 'S' ]
-            div.calendar-wd= wd
+            div.wd= wd
           - for (let i = 0; i < total; i++) {
             - const dayNum = i - startDay + 1
             if i < startDay
-              div.calendar-day.empty
+              div.day.empty
             else
               - const dateStr = `${y}-${ String( m + 1 ).padStart( 2, '0' ) }-${ String( dayNum ).padStart( 2, '0' ) }`
               if dates.includes( dateStr )
-                a.calendar-day.marked(
+                a.day.marked(
                   href= `/orders?from=${dateStr}&to=${dateStr}`
                 )= dayNum
               else
-                div.calendar-day= dayNum
+                div.day= dayNum
           - }
