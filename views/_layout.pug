@@ -11,7 +11,7 @@ block styles
   link( rel= "stylesheet", href= "/css/layout.min.css" )
 
 block content
-  header#header.header
+  header#header.header.noselect
     h1= title + ' — eBay Sales Manager'
     div.header-actions
       +icon_nav( [
@@ -19,7 +19,7 @@ block content
         { path: '/logout', label: 'Abmelden', icon: 'logout.svg' }
       ] )
 
-  nav#nav.nav
+  nav#nav.nav.noselect
     img.logo( src= "/images/favicon.svg", alt= "eBay Sales Manager" )
     +icon_nav(  [
       { path: '/', label: 'Dashboard', icon: 'app.svg' },
@@ -35,5 +35,5 @@ block content
     main#main.main
       block main
 
-    footer#footer.footer
+    footer#footer.footer.noselect
       span Copyright &copy; 2025 <a href= "https://komed3.de" target="_blank">komed3</a>. Alle Rechte vorbehalten.
