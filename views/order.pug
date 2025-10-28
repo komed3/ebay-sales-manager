@@ -1,5 +1,13 @@
 extends ./_layout
+include ./mixin/map
 include ./mixin/nav
+
+append scripts
+  script( src= "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" )
+  script( src= "/js/map.min.js", defer )
+
+append styles
+  link( rel= "stylesheet" href= "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" )
 
 block main
   div.box
@@ -72,8 +80,13 @@ block main
               strong= data.customer.tel
 
       if data.customer.address && data.location
+        - var { street, zipCode, city } = data.customer.address
         div.box
           h3 Adresse
+          +map( [ data.location ] )
+          div.box-row
+            span Lieferung:
+            strong= street + ', ' + zipCode + ' ' + city
 
   if data.article && data.article.length
     div.box
