@@ -56,6 +56,26 @@
     padding: 32px;
 }
 
+.map {
+    margin: 16px 0;
+    width: 100%;
+    height: 75dvh;
+    font-family: var( --font-sans ) !important;
+}
+
+.map-marker {
+    padding: 4px;
+    background: #fff;
+    border: 2px solid var( --primary-color );
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba( 0 0 0 / 0.1 );
+}
+
+.map-marker img {
+    width: 18px !important;
+    height: 18px !important;
+}
+
 .column {
     column-count: 2;
     column-gap: 24px;
@@ -99,6 +119,10 @@
     border-top: var( --box-border );
 }
 
+.box .map {
+    height: 420px;
+}
+
 .box-row {
     display: flex;
     flex-flow: row nowrap;
@@ -136,26 +160,6 @@ table th {
 
 table tbody tr:nth-child( even ) td {
     background: var( --background-color );
-}
-
-.map {
-    margin: 16px 0;
-    width: 100%;
-    height: 420px;
-    font-family: var( --font-sans ) !important;
-}
-
-.map-marker {
-    padding: 4px;
-    background: #fff;
-    border: 2px solid var( --primary-color );
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba( 0 0 0 / 0.1 );
-}
-
-.map-marker img {
-    width: 18px;
-    height: 18px;
 }
 
 .footer {
