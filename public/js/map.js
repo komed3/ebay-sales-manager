@@ -21,9 +21,11 @@ document.addEventListener( 'DOMContentLoaded', function () {
                 iconSize: [ 30, 30 ],
                 className: 'map-marker',
                 html: `<img src="/images/icons/${entry.type}.svg" alt="marker" />`
-            } ) } ).addEventListener( 'click', () => {
-                location.href = new URL( '/order?uuid=' + entry.uuid, __url ).toString();
-            } ).addTo( markers );
+            } ) } ).bindPopup( `
+                <b>#${entry.number}</b><br />
+                ${entry.name}<br />${entry.address.street}<br />${entry.address.zipCode} ${entry.address.city}<br />
+                <a href="${ new URL( '/order?uuid=' + entry.uuid, __url ).toString() }">Weitere Details</a>
+            ` ).addTo( markers );
 
         } );
 
