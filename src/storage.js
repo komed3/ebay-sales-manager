@@ -114,11 +114,19 @@ export function getOrders () {
 
 export function filterOrders ( query ) {
 
-    return getOrders().filter( o =>
-        JSON.stringify( o ).match( new RegExp( query.search?.length ? query.search : '', 'i' ) ) &&
-        new Date( o.orderDate ).getTime() >= new Date( query.from?.length ? query.from : '1900-01-01' ).getTime() &&
-        new Date( o.orderDate ).getTime() <= new Date( query.to?.length ? query.to : '2100-12-31' ).getTime()
-    ).slice( query.offset ?? 0, query.limit ?? 32 );
+    const {
+        offset = 0, limit = 32, search = '',
+        from = '1900-01-01', to = '2100-12-31'
+    } = expandDotNotation( query ?? {} );
+
+    const orders = getOrders().filter( o =>
+        JSON.stringify( o ).match( new RegExp( search, 'i' ) ) &&
+        new Date( o.orderDate ).getTime() >= new Date( from ).getTime() &&
+        new Date( o.orderDate ).getTime() <= new Date( to ).getTime()
+    );
+
+    const results = orders.slice( offset, offset + limit );
+    return { results, count: results.length, max: orders.length };
 
 }
 
