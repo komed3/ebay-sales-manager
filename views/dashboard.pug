@@ -1,6 +1,9 @@
 extends ./_layout
 include ./mixin/stats
 
+append styles
+  link( rel= "stylesheet", href= "/css/stats.min.css" )
+
 block main
   +stats( stats, [
     'orderCount', 'totalRevenue', 'totalProfit',
