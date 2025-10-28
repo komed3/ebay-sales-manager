@@ -71,6 +71,12 @@
     border-radius: 5px;
 }
 
+.box h2 {
+    margin: 0;
+    width: 100%;
+    font-size: 1.4em;
+}
+
 .box h3 {
     margin: 0 0 16px;
     font-size: 1.1em;
