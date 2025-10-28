@@ -1,0 +1,30 @@
+mixin stats( data, keys = undefined )
+  - keys ||= Object.keys( data )
+  -
+    var fields = {
+      orderCount: { label: 'Bestellungen', el: 'number' },
+      customerCount: { label: 'Kunden', el: 'number' },
+      shippingCount: { label: 'Versendungen', el: 'number' },
+      pickupCount: { label: 'Abholungen', el: 'number' },
+      totalRevenue: { label: 'Gesamtumsatz', el: 'money' },
+      totalShipping: { label: 'Gesamtversand', el: 'money' },
+      totalFees: { label: 'Gesamtgebühren', el: 'money' },
+      totalRefund: { label: 'Gesamterstattungen', el: 'money' },
+      totalProfit: { label: 'Gesamtgewinn', el: 'money' },
+      totalItems: { label: 'Gesamtartikel', el: 'number' },
+      averageRevenue: { label: 'Ø Umsatz', el: 'money' },
+      averageShipping: { label: 'Ø Versand', el: 'money' },
+      averageFees: { label: 'Ø Gebühren', el: 'money' },
+      averageRefund: { label: 'Ø Rückerstattungen', el: 'money' },
+      averageProfit: { label: 'Ø Gewinn', el: 'money' },
+      averageItems: { label: 'Ø Artikelanzahl', el: 'number' },
+      averageItemPrice: { label: 'Ø Artikelpreis', el: 'money' }
+    }
+
+  if keys
+    div.stats-grid
+      each key in keys
+        if key in fields
+          div.box.stats-box
+            h3= fields[ key ].label
+            strong!= '<' + fields[ key ].el + '>' + data[ key ] + '</' + fields[ key ].el + '>'

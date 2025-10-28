@@ -1,1 +1,8 @@
 extends ./_layout
+include ./mixin/stats
+
+block main
+  +stats( stats, [
+    'orderCount', 'totalRevenue', 'totalProfit',
+    'averageProfit', 'customerCount', 'averageFees'
+  ] )
