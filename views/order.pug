@@ -22,6 +22,9 @@ block main
         div.box-row
           span Bestelldatum:
           strong: date= data.orderDate
+        div.box-row
+          span Typ:
+          strong= { shipping: 'Versand', pickup: 'Abholung' }[ data.orderType ]
         if data.invoicePDF
           div.box-row
             span Rechnung:
@@ -68,7 +71,7 @@ block main
             div.box-row
               span Telefon:
               strong= data.customer.tel
-          if data.customer.address
+          if data.customer.address && data.customer.address == 4
             - var address = data.customer.address
             hr
             div.box-row
