@@ -138,6 +138,13 @@ table tbody tr:nth-child( even ) td {
     background: var( --background-color );
 }
 
+.map {
+    margin: 16px 0;
+    width: 100%;
+    height: 420px;
+    font-family: var( --font-sans ) !important;
+}
+
 .footer {
     margin: 32px 0;
     font-size: 0.9em;

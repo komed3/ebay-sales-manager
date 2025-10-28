@@ -1,3 +1,4 @@
 mixin map( locations )
-  script( id= "mapdata", type= "application/json" )!= JSON.stringify( locations )
-  div.map
+  div.map-container
+    script.mapdata( type= "application/json" )!= JSON.stringify( locations )
+    div.map
