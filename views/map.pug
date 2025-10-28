@@ -1,1 +1,12 @@
 extends ./_layout
+include ./mixin/map
+
+append scripts
+  script( src= "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" )
+  script( src= "/js/map.min.js", defer )
+
+append styles
+  link( rel= "stylesheet" href= "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" )
+
+block main
+  +map( data )
