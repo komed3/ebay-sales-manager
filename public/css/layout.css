@@ -145,6 +145,19 @@ table tbody tr:nth-child( even ) td {
     font-family: var( --font-sans ) !important;
 }
 
+.map-marker {
+    padding: 4px;
+    background: #fff;
+    border: 2px solid var( --primary-color );
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba( 0 0 0 / 0.1 );
+}
+
+.map-marker img {
+    width: 18px;
+    height: 18px;
+}
+
 .footer {
     margin: 32px 0;
     font-size: 0.9em;

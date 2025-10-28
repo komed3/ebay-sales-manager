@@ -83,7 +83,7 @@ block main
         - var { street, zipCode, city } = data.customer.address
         div.box
           h3 Adresse
-          +map( [ data.location ] )
+          +map( [ { ...data.location, ...{ type: data.orderType, uuid: data.__uuid } } ] )
           div.box-row
             span Lieferung:
             strong= street + ', ' + zipCode + ' ' + city
