@@ -195,6 +195,12 @@ export function getOrderStats () {
 
 }
 
+export function getOrderDates () {
+
+    return JSON.parse( readFileSync( calendarFile, 'utf8' ) );
+
+}
+
 export function updateOrderStats () {
 
     const orders = getOrders();
