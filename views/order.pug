@@ -26,3 +26,24 @@ block main
           div.box-row
             span Rechnung:
             a( href= `/upload/${data.invoicePDF}`, target= "_blank" ) PDF anzeigen
+
+    div.box
+      h3 Umsatz &amp; Gebühren
+      div.box-col
+        div.box-row
+          span Umsatz (zzgl. Versand):
+          strong: money= data.revenue
+        div.box-row
+          span Versandkosten:
+          strong: money= data.shipping
+        div.box-row
+          span Gebühren (Werbekosten):
+          strong: money= data.fees
+        if data.refund
+          div.box-row
+            span Rückerstattung:
+            strong: money= data.refund
+        hr
+        div.box-row
+          span Bestelleinnahmen:
+          strong: money= data.profit

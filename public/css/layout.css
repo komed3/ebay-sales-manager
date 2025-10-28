@@ -92,6 +92,13 @@
     height: 32px;
 }
 
+.box hr {
+    margin: 0;
+    width: 100%;
+    border: 0;
+    border-top: var( --box-border );
+}
+
 .box-row {
     display: flex;
     flex-flow: row nowrap;
