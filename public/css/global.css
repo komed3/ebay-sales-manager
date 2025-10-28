@@ -51,6 +51,11 @@ html, body {
     background: var( --background-color );
 }
 
+p {
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
 a, a:link, a:visited {
     text-decoration: none;
     color: var( --primary-color );

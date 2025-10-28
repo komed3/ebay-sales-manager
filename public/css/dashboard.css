@@ -1,0 +1,6 @@
+.dashboard-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.1em;
+}

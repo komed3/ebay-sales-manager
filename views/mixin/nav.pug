@@ -2,3 +2,9 @@ mixin icon_nav( nav )
   each item in nav
     a( href= item.path, title= item.label, class= ( item.path == ( path || '' ) ? 'active' : '' ) )
       img( src= '/images/icons/' + item.icon, alt= item.label )
+
+mixin text_nav( nav )
+  each item in nav
+    a( href= item.path )
+      img( src= '/images/icons/' + item.icon, alt= item.label )
+      span= item.label
