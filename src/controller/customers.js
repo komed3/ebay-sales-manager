@@ -26,6 +26,6 @@ export function customer ( req, res ) {
         data: customer
     } );
 
-    else res.redirect( '/orders' );
+    else res.redirect( '/customers' );
 
 }
