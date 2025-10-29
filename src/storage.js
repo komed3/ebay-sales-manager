@@ -251,7 +251,7 @@ export function getReportsList () {
 
         return files.map( f => f.endsWith( '.json' )
             ? f.replace( '.json', '' ) : null
-        ).filter( Boolean );
+        ).filter( Boolean ).reverse();
 
     } catch { return [] }
 
