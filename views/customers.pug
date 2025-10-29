@@ -1,1 +1,40 @@
 extends ./_layout
+include ./mixin/pagination
+
+block main
+  form.box( method= "GET", action= "/customers" )
+    div.box-row
+      img( src= "/images/icons/filter.svg", alt= "Filter" )
+      input(
+        type= "text", name= "search", value= query && query.search
+        placeholder= "Suche nach …"
+      )
+      button.icon( type= "submit", title= "Filtern" )
+        img( src= "/images/icons/search.svg", alt= "Filtern" )
+      a( href= "/customers", title= "Filter löschen" )
+        img( src= "/images/icons/clear.svg", alt= "Zurücksetzen" )
+
+  div.box
+    table#customers
+      thead
+        tr
+          th Benutzername
+          th Name
+          th.right Bestellungen
+          th.right Umsatz
+          th.right Gewinn
+          th.right Marge
+      tbody
+        each customer in data
+          tr
+            td: a(
+              href= '/customer?nick=' + customer.data.nick
+            )= '@' + customer.data.nick
+            td= customer.data.name
+            td.right: number= customer.stats.orderCount
+            td.right: money= customer.stats.totalRevenue
+            td.right: money= customer.stats.totalProfit
+            td.right: pct= customer.stats.profitMargin
+
+  if pagination
+    +pagination( query, pagination.max, pagination.limit, pagination.offset )
