@@ -9,13 +9,12 @@ append scripts
 
 block main
   div.box
-    h3 Report für 
-      q= report.label
+    h3 Finanzbericht
     div.box-col
       +chart( 'flow', report.data )
       div.box-row
         span Bericht:
-        select( onchange= "location.href='/reports?month='+this.value" )
+        select( onchange= "location.href='/report?month='+this.value" )
           each item in list
             option( value= item, selected= ( item === report.name ) )= item.replace( '-', ' / ' )
         +icon_nav( [

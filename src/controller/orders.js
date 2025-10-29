@@ -22,7 +22,7 @@ export function order ( req, res ) {
     const order = getOrder( req.query.uuid ?? '' );
 
     if ( isOrder( order ) ) res.render( 'order', {
-        path: '/order', title: `Bestellung`,
+        path: '/order', title: 'Bestellung Nr. ' + order.recordNumber,
         data: order
     } );
 

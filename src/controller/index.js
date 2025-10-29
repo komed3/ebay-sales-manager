@@ -3,7 +3,7 @@ import { dashboard } from './dashboard.js';
 import { form, update } from './form.js';
 import { map } from './map.js';
 import { orders, order } from './orders.js';
-import { reports } from './reports.js';
+import { report } from './report.js';
 import { settings } from './settings.js';
 import { stats } from './stats.js';
 import express from 'express';
@@ -19,7 +19,7 @@ const routes = [
     { paths: '/order{/}', controller: { get: order } },
     { paths: '/stats{/}', controller: { get: stats } },
     { paths: '/map{/}', controller: { get: map } },
-    { paths: '/reports{/}', controller: { get: reports } }
+    { paths: '/report{/}', controller: { get: report } }
 ];
 
 // Init router
