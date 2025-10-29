@@ -1,6 +1,6 @@
 import { login, logout, auth } from './auth.js';
 import { dashboard } from './dashboard.js';
-import { form, update } from './form.js';
+import { deleteOrder, form, update } from './form.js';
 import { map } from './map.js';
 import { orders, order } from './orders.js';
 import { report } from './report.js';
@@ -19,7 +19,8 @@ const routes = [
     { paths: '/order{/}', controller: { get: order } },
     { paths: '/stats{/}', controller: { get: stats } },
     { paths: '/map{/}', controller: { get: map } },
-    { paths: '/report{/}', controller: { get: report } }
+    { paths: '/report{/}', controller: { get: report } },
+    { paths: '/delete{/}', controller: { get: deleteOrder } }
 ];
 
 // Init router

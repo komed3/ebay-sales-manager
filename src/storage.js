@@ -193,6 +193,28 @@ export async function updateOrder ( raw, files ) {
 
 }
 
+export function deleteOrder ( uuid ) {
+
+    const orders = getOrders();
+    const idx = orders.findIndex( o => o.__uuid === uuid );
+
+    if ( idx >= 0 ) {
+
+        const dateStr = orders[ idx ].orderDate;
+        orders.splice( idx, 1 );
+
+        writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
+        updateOrderStats();
+        updateReport( dateStr );
+
+        return true;
+
+    }
+
+    return false;
+
+}
+
 export function getOrderStats () {
 
     return JSON.parse( readFileSync( statsFile, 'utf8' ) );

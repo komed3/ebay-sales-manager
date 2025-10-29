@@ -1,4 +1,4 @@
-import { getOrder, isOrder, updateOrder } from '../storage.js';
+import { deleteOrder, getOrder, isOrder, updateOrder } from '../storage.js';
 
 export function form ( req, res ) {
 
@@ -17,5 +17,12 @@ export async function update ( req, res ) {
 
     const uuid = await updateOrder( req.body, req.files );
     res.redirect( '/order?uuid=' + uuid );
+
+}
+
+export function deleteOrder ( req, res ) {
+
+    deleteOrder( req.query.uuid ?? '' );
+    res.redirect( '/orders' );
 
 }
