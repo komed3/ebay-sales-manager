@@ -11,6 +11,7 @@ const statsFile = join( cwd, 'data/stats.json' );
 const monthlyReportsFile = join( cwd, 'data/monthlyReports.json' );
 const annualReportsFile = join( cwd, 'data/annualReports.json' );
 const reports = join( cwd, 'data/reports' );
+const customerFile = join( cwd, 'data/customers.json' );
 
 function numberOrAny( value ) {
 
@@ -188,6 +189,7 @@ export async function updateOrder ( raw, files ) {
     writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
     updateOrderStats();
     updateReport( data.orderDate );
+    updateCustomerStats( data.customer.nick );
 
     return data.__uuid;
 
@@ -201,11 +203,13 @@ export function deleteOrder ( uuid ) {
     if ( idx >= 0 ) {
 
         const dateStr = orders[ idx ].orderDate;
+        const nick = orders[ idx ].customer.nick;
         orders.splice( idx, 1 );
 
         writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
         updateOrderStats();
         updateReport( dateStr );
+        updateCustomerStats( nick );
 
         return true;
 
@@ -263,6 +267,12 @@ export function getReport ( report ) {
 
 }
 
+export function getCustomer () {
+
+    return JSON.parse( readFileSync( customerFile, 'utf8' ) );
+
+}
+
 export function updateOrderStats () {
 
     const orders = getOrders();
@@ -305,7 +315,9 @@ export function updateOrderStats () {
         stats[ `${o.orderType}Revenue` ] += Number( o.revenue );
 
         if ( o.article && Array.isArray( o.article ) ) {
-            stats.totalItems += o.article.reduce( ( sum, a ) => sum + ( Number( a.quantity ) || 0 ), 0 );
+            stats.totalItems += o.article.reduce(
+                ( sum, a ) => sum + ( Number( a.quantity ) || 0 ), 0
+            );
         }
 
         if ( ! customers.has( o.customer.nick ) ) {
@@ -404,8 +416,13 @@ export function updateOrderStats () {
     }
 
     // Sort reports by date
-    const monthlyReportsSorted = Object.fromEntries( Object.entries( monthlyReports ).sort( ( [ a ], [ b ] ) => a.localeCompare( b ) ) );
-    const annualReportsSorted = Object.fromEntries( Object.entries( annualReports ).sort( ( [ a ], [ b ] ) => a.localeCompare( b ) ) );
+    const monthlyReportsSorted = Object.fromEntries( Object.entries( monthlyReports ).sort(
+        ( [ a ], [ b ] ) => a.localeCompare( b ) )
+    );
+
+    const annualReportsSorted = Object.fromEntries( Object.entries( annualReports ).sort(
+        ( [ a ], [ b ] ) => a.localeCompare( b ) )
+    );
 
     // Save stats and reports
     writeFileSync( calendarFile, JSON.stringify( [ ...dates ], null, 2 ), 'utf8' );
@@ -446,5 +463,71 @@ export function updateReport ( dateStr ) {
 
     // Save report
     writeFileSync( reportFile, JSON.stringify( data, null, 2 ), 'utf8' );
+
+}
+
+export function updateCustomerStats ( nick ) {
+
+    const orders = getOrders();
+    const customers = getCustomer();
+
+    // Init customer data object
+    const addresses = new Set();
+    const customer = {
+        data: {},
+        addresses: [],
+        stats: {
+            orderCount: 0,
+            itemCount: 0,
+            totalRevenue: 0,
+            totalRefund: 0,
+            totalProfit: 0,
+            profitMargin: 0
+        }
+    };
+
+    // Aggregate customer data
+    orders.forEach( o => {
+
+        if ( o.customer.nick === nick ) {
+
+            // Update customer data
+            customer.data = {
+                ...customer.data,
+                ...o.customer
+            };
+
+            // Collect unique addresses
+            addresses.add( o.customer.address );
+
+            // Aggregate statistics
+            customer.stats.orderCount++;
+            customer.stats.totalRevenue += Number( o.revenue );
+            customer.stats.totalRefund += Number( o.refund );
+            customer.stats.totalProfit += Number( o.profit );
+
+            if ( o.article && Array.isArray( o.article ) ) {
+                customer.stats.itemCount += o.article.reduce(
+                    ( sum, a ) => sum + ( Number( a.quantity ) || 0 ), 0
+                );
+            }
+
+        }
+
+    } );
+
+    // Finalize customer data
+    customer.addresses = [ ...addresses ];
+    customer.stats.profitMargin = customer.stats.totalProfit / customer.stats.totalRevenue * 100;
+    delete customer.data.address;
+
+    // Round values
+    for ( const [ key, val ] of Object.entries( customer.stats ) ) {
+        customer.stats[ key ] = Number( Number( val ).toFixed( 2 ) );
+    }
+
+    // Save customer data
+    customers[ nick ] = customer;
+    writeFileSync( customerFile, JSON.stringify( customers, null, 2 ), 'utf8' );
 
 }
