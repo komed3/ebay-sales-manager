@@ -191,84 +191,59 @@ function renderMarginChart ( ctx, data ) {
 
 function renderSankeyChart ( ctx, data ) {
 
-    const flows = [];
-    const colors = {
-        order: '#ccc',
-        shipping: '#89b5f6',
-        pickup: '#89b5f6',
-        profit: '#9fc67e',
-        shippingCost: '#ffcf4d',
-        fees: '#fda28d',
-        refund: '#c2d0e4'
+    const labels = {
+        order: { label: 'Bestellung', color: '#ccc' },
+        shipping: { label: 'Versand', color: '#89b5f6' },
+        pickup: { label: 'Abholung', color: '#89b5f6' },
+        profit: { label: 'Gewinn', color: '#9fc67e' },
+        shippingCost: { label: 'Versandkosten', color: '#ffcf4d' },
+        fees: { label: 'Gebühren', color: '#fda28d' },
+        refund: { label: 'Rückerstattung', color: '#c2d0e4' }
     };
+
+    const flowMap = new Map();
+
+    function addFlow ( from, to, flow ) {
+
+        const key = `${from}-${to}`;
+
+        if ( flowMap.has( key ) ) flowMap.get( key ).flow += flow;
+        else flowMap.set( key, { from, to, flow } );
+
+    }
 
     for ( const o of data ) {
 
-        const orderLabel = '#' + o.orderNumber;
-        const revenueColor = colors[ o.orderType ];
-        const revenueLabel = {
-            shipping: 'Versand',
-            pickup: 'Abholung'
-        }[ o.orderType ];
+        addFlow( '#' + o.orderNumber, o.orderType, o.revenue );
 
-        flows.push( {
-            from: orderLabel,
-            to: revenueLabel,
-            flow: o.revenue,
-            cFrom: colors.order,
-            cTo: revenueColor
-        } );
-        
-        if ( o.profit > 0 ) flows.push( {
-            from: revenueLabel,
-            to: 'Gewinn',
-            flow: o.profit,
-            cFrom: revenueColor,
-            cTo: colors.profit
-        } );
-        
-        if ( o.shipping > 0 ) flows.push( {
-            from: revenueLabel,
-            to: 'Versandkosten',
-            flow: o.shipping,
-            cFrom: revenueColor,
-            cTo: colors.shippingCost
-        } );
-
-        if ( o.fees > 0 ) flows.push( {
-            from: revenueLabel,
-            to: 'Gebühren',
-            flow: o.fees,
-            cFrom: revenueColor,
-            cTo: colors.fees
-        } );
-
-        if ( o.refund > 0 ) flows.push( {
-            from: revenueLabel,
-            to: 'Rückerstattung',
-            flow: o.refund,
-            cFrom: revenueColor,
-            cTo: colors.refund
-        } );
+        if ( o.profit > 0 ) addFlow( o.orderType, 'profit', o.profit );
+        if ( o.shipping > 0 ) addFlow( o.orderType, 'shippingCost', o.shipping );
+        if ( o.fees > 0 ) addFlow( o.orderType, 'fees', o.fees );
+        if ( o.refund > 0 ) addFlow( o.orderType, 'refund', o.refund );
 
     }
+
+    const flows = Array.from( flowMap.values() );
 
     new Chart( ctx, {
         type: 'sankey',
         data: {
             datasets: [ {
                 label: 'Bestellungen',
+                labels: Object.fromEntries(
+                    Object.entries( labels ).map( ( [ k, v ] ) => [ k, v.label ] )
+                ),
                 data: flows,
-                colorFrom: c => c.raw.cFrom,
-                colorTo: c => c.raw.cTo,
-                hoverColorFrom: c => c.raw.cFrom,
-                hoverColorTo: c => c.raw.cTo,
+                colorFrom: c => labels[ c.raw.from ]?.color || '#ccc',
+                colorTo: c => labels[ c.raw.to ]?.color || '#ccc',
+                hoverColorFrom: c => labels[ c.raw.from ]?.color || '#ccc',
+                hoverColorTo: c => labels[ c.raw.to ]?.color || '#ccc',
                 colorMode: 'gradient',
                 alpha: 1,
-                nodeWidth: 0,
-                nodePadding: 12,
+                nodeWidth: 20,
+                nodePadding: 10,
                 borderColor: '#fff',
-                borderWidth: 4,
+                borderWidth: 16,
                 font: { weight: 'bold' }
             } ]
         },
@@ -277,7 +252,7 @@ function renderSankeyChart ( ctx, data ) {
                 tooltip: {
                     displayColors: false,
                     callbacks: {
-                        label: ctx => `${ ctx.raw.to }: ${ formatMoney( ctx.raw.flow ) }`
+                        label: ctx => `${ labels[ ctx.raw.to ]?.label ?? ctx.raw.to }: ${ formatMoney( ctx.raw.flow ) }`
                     }
                 }
             }
