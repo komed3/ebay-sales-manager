@@ -36,7 +36,8 @@ function renderReportChart ( ctx, data ) {
                 hoverBackgroundColor: '#fff',
                 borderColor: '#000',
                 borderWidth: 2,
-                hoverBorderWidth: 2
+                hoverBorderWidth: 2,
+                clip: false
             }, {
                 data: totalShipping,
                 stack: 'finances',
@@ -78,14 +79,6 @@ function renderReportChart ( ctx, data ) {
                     }
                 },
                 tooltip: {
-                    padding: { top: 10, left: 12, right: 16, bottom: 10 },
-                    titleColor: '#000',
-                    bodyColor: '#000',
-                    backgroundColor: '#fff',
-                    borderColor: '#d5d6d7',
-                    borderWidth: 1,
-                    cornerRadius: 5,
-                    boxPadding: 4,
                     callbacks: {
                         label: ctx => `${ ctx.dataset.label }: ${ ( ctx.datasetIndex == 0
                             ? formatPercent( ctx.raw / 100 )
@@ -182,14 +175,6 @@ function renderMarginChart ( ctx, data ) {
                     }
                 },
                 tooltip: {
-                    padding: { top: 10, left: 12, right: 16, bottom: 10 },
-                    titleColor: '#000',
-                    bodyColor: '#000',
-                    backgroundColor: '#fff',
-                    borderColor: '#d5d6d7',
-                    borderWidth: 1,
-                    cornerRadius: 5,
-                    boxPadding: 4,
                     filter: ctx => ! ( ctx.datasetIndex == 2 && ctx.dataIndex == 1 ),
                     callbacks: {
                         label: ctx => `${ ctx.raw.x }: ${ ( ctx.datasetIndex == 2
@@ -208,15 +193,29 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
     Chart.defaults.responsive = true;
     Chart.defaults.maintainAspectRatio = false;
-    Chart.defaults.offset = true;
-    Chart.defaults.clip = false;
-    Chart.defaults.layout.padding = 6;
-    Chart.defaults.animation = false;
+    Chart.defaults.offset = false;
+    Chart.defaults.layout.padding = 0;
 
     Chart.defaults.font.family = 'SUSE, sans-serif';
     Chart.defaults.font.size = 14;
     Chart.defaults.font.weight = 400;
     Chart.defaults.color = '#000';
+
+    Chart.defaults.transitions = { active: { animation: { duration: 0 } } };
+    Chart.defaults.animations = {
+        x: { duration: 0 },
+        y: { duration: 150, easing: 'easeOutBack' }
+    };
+
+    Chart.defaults.plugins.tooltip.padding = { top: 10, left: 12, right: 16, bottom: 10 };
+    Chart.defaults.plugins.tooltip.animation = { duration: 150, easing: 'easeOutBack' };
+    Chart.defaults.plugins.tooltip.titleColor = '#000';
+    Chart.defaults.plugins.tooltip.bodyColor = '#000';
+    Chart.defaults.plugins.tooltip.backgroundColor = '#fff';
+    Chart.defaults.plugins.tooltip.borderColor = '#d5d6d7';
+    Chart.defaults.plugins.tooltip.borderWidth = 1;
+    Chart.defaults.plugins.tooltip.cornerRadius = 5;
+    Chart.defaults.plugins.tooltip.boxPadding = 4;
 
     document.querySelectorAll( '.chart-container' ).forEach( el => {
 
