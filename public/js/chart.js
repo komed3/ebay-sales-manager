@@ -11,7 +11,7 @@ function renderReportChart ( ctx, data ) {
 
     for ( const [ label, row ] of Object.entries( data ) ) {
 
-        labels.push( label.replaceAll( '-', ' / ' ) );
+        labels.push( label.replaceAll( '-', '/' ) );
         totalShipping.push( row.totalShipping );
         totalFees.push( row.totalFees );
         totalRefund.push( row.totalRefund );
@@ -69,7 +69,13 @@ function renderReportChart ( ctx, data ) {
         },
         options: {
             plugins: {
-                legend: { position: 'bottom' },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { size: 15 },
+                        boxWidth: 24
+                    }
+                },
                 tooltip: {
                     titleColor: '#000',
                     bodyColor: '#000',
@@ -95,14 +101,14 @@ function renderReportChart ( ctx, data ) {
                 y: {
                     stacked: true,
                     beginAtZero: true,
-                    ticks: { callback: v => formatMoney( v, 0 ) },
-                    grid: { drawOnChartArea: false, color: '#d5d6d7' },
-                    border: { color: '#d5d6d7' }
+                    ticks: { maxTicksLimit: 8, callback: v => formatMoney( v, 0 ) },
+                    grid: { color: '#d5d6d7' },
+                    border: { dash: [ 5, 5 ], color: '#d5d6d7' }
                 },
                 y2: {
                     position: 'right',
                     min: 0, max: 100,
-                    ticks: { callback: v => formatPercent( v / 100, 0 ) },
+                    ticks: { maxTicksLimit: 6, callback: v => formatPercent( v / 100, 0 ) },
                     grid: { drawOnChartArea: false, color: '#d5d6d7' },
                     border: { color: '#d5d6d7' }
                 }
@@ -123,7 +129,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
     Chart.defaults.interaction = { mode: 'index', intersect: false };
 
     Chart.defaults.font.family = 'SUSE, sans-serif';
-    Chart.defaults.font.size = 15;
+    Chart.defaults.font.size = 14;
     Chart.defaults.font.weight = 400;
     Chart.defaults.color = '#000';
 
