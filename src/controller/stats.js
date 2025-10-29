@@ -1,4 +1,4 @@
-import { getAnnualReports, getOrderDates, getOrderStats, getReports } from '../storage.js';
+import { getAnnualReports, getMonthlyReports, getOrderDates, getOrderStats } from '../storage.js';
 
 export function stats ( req, res ) {
 
@@ -7,7 +7,7 @@ export function stats ( req, res ) {
     res.render( 'stats', {
         path: '/stats', title: 'Statistik',
         query: query,
-        reports: query.type === 'annual' ? getAnnualReports() : getReports(),
+        reports: query.type === 'annual' ? getAnnualReports() : getMonthlyReports(),
         stats: getOrderStats(),
         dates: getOrderDates()
     } );

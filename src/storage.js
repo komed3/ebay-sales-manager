@@ -8,8 +8,9 @@ import { v4 as uuidv4 } from 'uuid';
 const ordersFile = join( cwd, 'data/orders.json' );
 const calendarFile = join( cwd, 'data/calendar.json' );
 const statsFile = join( cwd, 'data/stats.json' );
+const monthlyReportsFile = join( cwd, 'data/monthlyReports.json' );
 const annualReportsFile = join( cwd, 'data/annualReports.json' );
-const reportsFile = join( cwd, 'data/reports.json' );
+const reports = join( cwd, 'data/reports' );
 
 function numberOrAny( value ) {
 
@@ -186,6 +187,7 @@ export async function updateOrder ( raw, files ) {
 
     writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
     updateOrderStats();
+    updateReport( data.orderDate );
 
     return data.__uuid;
 
@@ -203,15 +205,15 @@ export function getOrderDates () {
 
 }
 
-export function getAnnualReports () {
+export function getMonthlyReports () {
 
-    return JSON.parse( readFileSync( annualReportsFile, 'utf8' ) );
+    return JSON.parse( readFileSync( monthlyReportsFile, 'utf8' ) );
 
 }
 
-export function getReports () {
+export function getAnnualReports () {
 
-    return JSON.parse( readFileSync( reportsFile, 'utf8' ) );
+    return JSON.parse( readFileSync( annualReportsFile, 'utf8' ) );
 
 }
 
@@ -220,6 +222,7 @@ export function updateOrderStats () {
     const orders = getOrders();
     const customers = new Set();
     const dates = new Set();
+
     const stats = {
         orderCount: 0,
         customerCount: 0,
@@ -361,7 +364,59 @@ export function updateOrderStats () {
     // Save stats and reports
     writeFileSync( calendarFile, JSON.stringify( [ ...dates ], null, 2 ), 'utf8' );
     writeFileSync( statsFile, JSON.stringify( stats, null, 2 ), 'utf8' );
+    writeFileSync( monthlyReportsFile, JSON.stringify( monthlyReportsSorted, null, 2 ), 'utf8' );
     writeFileSync( annualReportsFile, JSON.stringify( annualReportsSorted, null, 2 ), 'utf8' );
-    writeFileSync( reportsFile, JSON.stringify( monthlyReportsSorted, null, 2 ), 'utf8' );
+
+}
+
+export function updateReport ( dateStr ) {
+
+    const orders = getOrders();
+    const date = new Date( dateStr ).toISOString().replace( /(\d+)-(\d+)-(.+)/, '$1-$2' );
+    const reportFile = join( reports, `${ date }.json` );
+
+    const data = {
+        in: [],
+        revenue: {
+            shipping: 0,
+            pickup: 0
+        },
+        out: {
+            profit: 0,
+            shipping: 0,
+            fees: 0,
+            refund: 0
+        }
+    };
+
+    // Aggregate data for the specified month
+    orders.forEach( o => {
+
+        if ( o.orderDate.startsWith( date ) ) {
+
+            data.in.push( {
+                uuid: o.__uuid,
+                orderNumber: o.orderNumber,
+                orderDate: o.orderDate,
+                revenue: o.revenue
+            } );
+
+            data.revenue[ o.orderType ] += Number( o.revenue );
+            data.out.profit += Number( o.profit );
+            data.out.shipping += Number( o.shipping );
+            data.out.fees += Number( o.fees );
+            data.out.refund += Number( o.refund );
+
+        }
+
+    } );
+
+    // Round values
+    for ( const [ key, val ] of Object.entries( data.revenue ) ) {
+        data.revenue[ key ] = Number( Number( val ).toFixed( 2 ) );
+    }
+
+    // Save report
+    writeFileSync( reportFile, JSON.stringify( data, null, 2 ), 'utf8' );
 
 }
