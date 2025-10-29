@@ -270,27 +270,6 @@ export function updateOrderStats () {
         const month = String( date.getMonth() + 1 ).padStart( 2, '0' );
         const reportKey = `${year}-${month}`;
 
-        if ( ! annualReports[ year ] ) {
-
-            annualReports[ year ] = {
-                orderCount: 0,
-                totalRevenue: 0,
-                totalShipping: 0,
-                totalFees: 0,
-                totalRefund: 0,
-                totalProfit: 0
-            };
-
-        }
-
-        report = annualReports[ year ];
-        report.orderCount++;
-        report.totalRevenue += Number( o.revenue );
-        report.totalShipping += Number( o.shipping );
-        report.totalFees += Number( o.fees );
-        report.totalRefund += Number( o.refund );
-        report.totalProfit += Number( o.profit );
-
         if ( ! monthlyReports[ reportKey ] ) {
 
             monthlyReports[ reportKey ] = {
@@ -305,6 +284,27 @@ export function updateOrderStats () {
         }
 
         report = monthlyReports[ reportKey ];
+        report.orderCount++;
+        report.totalRevenue += Number( o.revenue );
+        report.totalShipping += Number( o.shipping );
+        report.totalFees += Number( o.fees );
+        report.totalRefund += Number( o.refund );
+        report.totalProfit += Number( o.profit );
+
+        if ( ! annualReports[ year ] ) {
+
+            annualReports[ year ] = {
+                orderCount: 0,
+                totalRevenue: 0,
+                totalShipping: 0,
+                totalFees: 0,
+                totalRefund: 0,
+                totalProfit: 0
+            };
+
+        }
+
+        report = annualReports[ year ];
         report.orderCount++;
         report.totalRevenue += Number( o.revenue );
         report.totalShipping += Number( o.shipping );
@@ -334,16 +334,6 @@ export function updateOrderStats () {
     }
 
     // Proceed reports
-    for ( const report of Object.values( annualReports ) ) {
-
-        report.profitMargin = report.totalProfit / report.totalRevenue * 100;
-
-        for ( const [ key, val ] of Object.entries( report ) ) {
-            report[ key ] = Number( Number( val ).toFixed( 2 ) );
-        }
-
-    }
-
     for ( const report of Object.values( monthlyReports ) ) {
 
         report.profitMargin = report.totalProfit / report.totalRevenue * 100;
@@ -354,10 +344,24 @@ export function updateOrderStats () {
 
     }
 
+    for ( const report of Object.values( annualReports ) ) {
+
+        report.profitMargin = report.totalProfit / report.totalRevenue * 100;
+
+        for ( const [ key, val ] of Object.entries( report ) ) {
+            report[ key ] = Number( Number( val ).toFixed( 2 ) );
+        }
+
+    }
+
+    // Sort reports by date
+    const monthlyReportsSorted = Object.fromEntries( Object.entries( monthlyReports ).sort( ( [ a ], [ b ] ) => a.localeCompare( b ) ) );
+    const annualReportsSorted = Object.fromEntries( Object.entries( annualReports ).sort( ( [ a ], [ b ] ) => a.localeCompare( b ) ) );
+
     // Save stats and reports
     writeFileSync( calendarFile, JSON.stringify( [ ...dates ], null, 2 ), 'utf8' );
     writeFileSync( statsFile, JSON.stringify( stats, null, 2 ), 'utf8' );
-    writeFileSync( annualReportsFile, JSON.stringify( annualReports, null, 2 ), 'utf8' );
-    writeFileSync( reportsFile, JSON.stringify( monthlyReports, null, 2 ), 'utf8' );
+    writeFileSync( annualReportsFile, JSON.stringify( annualReportsSorted, null, 2 ), 'utf8' );
+    writeFileSync( reportsFile, JSON.stringify( monthlyReportsSorted, null, 2 ), 'utf8' );
 
 }
