@@ -267,9 +267,21 @@ export function getReport ( report ) {
 
 }
 
-export function getCustomer () {
+export function getCustomers () {
 
     return JSON.parse( readFileSync( customerFile, 'utf8' ) );
+
+}
+
+export function getCustomer ( nick ) {
+
+    return getCustomers()[ nick ] || null;
+
+}
+
+export function isCustomer ( customer ) {
+
+    return customer && typeof customer === 'object' && customer.data.nick;
 
 }
 
@@ -469,7 +481,7 @@ export function updateReport ( dateStr ) {
 export function updateCustomerStats ( nick ) {
 
     const orders = getOrders();
-    const customers = getCustomer();
+    const customers = getCustomers();
 
     // Init customer data object
     const addresses = new Set();

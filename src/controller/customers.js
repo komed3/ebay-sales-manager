@@ -1,3 +1,5 @@
+import { getCustomer, isCustomer } from '../storage.js';
+
 export function customers ( _, res ) {
 
     res.render( 'customers', {
@@ -6,10 +8,15 @@ export function customers ( _, res ) {
 
 }
 
-export function customer ( _, res ) {
+export function customer ( req, res ) {
 
-    res.render( 'customer', {
-        path: '/customer', title: ''
+    const customer = getCustomer( req.query.nick ?? '' );
+
+    if ( isCustomer( customer ) ) res.render( 'customer', {
+        path: '/customers', title: '@' + customer.data.nick,
+        data: customer
     } );
+
+    else res.redirect( '/orders' );
 
 }
