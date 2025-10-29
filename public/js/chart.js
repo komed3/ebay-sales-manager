@@ -189,6 +189,100 @@ function renderMarginChart ( ctx, data ) {
 
 }
 
+function renderSankeyChart ( ctx, data ) {
+
+    const flows = [];
+    const colors = {
+        order: '#ccc',
+        shipping: '#2f88ff',
+        pickup: '#1060d6',
+        profit: '#78ac4c',
+        shippingCost: '#ffbb00',
+        fees: '#fb6542',
+        refund: '#698bbe'
+    };
+
+    for ( const o of data ) {
+
+        const orderLabel = '#' + o.orderNumber;
+        const revenueColor = colors[ o.orderType ];
+        const revenueLabel = {
+            shipping: 'Versand',
+            pickup: 'Abholung'
+        }[ o.orderType ];
+
+        flows.push( {
+            from: orderLabel,
+            to: revenueLabel,
+            flow: o.revenue,
+            cFrom: colors.order,
+            cTo: revenueColor
+        } );
+        
+        if ( o.profit > 0 ) flows.push( {
+            from: revenueLabel,
+            to: 'Gewinn',
+            flow: o.profit,
+            cFrom: revenueColor,
+            cTo: colors.profit
+        } );
+        
+        if ( o.shipping > 0 ) flows.push( {
+            from: revenueLabel,
+            to: 'Versandkosten',
+            flow: o.shipping,
+            cFrom: revenueColor,
+            cTo: colors.shippingCost
+        } );
+
+        if ( o.fees > 0 ) flows.push( {
+            from: revenueLabel,
+            to: 'Gebühren',
+            flow: o.fees,
+            cFrom: revenueColor,
+            cTo: colors.fees
+        } );
+
+        if ( o.refund > 0 ) flows.push( {
+            from: revenueLabel,
+            to: 'Rückerstattung',
+            flow: o.refund,
+            cFrom: revenueColor,
+            cTo: colors.refund
+        } );
+
+    }
+
+    new Chart( ctx, {
+        type: 'sankey',
+        data: {
+            datasets: [ {
+                label: 'Bestellungen',
+                data: flows,
+                colorFrom: c => c.raw.cFrom,
+                colorTo: c => c.raw.cTo,
+                colorMode: 'gradient',
+                alpha: 0.6,
+                borderWidth: 0,
+                nodeWidth: 12,
+                nodePadding: 12,
+                font: { weight: 'bold' },
+            } ]
+        },
+        options: {
+            plugins: {
+                tooltip: {
+                    displayColors: false,
+                    callbacks: {
+                        label: ctx => `${ ctx.raw.to }: ${ formatMoney( ctx.raw.flow ) }`
+                    }
+                }
+            }
+        }
+    } );
+
+}
+
 document.addEventListener( 'DOMContentLoaded', function () {
 
     Chart.defaults.responsive = true;
@@ -220,11 +314,15 @@ document.addEventListener( 'DOMContentLoaded', function () {
     document.querySelectorAll( '.chart-container' ).forEach( el => {
 
         const data = JSON.parse( el.querySelector( '.chartdata' ).textContent );
+        const type = el.getAttribute( 'chart-type' );
         const ctx = el.querySelector( '.chart' );
 
-        switch ( el.getAttribute( 'chart-type' ) ) {
+        ctx.classList.add( type );
+
+        switch ( type ) {
             case 'report': renderReportChart( ctx, data ); break;
             case 'margin': renderMarginChart( ctx, data ); break;
+            case 'sankey': renderSankeyChart( ctx, data ); break;
         }
 
     } );

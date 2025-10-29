@@ -230,6 +230,10 @@ table tbody tr:nth-child( even ) td {
     height: 420px;
 }
 
+.chart.sankey {
+    height: auto;
+}
+
 .footer {
     margin: 32px 0;
     font-size: 0.9em;
