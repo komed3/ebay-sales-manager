@@ -1,9 +1,18 @@
-import { getCustomer, isCustomer } from '../storage.js';
+import { filterCustomers, getCustomer, isCustomer } from '../storage.js';
 
-export function customers ( _, res ) {
+export function customers ( req, res ) {
+
+    const { results, max } = filterCustomers( req.query ?? {} );
 
     res.render( 'customers', {
-        path: '/customers', title: 'Kunden'
+        path: '/customers', title: 'Kunden',
+        query: req.query ?? {},
+        data: results,
+        pagination: {
+            limit: req.query?.limit || 32,
+            offset: req.query?.offset || 0,
+            max: max
+        }
     } );
 
 }

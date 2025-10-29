@@ -273,6 +273,21 @@ export function getCustomers () {
 
 }
 
+export function filterCustomers ( query ) {
+
+    const {
+        offset = 0, limit = 32, search = ''
+    } = expandDotNotation( query ?? {} );
+
+    const customer = Object.values( getCustomers() ).filter( c =>
+        JSON.stringify( c ).match( new RegExp( search, 'i' ) )
+    );
+
+    const results = customer.slice( offset, offset + limit );
+    return { results, count: results.length, max: customer.length };
+
+}
+
 export function getCustomer ( nick ) {
 
     return getCustomers()[ nick ] || null;
