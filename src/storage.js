@@ -399,46 +399,28 @@ export function updateReport ( dateStr ) {
     const date = new Date( dateStr ).toISOString().replace( /(\d+)-(\d+)-(.+)/, '$1-$2' );
     const reportFile = join( reports, `${ date }.json` );
 
-    const data = {
-        in: [],
-        revenue: {
-            shipping: 0,
-            pickup: 0
-        },
-        out: {
-            profit: 0,
-            shipping: 0,
-            fees: 0,
-            refund: 0
-        }
-    };
+    const data = [];
 
     // Aggregate data for the specified month
     orders.forEach( o => {
 
         if ( o.orderDate.startsWith( date ) ) {
 
-            data.in.push( {
+            data.push( {
                 uuid: o.__uuid,
+                orderType: o.orderType,
                 orderNumber: o.orderNumber,
                 orderDate: o.orderDate,
-                revenue: o.revenue
+                revenue: Number( o.revenue ),
+                profit: Number( o.profit ),
+                shipping: Number( o.shipping ),
+                fees: Number( o.fees ),
+                refund: Number( o.refund )
             } );
-
-            data.revenue[ o.orderType ] += Number( o.revenue );
-            data.out.profit += Number( o.profit );
-            data.out.shipping += Number( o.shipping );
-            data.out.fees += Number( o.fees );
-            data.out.refund += Number( o.refund );
 
         }
 
     } );
-
-    // Round values
-    for ( const [ key, val ] of Object.entries( data.revenue ) ) {
-        data.revenue[ key ] = Number( Number( val ).toFixed( 2 ) );
-    }
 
     // Save report
     writeFileSync( reportFile, JSON.stringify( data, null, 2 ), 'utf8' );
