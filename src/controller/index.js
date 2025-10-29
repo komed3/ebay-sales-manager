@@ -1,6 +1,7 @@
 import { login, logout, auth } from './auth.js';
+import { customer, customers } from './customers.js';
 import { dashboard } from './dashboard.js';
-import { deleteOrder, form, update } from './form.js';
+import { form, trash, update } from './form.js';
 import { map } from './map.js';
 import { orders, order } from './orders.js';
 import { report } from './report.js';
@@ -17,10 +18,12 @@ const routes = [
     { paths: '/form{/}', controller: { get: form, post: update } },
     { paths: '/orders{/}', controller: { get: orders } },
     { paths: '/order{/}', controller: { get: order } },
+    { paths: '/customers{/}', controller: { get: customers } },
+    { paths: '/customer{/}', controller: { get: customer } },
     { paths: '/stats{/}', controller: { get: stats } },
     { paths: '/map{/}', controller: { get: map } },
     { paths: '/report{/}', controller: { get: report } },
-    { paths: '/delete{/}', controller: { get: deleteOrder } }
+    { paths: '/delete{/}', controller: { get: trash } }
 ];
 
 // Init router

@@ -20,7 +20,7 @@ export async function update ( req, res ) {
 
 }
 
-export function deleteOrder ( req, res ) {
+export function trash ( req, res ) {
 
     deleteOrder( req.query.uuid ?? '' );
     res.redirect( '/orders' );
