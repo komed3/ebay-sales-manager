@@ -91,6 +91,7 @@
     width: 100%;
     height: 75dvh;
     font-family: var( --font-sans ) !important;
+    border: var( --box-border );
 }
 
 .map-marker {
