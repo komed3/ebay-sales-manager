@@ -40,7 +40,7 @@ block main
           tr
             td: a(
               href= '/order?uuid=' + order.__uuid
-            ): number= order.orderNumber
+            )= '#' + order.orderNumber
             td: date= order.orderDate
             td= order.customer.name + ' (@' + order.customer.nick + ')'
             td= { shipping: 'Versand', pickup: 'Abholung' }[ order.orderType ]
