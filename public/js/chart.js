@@ -77,6 +77,7 @@ function renderReportChart ( ctx, data ) {
                     }
                 },
                 tooltip: {
+                    padding: { top: 10, left: 12, right: 16, bottom: 10 },
                     titleColor: '#000',
                     bodyColor: '#000',
                     backgroundColor: '#fff',
