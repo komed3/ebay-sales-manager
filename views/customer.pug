@@ -1,6 +1,15 @@
 extends ./_layout
+include ./mixin/nav
 
 block main
+  div.box
+    div.box-row
+      h2 Kundendaten
+      +icon_nav( [
+        { path: '/export?customer=' + data.data.nick, label: 'Exportieren', icon: 'download.svg' },
+        { path: '/orders?search=' + data.data.nick, label: 'Bestellungen', icon: 'table.svg' }
+      ] )
+
   div.column
     div.box
       h3 Stammdaten
@@ -18,6 +27,15 @@ block main
           div.box-row
             span Telefon:
             strong= data.data.tel
+
+    div.box
+      h3 Adressen
+      if data.addresses.length > 0
+        each address in data.addresses
+          div.box-row
+            span= address.street + ', ' + address.zipCode + ' ' + address.city
+      else
+        span (keine Adressen angegeben)
 
     div.box
       h3 Umsatz
