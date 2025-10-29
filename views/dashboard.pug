@@ -1,4 +1,5 @@
 extends ./_layout
+include ./mixin/chart
 include ./mixin/nav
 include ./mixin/stats
 
@@ -13,13 +14,19 @@ block main
   ] )
 
   div.column
-    div.box.dashboard-links
+    div.box
       h3 eBay Sales Manager
       p
-       | Verwaltung von eBay Bestellungen, Erfassung von Umsätzen, Profiten und Kundendaten.
-       | Unterstützt den Export von Reporten und Statistiken, generiert detaillierte Umsatzdaten
-       | und eine Kartenansicht aller Kundenstandorte.
-      div.box-col
+       | Verwaltung von privaten eBay Bestellungen hilft bei der Erfassung von Umsätzen,
+       | Profiten und Kundendaten. Unterstützt werden der Export von Reporten und Statistiken,
+       | Einblick in detaillierte Umsatzdaten und eine Kartenansicht aller Kundenstandorte.
+      p
+       | Neue Bestellungen können schnell und einfach über das Formular erfasst werden.
+       | Berichte und Statistiken helfen dabei, den Überblick über Verkäufe und Gewinne zu
+       | behalten und werden vom System automatisch generiert. Eine filterbare Liste aller
+       | Bestellungen erleichtert die Verwaltung und Nachverfolgung von Verkäufen, über die
+       | Kartenansicht werden Bestellungen nach Standort visualisiert.
+      div.box-col.dashboard-links
         +text_nav( [
           { path: '/orders', label: 'Bestellungen', icon: 'table.svg' },
           { path: '/form', label: 'Neue Bestellung', icon: 'add.svg' },
@@ -27,3 +34,7 @@ block main
           { path: '/map', label: 'Karte', icon: 'map.svg' },
           { path: '/reports', label: 'Reporte & Export', icon: 'database.svg' }
         ] )
+
+    div.box
+      h3 Gewinnmarge
+      +chart( 'margin', stats )
