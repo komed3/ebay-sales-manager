@@ -1,5 +1,5 @@
 import { cwd } from './config.js';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import deepmerge from 'deepmerge';
 import fetch from 'node-fetch';
@@ -214,6 +214,30 @@ export function getMonthlyReports () {
 export function getAnnualReports () {
 
     return JSON.parse( readFileSync( annualReportsFile, 'utf8' ) );
+
+}
+
+export function getReportsList () {
+
+    try {
+
+        const files = readdirSync( reports );
+
+        return files.map( f => f.endsWith( '.json' )
+            ? f.replace( '.json', '' ) : null
+        ).filter( Boolean );
+
+    } catch { return [] }
+
+}
+
+export function getReport ( report ) {
+
+    const reportFile = join( reports, `${ report }.json` );
+
+    if ( existsSync( reportFile ) === false ) return null;
+
+    return JSON.parse( readFileSync( reportFile, 'utf8' ) );
 
 }
 

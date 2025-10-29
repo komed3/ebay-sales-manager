@@ -1,1 +1,8 @@
 extends ./_layout
+include ./mixin/chart
+
+block main
+  div.box
+    h3 Report für 
+      q= report.label
+    +chart( 'sankey', report.data )
