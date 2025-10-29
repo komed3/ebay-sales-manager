@@ -119,6 +119,36 @@ function renderReportChart ( ctx, data ) {
 
 }
 
+function renderMarginChart ( ctx, data ) {
+
+    new Chart( ctx, {
+        type: 'doughnut',
+        data: {
+            datasets: [ {
+                label: 'Umsätze',
+                data: [ data.shippingRevenue, data.pickupRevenue ],
+                backgroundColor: [ '#2f88ff', '#1060d6' ],
+                borderColor: '#fff',
+                borderWidth: 2
+            }, {
+                label: 'Kosten & Gewinn',
+                data: [ data.totalProfit, data.totalShipping, data.totalFees, data.totalRefund ],
+                backgroundColor: [ '#78ac4c', '#ffbb00', '#fb6542', '#698bbe' ],
+                borderColor: '#fff',
+                borderWidth: 2
+            }, {
+                label: 'Profitmarge',
+                data: [ data.profitMargin, 100 - data.profitMargin ],
+                backgroundColor: [ '#000', 'rgba( 0 0 0 / 0 )' ],
+                borderColor: '#fff',
+                borderWidth: 2
+            } ]
+        },
+        options: {}
+    } );
+
+}
+
 document.addEventListener( 'DOMContentLoaded', function () {
 
     Chart.defaults.responsive = true;
@@ -141,6 +171,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
         switch ( el.getAttribute( 'chart-type' ) ) {
             case 'report': renderReportChart( ctx, data ); break;
+            case 'margin': renderMarginChart( ctx, data ); break;
         }
 
     } );
