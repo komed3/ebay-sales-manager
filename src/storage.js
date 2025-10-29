@@ -214,6 +214,8 @@ export function updateOrderStats () {
         shippingCount: 0,
         pickupCount: 0,
         totalRevenue: 0,
+        shippingRevenue: 0,
+        pickupRevenue: 0,
         totalShipping: 0,
         totalFees: 0,
         totalRefund: 0,
@@ -232,12 +234,14 @@ export function updateOrderStats () {
 
         // Aggregate statistics
         stats.orderCount++;
-        stats[ `${o.orderType}Count` ]++;
         stats.totalRevenue += Number( o.revenue );
         stats.totalShipping += Number( o.shipping );
         stats.totalFees += Number( o.fees );
         stats.totalRefund += Number( o.refund );
         stats.totalProfit += Number( o.profit );
+
+        stats[ `${o.orderType}Count` ]++;
+        stats[ `${o.orderType}Revenue` ] += Number( o.revenue );
 
         if ( o.article && Array.isArray( o.article ) ) {
             stats.totalItems += o.article.reduce( ( sum, a ) => sum + ( Number( a.quantity ) || 0 ), 0 );
