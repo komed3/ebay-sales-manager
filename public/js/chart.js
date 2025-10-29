@@ -194,12 +194,12 @@ function renderSankeyChart ( ctx, data ) {
     const flows = [];
     const colors = {
         order: '#ccc',
-        shipping: '#2f88ff',
-        pickup: '#1060d6',
-        profit: '#78ac4c',
-        shippingCost: '#ffbb00',
-        fees: '#fb6542',
-        refund: '#698bbe'
+        shipping: '#89b5f6',
+        pickup: '#89b5f6',
+        profit: '#9fc67e',
+        shippingCost: '#ffcf4d',
+        fees: '#fda28d',
+        refund: '#c2d0e4'
     };
 
     for ( const o of data ) {
@@ -261,12 +261,15 @@ function renderSankeyChart ( ctx, data ) {
                 data: flows,
                 colorFrom: c => c.raw.cFrom,
                 colorTo: c => c.raw.cTo,
+                hoverColorFrom: c => c.raw.cFrom,
+                hoverColorTo: c => c.raw.cTo,
                 colorMode: 'gradient',
-                alpha: 0.6,
-                borderWidth: 0,
-                nodeWidth: 12,
+                alpha: 1,
+                nodeWidth: 0,
                 nodePadding: 12,
-                font: { weight: 'bold' },
+                borderColor: '#fff',
+                borderWidth: 4,
+                font: { weight: 'bold' }
             } ]
         },
         options: {
