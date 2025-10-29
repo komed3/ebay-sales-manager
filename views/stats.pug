@@ -13,6 +13,9 @@ append styles
 
 block main
   h2 Umsatz
+    div.actions
+      a( href= "/stats?type=monthly", class= ( query.type === 'monthly' ? 'active' : '' ) ) Monatlich
+      a( href= "/stats?type=annual", class= ( query.type === 'annual' ? 'active' : '' ) ) Jährlich
   +chart( 'report', reports )
   h2 Statistik
   +stats( stats )

@@ -56,6 +56,33 @@
     padding: 32px;
 }
 
+.main h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin: 36px 0 24px;
+    font-size: 1.4em;
+}
+
+.main h2 .actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.main h2 .actions a {
+    padding: 6px 12px;
+    font-size: 1rem;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.main h2 .actions a.active {
+    color: #fff;
+    background: var( --primary-color );
+}
+
 .main h2:first-child {
     margin-top: 0;
 }

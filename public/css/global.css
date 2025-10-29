@@ -51,11 +51,6 @@ html, body {
     background: var( --background-color );
 }
 
-h2 {
-    margin: 36px 0 24px;
-    font-size: 1.4em;
-}
-
 p {
     line-height: 1.6;
     font-size: 1.1em;
