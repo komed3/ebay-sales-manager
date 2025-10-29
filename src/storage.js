@@ -203,6 +203,18 @@ export function getOrderDates () {
 
 }
 
+export function getAnnualReports () {
+
+    return JSON.parse( readFileSync( annualReportsFile, 'utf8' ) );
+
+}
+
+export function getReports () {
+
+    return JSON.parse( readFileSync( reportsFile, 'utf8' ) );
+
+}
+
 export function updateOrderStats () {
 
     const orders = getOrders();

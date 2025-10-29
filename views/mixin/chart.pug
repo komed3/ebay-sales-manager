@@ -1,0 +1,4 @@
+mixin chart( data )
+  div.chart-container
+    script.chartdata( type= "application/json" )!= JSON.stringify( data )
+    div.chart
