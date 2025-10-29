@@ -99,7 +99,6 @@ block main
           tr
             th Artikelnr.
             th Name
-            th Kommission
             th.right Menge
             th.right Artikelpreis
             th.right Gebühren
@@ -109,7 +108,6 @@ block main
             tr
               td: number= article.number
               td= article.name
-              td= article.commission || '—'
               td.right: number= article.quantity
               td.right: money= article.price
               td.right: money= article.fee

@@ -1,5 +1,4 @@
 import { login, logout, auth } from './auth.js';
-import { commission } from './commission.js';
 import { dashboard } from './dashboard.js';
 import { form, update } from './form.js';
 import { map } from './map.js';
@@ -20,7 +19,6 @@ const routes = [
     { paths: '/order{/}', controller: { get: order } },
     { paths: '/stats{/}', controller: { get: stats } },
     { paths: '/map{/}', controller: { get: map } },
-    { paths: '/commission{/}', controller: { get: commission } },
     { paths: '/reports{/}', controller: { get: reports } }
 ];
 

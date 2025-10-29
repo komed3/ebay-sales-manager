@@ -146,10 +146,6 @@ block main
                 placeholder= "Gebühren [€]", min= 0, step= 0.01,
                 value= article.fee || ''
               )
-              - var commission = article.commission || ''
-              select( name= `article.commission[${val}]` )
-                option( value="" ) —
-                optgroup( label= "Kommissioniert für:" )
 
     div.box-row
       button( type= "submit" ) Speichern
