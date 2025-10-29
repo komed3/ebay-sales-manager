@@ -18,3 +18,25 @@ block main
           div.box-row
             span Telefon:
             strong= data.data.tel
+
+    div.box
+      h3 Umsatz
+      div.box-col
+        div.box-row
+          span Anzahl d. Bestellungen:
+          strong: number= data.stats.orderCount
+        div.box-row
+          span Bestellte Artikel:
+          strong: number= data.stats.itemCount
+        div.box-row
+          span Gesamtumsatz:
+          strong: money= data.stats.totalRevenue
+        div.box-row
+          span Rückerstattung:
+          strong: money= data.stats.totalRefund
+        div.box-row
+          span Gewinn:
+          strong: money= data.stats.totalProfit
+        div.box-row
+          span Gewinnmarge:
+          strong: pct= data.stats.profitMargin
