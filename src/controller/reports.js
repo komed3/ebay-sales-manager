@@ -16,9 +16,9 @@ export function reports ( req, res ) {
             path: '/reports', title: 'Reporte & Export',
             list: list,
             report: {
+                name: req.query.month,
                 label: new Date( req.query.month + '-01' ).toLocaleDateString( 'de-DE', {
-                    month: 'long',
-                    year: 'numeric'
+                    month: 'long', year: 'numeric'
                 } ),
                 data: report
             }

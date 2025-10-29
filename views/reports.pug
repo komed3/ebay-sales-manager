@@ -1,5 +1,6 @@
 extends ./_layout
 include ./mixin/chart
+include ./mixin/nav
 
 append scripts
   script( src= "https://cdn.jsdelivr.net/npm/chart.js" )
@@ -10,4 +11,40 @@ block main
   div.box
     h3 Report für 
       q= report.label
-    +chart( 'flow', report.data )
+    div.box-col
+      +chart( 'flow', report.data )
+      div.box-row
+        span Bericht:
+        select( onchange= "location.href='/reports?month='+this.value" )
+          each item in list
+            option( value= item, selected= ( item === report.name ) )= item.replace( '-', ' / ' )
+        +icon_nav( [
+          { path: '/export?report=' + report.name, label: 'Exportieren', icon: 'download.svg' }
+        ] )
+
+  div.box
+    h3 Rechnungen in diesem Bericht
+    table
+      thead
+        tr
+          th Bestellnummer
+          th Datum
+          th Typ
+          th.right Umsatz
+          th.right Gebühren
+          th.right Versand
+          th.right Erstattung
+          th.right Gewinn
+          th.right Marge
+      tbody
+        each order in report.data
+          tr
+            td: a( href= '/order?uuid=' + order.uuid ): number= order.orderNumber
+            td: date= order.orderDate
+            td= { shipping: 'Versand', pickup: 'Abholung' }[ order.orderType ]
+            td.right: money= order.revenue
+            td.right: money= order.fees
+            td.right: money= order.shipping
+            td.right: money= order.refund
+            td.right: b: money= order.profit
+            td.right: b: pct= order.profit / order.revenue
