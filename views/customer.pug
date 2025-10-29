@@ -1,1 +1,20 @@
 extends ./_layout
+
+block main
+  div.column
+    div.box
+      h3 Stammdaten
+      div.box-col
+        div.box-row
+          span Benutzername:
+          strong= data.data.nick
+        div.box-row
+          span Name:
+          strong= data.data.name
+        div.box-row
+          span E-Mail:
+          strong= data.data.mail
+        if data.data.tel
+          div.box-row
+            span Telefon:
+            strong= data.data.tel
