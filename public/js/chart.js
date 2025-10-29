@@ -1,5 +1,7 @@
 function renderReportChart ( ctx, data ) {
 
+    data = Object.fromEntries( Object.entries( data ).reverse().slice( 0, 24 ).reverse() );
+
     const labels = [];
     const totalShipping = [];
     const totalFees = [];
@@ -9,7 +11,7 @@ function renderReportChart ( ctx, data ) {
 
     for ( const [ label, row ] of Object.entries( data ) ) {
 
-        labels.push( label );
+        labels.push( label.replaceAll( '-', ' / ' ) );
         totalShipping.push( row.totalShipping );
         totalFees.push( row.totalFees );
         totalRefund.push( row.totalRefund );
@@ -26,7 +28,7 @@ function renderReportChart ( ctx, data ) {
                 data: profitMargin,
                 type: 'line',
                 yAxisID: 'y2',
-                label: 'Gewinnmarge (%)',
+                label: 'Gewinnmarge',
                 pointRadius: 6,
                 pointHoverRadius: 6,
                 tension: 0.3,
@@ -39,29 +41,29 @@ function renderReportChart ( ctx, data ) {
                 data: totalShipping,
                 stack: 'finances',
                 label: 'Versandkosten',
-                backgroundColor: '#9f73ad',
-                hoverBackgroundColor: '#9f73ad',
+                backgroundColor: '#ffbb00',
+                hoverBackgroundColor: '#ffbb00',
                 borderWidth: 0
             }, {
                 data: totalFees,
                 stack: 'finances',
-                label: 'Verkaufsgebühren',
-                backgroundColor: '#da6f88',
-                hoverBackgroundColor: '#da6f88',
+                label: 'Gebühren',
+                backgroundColor: '#fb6542',
+                hoverBackgroundColor: '#fb6542',
                 borderWidth: 0
             }, {
                 data: totalRefund,
                 stack: 'finances',
-                label: 'Rückerstattungen',
-                backgroundColor: '#cfa75c',
-                hoverBackgroundColor: '#cfa75c',
+                label: 'Erstattungen',
+                backgroundColor: '#698bbe',
+                hoverBackgroundColor: '#698bbe',
                 borderWidth: 0
             }, {
                 data: totalProfit,
                 stack: 'finances',
-                label: 'Gewinn / Einnahmen',
-                backgroundColor: '#4cb96d',
-                hoverBackgroundColor: '#4cb96d',
+                label: 'Gewinn',
+                backgroundColor: '#78ac4c',
+                hoverBackgroundColor: '#78ac4c',
                 borderWidth: 0
             } ]
         },
@@ -74,8 +76,9 @@ function renderReportChart ( ctx, data ) {
                     backgroundColor: '#fff',
                     borderColor: '#d5d6d7',
                     borderWidth: 1,
+                    cornerRadius: 5,
+                    boxPadding: 4,
                     callbacks: {
-                        title: ctx => ctx[ 0 ].label.replace( '-', ' / ' ),
                         label: ctx => `${ ctx.dataset.label }: ${ ( ctx.datasetIndex == 0
                             ? formatPercent( ctx.raw / 100 )
                             : formatMoney( ctx.raw )
@@ -83,25 +86,27 @@ function renderReportChart ( ctx, data ) {
                     }
                 }
             },
-        scales: {
-            x: {
-            stacked: true,
-            ticks: { color: 'var(--text-muted)', font: { family: 'var(--font-sans)' } },
-            grid: { display: false }
-            },
-            y: {
-            stacked: true,
-            beginAtZero: true,
-            ticks: { color: 'var(--text-muted)', font: { family: 'var(--font-sans)' }, callback: v => v + ' €' },
-            grid: { color: 'rgba(0,0,0,0.05)' }
-            },
-            y2: {
-            position: 'right',
-            beginAtZero: true,
-            grid: { drawOnChartArea: false },
-            ticks: { color: 'var(--green)', callback: v => v + '%' }
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: { display: false },
+                    border: { color: '#d5d6d7' }
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true,
+                    ticks: { callback: v => formatMoney( v, 0 ) },
+                    grid: { drawOnChartArea: false, color: '#d5d6d7' },
+                    border: { color: '#d5d6d7' }
+                },
+                y2: {
+                    position: 'right',
+                    min: 0, max: 100,
+                    ticks: { callback: v => formatPercent( v / 100, 0 ) },
+                    grid: { drawOnChartArea: false, color: '#d5d6d7' },
+                    border: { color: '#d5d6d7' }
+                }
             }
-        }
         }
     } );
 

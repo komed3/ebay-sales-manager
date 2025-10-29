@@ -1,8 +1,16 @@
 const __url = new URL( window.location.href );
 
-const formatMoney = ( value ) => new Intl.NumberFormat( 'de-DE', { style: 'currency', currency: 'EUR' } ).format( value );
-const formatPercent = ( value ) => new Intl.NumberFormat( 'de-DE', { style: 'percent', minimumFractionDigits: 1 } ).format( value );
-const formatDate = ( date ) => new Date( date ).toLocaleDateString( 'de-DE', { dateStyle: 'medium' } );
+const formatMoney = ( value, d = 2 ) => new Intl.NumberFormat( 'de-DE', {
+    style: 'currency', currency: 'EUR', minimumFractionDigits: d
+} ).format( value );
+
+const formatPercent = ( value, d = 1 ) => new Intl.NumberFormat( 'de-DE', {
+    style: 'percent', minimumFractionDigits: d
+} ).format( value );
+
+const formatDate = ( date ) => new Date( date ).toLocaleDateString( 'de-DE', {
+    dateStyle: 'medium'
+} );
 
 document.addEventListener( 'DOMContentLoaded', function () {
 
