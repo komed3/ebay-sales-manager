@@ -68,6 +68,7 @@ function renderReportChart ( ctx, data ) {
             } ]
         },
         options: {
+            interaction: { mode: 'index', intersect: false },
             plugins: {
                 legend: {
                     position: 'bottom',
@@ -125,26 +126,80 @@ function renderMarginChart ( ctx, data ) {
         type: 'doughnut',
         data: {
             datasets: [ {
-                label: 'Umsätze',
-                data: [ data.shippingRevenue, data.pickupRevenue ],
+                data: [
+                    { x: 'Versand', value: data.shippingRevenue },
+                    { x: 'Abholung', value: data.pickupRevenue }
+                ],
                 backgroundColor: [ '#2f88ff', '#1060d6' ],
+                hoverBackgroundColor: [ '#2f88ff', '#1060d6' ],
                 borderColor: '#fff',
-                borderWidth: 2
+                hoverBorderColor: '#fff',
+                borderWidth: 3,
+                borderRadius: 12
             }, {
-                label: 'Kosten & Gewinn',
-                data: [ data.totalProfit, data.totalShipping, data.totalFees, data.totalRefund ],
+                data: [
+                    { x: 'Gewinn', value: data.totalProfit },
+                    { x: 'Versandkosten', value: data.totalShipping },
+                    { x: 'Gebühren', value: data.totalFees },
+                    { x: 'Rückerstattung', value: data.totalRefund }
+                ],
                 backgroundColor: [ '#78ac4c', '#ffbb00', '#fb6542', '#698bbe' ],
+                hoverBackgroundColor: [ '#78ac4c', '#ffbb00', '#fb6542', '#698bbe' ],
                 borderColor: '#fff',
-                borderWidth: 2
+                hoverBorderColor: '#fff',
+                borderWidth: 3,
+                borderRadius: 12
             }, {
-                label: 'Profitmarge',
-                data: [ data.profitMargin, 100 - data.profitMargin ],
+                data: [
+                    { x: 'Profitmarge', value: data.profitMargin },
+                    { value: 100 - data.profitMargin }
+                ],
                 backgroundColor: [ '#000', 'rgba( 0 0 0 / 0 )' ],
+                hoverBackgroundColor: [ '#000', 'rgba( 0 0 0 / 0 )' ],
                 borderColor: '#fff',
-                borderWidth: 2
+                hoverBorderColor: '#fff',
+                borderWidth: 3,
+                borderRadius: 12
             } ]
         },
-        options: {}
+        options: {
+            cutout: '40%',
+            plugins: {
+                legend: {
+                    position: 'left',
+                    labels: {
+                        font: { size: 15 },
+                        boxWidth: 24,
+                        generateLabels: () => [
+                            { text: 'Versand', fillStyle: '#2f88ff' },
+                            { text: 'Abholung', fillStyle: '#1060d6' },
+                            { text: 'Gewinn', fillStyle: '#78ac4c' },
+                            { text: 'Versandkosten', fillStyle: '#ffbb00' },
+                            { text: 'Gebühren', fillStyle: '#fb6542' },
+                            { text: 'Rückerstattung', fillStyle: '#698bbe' },
+                            { text: 'Profitmarge', fillStyle: '#000' }
+                        ]
+                    }
+                },
+                tooltip: {
+                    padding: { top: 10, left: 12, right: 16, bottom: 10 },
+                    titleColor: '#000',
+                    bodyColor: '#000',
+                    backgroundColor: '#fff',
+                    borderColor: '#d5d6d7',
+                    borderWidth: 1,
+                    cornerRadius: 5,
+                    boxPadding: 4,
+                    filter: ctx => ! ( ctx.datasetIndex == 2 && ctx.dataIndex == 1 ),
+                    callbacks: {
+                        label: ctx => `${ ctx.raw.x }: ${ ( ctx.datasetIndex == 2
+                            ? formatPercent( ctx.raw.value / 100 )
+                            : formatMoney( ctx.raw.value )
+                        ) }`
+                    }
+                }
+            }
+        }
     } );
 
 }
@@ -157,7 +212,6 @@ document.addEventListener( 'DOMContentLoaded', function () {
     Chart.defaults.clip = false;
     Chart.defaults.layout.padding = 6;
     Chart.defaults.animation = false;
-    Chart.defaults.interaction = { mode: 'index', intersect: false };
 
     Chart.defaults.font.family = 'SUSE, sans-serif';
     Chart.defaults.font.size = 14;
