@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from 'uuid';
 const ordersFile = join( cwd, 'data/orders.json' );
 const calendarFile = join( cwd, 'data/calendar.json' );
 const statsFile = join( cwd, 'data/stats.json' );
+const annualReportsFile = join( cwd, 'data/annualReports.json' );
+const reportsFile = join( cwd, 'data/reports.json' );
 
 function numberOrAny( value ) {
 
@@ -219,10 +221,16 @@ export function updateOrderStats () {
         totalItems: 0
     };
 
+    const monthlyReports = {};
+    const annualReports = {};
+    let report;
+
     orders.forEach( o => {
 
+        // Collect unique order dates
         dates.add( o.orderDate );
 
+        // Aggregate statistics
         stats.orderCount++;
         stats[ `${o.orderType}Count` ]++;
         stats.totalRevenue += Number( o.revenue );
@@ -240,8 +248,57 @@ export function updateOrderStats () {
             customers.add( o.customer.nick );
         }
 
+        // Aggregate report data
+        const date = new Date( o.orderDate );
+        const year = date.getFullYear();
+        const month = String( date.getMonth() + 1 ).padStart( 2, '0' );
+        const reportKey = `${year}-${month}`;
+
+        if ( ! annualReports[ year ] ) {
+
+            annualReports[ year ] = {
+                orderCount: 0,
+                totalRevenue: 0,
+                totalShipping: 0,
+                totalFees: 0,
+                totalRefund: 0,
+                totalProfit: 0
+            };
+
+        }
+
+        report = annualReports[ year ];
+        report.orderCount++;
+        report.totalRevenue += Number( o.revenue );
+        report.totalShipping += Number( o.shipping );
+        report.totalFees += Number( o.fees );
+        report.totalRefund += Number( o.refund );
+        report.totalProfit += Number( o.profit );
+
+        if ( ! monthlyReports[ reportKey ] ) {
+
+            monthlyReports[ reportKey ] = {
+                orderCount: 0,
+                totalRevenue: 0,
+                totalShipping: 0,
+                totalFees: 0,
+                totalRefund: 0,
+                totalProfit: 0
+            };
+
+        }
+
+        report = monthlyReports[ reportKey ];
+        report.orderCount++;
+        report.totalRevenue += Number( o.revenue );
+        report.totalShipping += Number( o.shipping );
+        report.totalFees += Number( o.fees );
+        report.totalRefund += Number( o.refund );
+        report.totalProfit += Number( o.profit );
+
     } );
 
+    // Calculate averages and profit margins
     if ( stats.orderCount ) {
 
         stats.averageRevenue = stats.totalRevenue / stats.orderCount;
@@ -255,11 +312,36 @@ export function updateOrderStats () {
 
     }
 
+    // Round values
     for ( const [ key, val ] of Object.entries( stats ) ) {
         stats[ key ] = Number( Number( val ).toFixed( 2 ) );
     }
 
+    // Proceed reports
+    for ( const report of Object.values( annualReports ) ) {
+
+        report.profitMargin = report.totalProfit / report.totalRevenue * 100;
+
+        for ( const [ key, val ] of Object.entries( report ) ) {
+            report[ key ] = Number( Number( val ).toFixed( 2 ) );
+        }
+
+    }
+
+    for ( const report of Object.values( monthlyReports ) ) {
+
+        report.profitMargin = report.totalProfit / report.totalRevenue * 100;
+
+        for ( const [ key, val ] of Object.entries( report ) ) {
+            report[ key ] = Number( Number( val ).toFixed( 2 ) );
+        }
+
+    }
+
+    // Save stats and reports
     writeFileSync( calendarFile, JSON.stringify( [ ...dates ], null, 2 ), 'utf8' );
     writeFileSync( statsFile, JSON.stringify( stats, null, 2 ), 'utf8' );
+    writeFileSync( annualReportsFile, JSON.stringify( annualReports, null, 2 ), 'utf8' );
+    writeFileSync( reportsFile, JSON.stringify( monthlyReports, null, 2 ), 'utf8' );
 
 }
