@@ -7,7 +7,7 @@ export function report ( req, res ) {
 
     if ( ! report ) {
 
-        if ( list.length ) res.redirect( '/report?month=' + list.at( -1 ) );
+        if ( list.length ) res.redirect( '/report?month=' + list[ 0 ] );
         else res.redirect( '/' );
 
     } else {
