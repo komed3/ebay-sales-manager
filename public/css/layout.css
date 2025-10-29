@@ -230,7 +230,7 @@ table tbody tr:nth-child( even ) td {
     height: 420px;
 }
 
-.chart.sankey {
+.chart.flow {
     height: auto;
 }
 

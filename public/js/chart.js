@@ -189,7 +189,7 @@ function renderMarginChart ( ctx, data ) {
 
 }
 
-function renderSankeyChart ( ctx, data ) {
+function renderFlowChart ( ctx, data ) {
 
     const labels = {
         order: { label: 'Bestellung', color: '#ccc' },
@@ -300,7 +300,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
         switch ( type ) {
             case 'report': renderReportChart( ctx, data ); break;
             case 'margin': renderMarginChart( ctx, data ); break;
-            case 'sankey': renderSankeyChart( ctx, data ); break;
+            case 'flow': renderFlowChart( ctx, data ); break;
         }
 
     } );
