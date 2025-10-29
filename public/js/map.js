@@ -10,8 +10,9 @@ document.addEventListener( 'DOMContentLoaded', function () {
 
         map.attributionControl.setPrefix( false );
 
-        L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors',
+        L.tileLayer( 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png', {
+            subdomains: 'abcd',
+            attribution: '&copy; Copyright by Carto &amp; OSM',
             minZoom: 5, maxZoom: 18
         } ).addTo( map );
 
