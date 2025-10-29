@@ -127,8 +127,8 @@ function renderMarginChart ( ctx, data ) {
         data: {
             datasets: [ {
                 data: [
-                    { x: 'Versand', value: data.shippingRevenue },
-                    { x: 'Abholung', value: data.pickupRevenue }
+                    { x: 'Umsatz d. Versand', value: data.shippingRevenue },
+                    { x: 'Umsatz d. Abholung', value: data.pickupRevenue }
                 ],
                 backgroundColor: [ '#2f88ff', '#1060d6' ],
                 hoverBackgroundColor: [ '#2f88ff', '#1060d6' ],
@@ -171,8 +171,8 @@ function renderMarginChart ( ctx, data ) {
                         font: { size: 15 },
                         boxWidth: 24,
                         generateLabels: () => [
-                            { text: 'Versand', fillStyle: '#2f88ff' },
-                            { text: 'Abholung', fillStyle: '#1060d6' },
+                            { text: 'Umsatz d. Versand', fillStyle: '#2f88ff' },
+                            { text: 'Umsatz d. Abholung', fillStyle: '#1060d6' },
                             { text: 'Gewinn', fillStyle: '#78ac4c' },
                             { text: 'Versandkosten', fillStyle: '#ffbb00' },
                             { text: 'Gebühren', fillStyle: '#fb6542' },
