@@ -510,7 +510,7 @@ export function updateCustomerStats ( nick ) {
             };
 
             // Collect unique addresses
-            addresses.add( o.customer.address );
+            if ( o.location ) addresses.add( o.customer.address );
 
             // Aggregate statistics
             customer.stats.orderCount++;
