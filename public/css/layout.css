@@ -193,6 +193,12 @@ table tbody tr:nth-child( even ) td {
     background: var( --background-color );
 }
 
+.chart {
+    position: relative;
+    width: 100%;
+    height: 420px;
+}
+
 .footer {
     margin: 32px 0;
     font-size: 0.9em;

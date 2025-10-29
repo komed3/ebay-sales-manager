@@ -3,12 +3,16 @@ include ./mixin/calendar
 include ./mixin/chart
 include ./mixin/stats
 
+append scripts
+  script( src= "https://cdn.jsdelivr.net/npm/chart.js" )
+  script( src= "/js/chart.js", defer ) 
+
 append styles
   link( rel= "stylesheet", href= "/css/calendar.min.css" )
   link( rel= "stylesheet", href= "/css/stats.min.css" )
 
 block main
-  +chart( reports )
+  +chart( 'report', reports )
   h2 Statistik
   +stats( stats )
   h2 Kalender

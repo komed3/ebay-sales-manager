@@ -1,4 +1,4 @@
-mixin chart( data )
-  div.chart-container
+mixin chart( type, data )
+  div.chart-container( chart-type= type )
     script.chartdata( type= "application/json" )!= JSON.stringify( data )
-    div.chart
+    canvas.chart
