@@ -6,7 +6,7 @@ import { form, trash, update } from './form.js';
 import { map } from './map.js';
 import { orders, order } from './orders.js';
 import { report } from './report.js';
-import { settings } from './settings.js';
+import { settings, updateSettings } from './settings.js';
 import { stats } from './stats.js';
 import express from 'express';
 
@@ -15,7 +15,7 @@ const routes = [
     { paths: '{/}', controller: { get: dashboard } },
     { paths: '/login{/}', controller: { get: login, post: auth } },
     { paths: '/logout{/}', controller: { get: logout } },
-    { paths: '/settings{/}', controller: { get: settings } },
+    { paths: '/settings{/}', controller: { get: settings, post: updateSettings } },
     { paths: '/form{/}', controller: { get: form, post: update } },
     { paths: '/orders{/}', controller: { get: orders } },
     { paths: '/order{/}', controller: { get: order } },
