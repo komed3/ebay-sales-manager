@@ -25,61 +25,61 @@ block main
 
   div.column
     div.box
-      h3 Bestelldaten
+      h3= t( 'order.data.info' )
       div.box-col
         div.box-row
-          span Bestellnummer:
+          span= t( 'order.data.number' )
           strong= data.orderNumber
         div.box-row
-          span Verkaufsprotokoll:
+          span= t( 'order.data.record' )
           strong= data.recordNumber
         div.box-row
-          span Bestelldatum:
+          span= t( 'order.data.date' )
           strong: date= data.orderDate
 
     div.box
-      h3 Umsatz &amp; Gebühren
+      h3= t( 'order.data.finance' )
       div.box-col
         div.box-row
-          span Umsatz (inkl. Versand):
+          span= t( 'order.data.revenue' )
           strong: money= data.revenue
         div.box-row
-          span Versandkosten:
+          span= t( 'order.data.shipping' )
           strong: money= data.shipping
         div.box-row
-          span Gebühren (Werbekosten):
+          span= t( 'order.data.fees' )
           strong: money= data.fees
         if data.refund
           div.box-row
-            span Rückerstattung:
+            span= t( 'order.data.refund' )
             strong: money= data.refund
         hr
         div.box-row
-          span Bestelleinnahmen:
+          span= t( 'order.data.profit' )
           strong: money= data.profit
 
     if data.customer
       div.box
-        h3 Kundendaten
+        h3= t( 'order.data.customer' )
         div.box-col
           div.box-row
-            span Benutzername:
+            span= t( 'order.data.nick' )
             strong: a( href= '/customer?nick=' + data.customer.nick )= data.customer.nick
           div.box-row
-            span Name:
+            span= t( 'order.data.name' )
             strong= data.customer.name
           div.box-row
-            span E-Mail:
+            span= t( 'order.data.mail' )
             strong= data.customer.mail
           if data.customer.tel
             div.box-row
-              span Telefon:
+              span= t( 'order.data.tel' )
               strong= data.customer.tel
 
       if data.customer.address && data.location
         - var { street, zipCode, city } = data.customer.address
         div.box
-          h3 Adresse
+          h3= t( 'order.data.address' )
           +map( [ { ...data.location, ...{
             type: data.orderType, uuid: data.__uuid,
             number: data.orderNumber,
@@ -94,12 +94,12 @@ block main
       table
         thead
           tr
-            th Artikelnr.
-            th Name
-            th.right Menge
-            th.right Artikelpreis
-            th.right Gebühren
-            th.right Profit
+            th= t( 'order.table.number' )
+            th= t( 'order.table.name' )
+            th.right= t( 'order.table.quantity' )
+            th.right= t( 'order.table.price' )
+            th.right= t( 'order.table.fee' )
+            th.right= t( 'order.table.profit' )
         tbody
           each article in data.article
             tr

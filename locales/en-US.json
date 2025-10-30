@@ -119,6 +119,32 @@
     "action": {
       "invoice": "Show invoice"
     },
+    "data": {
+      "address": "Address",
+      "customer": "Customer data",
+      "date": "Order date:",
+      "fees": "Fees (advertising costs):",
+      "finance": "Revenue & fees",
+      "info": "Order details",
+      "mail": "Email:",
+      "name": "Name:",
+      "nick": "Username:",
+      "number": "Order number:",
+      "profit": "Order income:",
+      "record": "Sales record:",
+      "refund": "Refund:",
+      "revenue": "Revenue (incl. shipping):",
+      "shipping": "Shipping costs:",
+      "tel": "Phone:"
+    },
+    "table": {
+      "fee": "Fee",
+      "name": "Name",
+      "number": "Item no.",
+      "price": "Unit price",
+      "profit": "Profit",
+      "quantity": "Quantity"
+    },
     "title": "Order #{{order}}"
   },
   "orders": {

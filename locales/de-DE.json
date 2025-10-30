@@ -119,6 +119,32 @@
     "action": {
       "invoice": "Rechnung anzeigen"
     },
+    "data": {
+      "address": "Adresse",
+      "customer": "Kundendaten",
+      "date": "Bestelldatum:",
+      "fees": "Gebühren (Werbekosten):",
+      "finance": "Umsatz & Gebühren",
+      "info": "Bestelldaten",
+      "mail": "E-Mail:",
+      "name": "Name:",
+      "nick": "Benutzername:",
+      "number": "Bestellnummer:",
+      "profit": "Bestelleinnahmen:",
+      "record": "Verkaufsprotokoll:",
+      "refund": "Rückerstattung:",
+      "revenue": "Umsatz (inkl. Versand):",
+      "shipping": "Versandkosten:",
+      "tel": "Telefon:"
+    },
+    "table": {
+      "fee": "Gebühr",
+      "name": "Name",
+      "number": "Artikelnr.",
+      "price": "EZP",
+      "profit": "Gewinn",
+      "quantity": "Menge"
+    },
     "title": "Bestellübersicht #{{order}}"
   },
   "orders": {
