@@ -68,14 +68,31 @@
   },
   "generic": {
     "credits": "Copyright &copy; 2025 <a href=\"https://komed3.de\" target=\"_blank\">komed3</a>. All rights reserved.",
-    "finance": {
-      "margin": "Profit margin"
-    },
     "form": {
       "abort": "Abort",
       "submit": "Submit"
     },
     "name": "eBay Sales Manager",
+    "stats": {
+      "orderCount": "Orders",
+      "customerCount": "Customers",
+      "totalRevenue": "Total revenue",
+      "shippingRevenue": "Revenue (shipping)",
+      "pickupRevenue": "Revenue (pickup)",
+      "totalShipping": "Shipping costs",
+      "totalFees": "Fees",
+      "totalRefund": "Refunds",
+      "totalProfit": "Total profit",
+      "totalItems": "Number of items",
+      "averageRevenue": "Avg. revenue",
+      "averageShipping": "Avg. shipping",
+      "averageFees": "Avg. fees",
+      "averageRefund": "Avg. refund",
+      "averageProfit": "Avg. profit",
+      "averageItems": "Avg. items",
+      "averageItemPrice": "Avg. item price",
+      "profitMargin": "Profit margin"
+    },
     "title": "{{site}} — eBay Sales Manager",
     "wd": "MTWTFSS"
   },
