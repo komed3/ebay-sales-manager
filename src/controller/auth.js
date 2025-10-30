@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt';
 import { getUser } from '../storage.js';
+import bcrypt from 'bcrypt';
 
 export function login ( _, res ) { res.render( 'login' ) }
 
