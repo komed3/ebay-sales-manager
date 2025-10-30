@@ -231,6 +231,11 @@ table tbody tr:nth-child( even ) td {
     background: var( --background-color );
 }
 
+table tfoot td {
+    padding-bottom: 0;
+    border-top: var( --box-border );
+}
+
 .chart {
     position: relative;
     width: 100%;
