@@ -1,4 +1,5 @@
 import { cwd, config } from './config.js';
+import { getUser } from './storage.js';
 import { router } from './controller/index.js';
 import { join } from 'node:path';
 import express, { static as serveStatic } from 'express';
@@ -27,6 +28,30 @@ app.use( session( {
     saveUninitialized: false,
     cookie: { maxAge: 8.64e7 }
 } ) );
+
+// Expose current user settings globally for templates
+app.use( ( req, res, next ) => {
+
+    const nick = req.session?.user?.name;
+
+    if ( nick ) {
+
+        const user = getUser( nick );
+        res.locals.currentUser = { name: nick, mail: user?.mail };
+        res.locals.lang = user?.settings?.lang || 'de-DE';
+        res.locals.currency = user?.settings?.currency || 'EUR';
+
+    } else {
+
+        res.locals.currentUser = null;
+        res.locals.lang = 'de-DE';
+        res.locals.currency = 'EUR';
+
+    }
+
+    next();
+
+} );
 
 // Serve static files
 app.use( '/fonts', serveStatic( join( cwd, 'public/fonts' ) ) );
