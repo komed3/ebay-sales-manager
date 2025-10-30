@@ -79,21 +79,21 @@ block main
             placeholder= t( 'form.form.customerMail' ),
             value= customer.mail || ''
           )
-          h4 Lieferanschrift (bei Versand)
+          h4= t( 'form.form.address' )
           input(
             type= "text", name= "customer.address.street",
-            placeholder= "Straße + Hausnr.",
+            placeholder= t( 'form.form.addressStreet' ),
             value= address.street || ''
           )
           div.box-row
             input(
               type= "text", name= "customer.address.zipCode",
-              placeholder= "PLZ",
+              placeholder= t( 'form.form.addressZipCode' ),
               value= address.zipCode || ''
             )
             input(
               type= "text", name= "customer.address.city",
-              placeholder= "Ort",
+              placeholder= t( 'form.form.addressCity' ),
               value= address.city || ''
             )
           - var country = address.country || 'de'
@@ -101,7 +101,7 @@ block main
             option( value= "de", selected= ( country == 'de' ) ) Deutschland
 
     div.box
-      h3 Artikel
+      h3= t( 'form.form.article' )
       div.box-col
         each val in [ 0, 1, 2, 3, 4, 5, 6, 7 ]
           div.box-col
@@ -109,28 +109,28 @@ block main
               - var article = data?.article?.[ val ] || {}
               input(
                 type= "text", name= `article.number[${val}]`,
-                placeholder= "Artikelnr.",
+                placeholder= t( 'form.form.articleNumber' ),
                 value= article.number || ''
               )
               input(
                 type= "text", name= `article.name[${val}]`,
-                placeholder= "Name",
+                placeholder= t( 'form.form.articleName' ),
                 value= article.name || ''
               )
               input(
                 type= "number", name= `article.quantity[${val}]`,
-                placeholder= "Menge", min= 1, max= 99, step= 1,
-                value= article.quantity || ''
+                placeholder= t( 'form.form.articleQuantity' ),
+                min= 1, max= 99, step= 1, value= article.quantity || ''
               )
               input(
                 type= "number", name= `article.price[${val}]`,
-                placeholder= "Artikelpreis [€]", min= 0, step= 0.01,
-                value= article.price || ''
+                placeholder= t( 'form.form.articlePrice', { currency } ),
+                min= 0, step= 0.01, value= article.price || ''
               )
               input(
                 type= "number", name= `article.fee[${val}]`,
-                placeholder= "Gebühren [€]", min= 0, step= 0.01,
-                value= article.fee || ''
+                placeholder= t( 'form.form.articleFee', { currency } ),
+                min= 0, step= 0.01, value= article.fee || ''
               )
 
     div.box-row

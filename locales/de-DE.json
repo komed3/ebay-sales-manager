@@ -37,6 +37,16 @@
       "title": "Neue Bestellung"
     },
     "form": {
+      "address": "Lieferanschrift (bei Versand)",
+      "addressCity": "Ort",
+      "addressStreet": "Straße + Hausnr.",
+      "addressZipCode": "PLZ",
+      "article": "Artikel",
+      "articleFee": "Gebühren [{{currency}}]",
+      "articleName": "Name",
+      "articleNumber": "Artikelnr.",
+      "articlePrice": "Artikelpreis [{{currency}}]",
+      "articleQuantity": "Menge",
       "customer": "Kundendaten",
       "customerMail": "E-Mail-Adresse",
       "customerName": "Name (Realname)",
