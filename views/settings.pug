@@ -1,1 +1,46 @@
 extends ./_layout
+
+block main
+  if error
+    div.alert.noselect
+      span= error
+
+  form( method= "POST", action= "/settings" )
+    - var user = data?.user || {}
+    - var s = user.settings || {}
+
+    div.box
+      h3 Persönliche Daten
+      div.box-col
+        input( type= "text", value= user.nick readonly )
+        input(
+          type= "email", name= "mail", required,
+          placeholder= "E-Mail-Adresse",
+          value= user.mail || ''
+        )
+
+    div.box
+      h3 Passwort ändern
+      div.box-col
+        input(
+          type= "password", name= "password",
+          placeholder= "Neues Passwort (leer lassen um unverändert)"
+        )
+        input(
+          type= "password", name= "passwordConfirm",
+          placeholder= "Passwort wiederholen"
+        )
+
+    div.box
+      h3 Einstellungen
+      div.box-col
+        select( name= "currency" )
+          option( value= "EUR", selected= ( s.currency == 'EUR' ) ) EUR
+          option( value= "USD", selected= ( s.currency == 'USD' ) ) USD
+        select( name= "lang" )
+          option( value= "de-DE", selected= ( s.lang == 'de-DE' ) ) Deutsch
+          option( value= "en-US", selected= ( s.lang == 'en-US' ) ) English
+
+    div.box-row
+      button( type= "submit" ) Speichern
+      button( type= "button", onclick= "location.href='/'", class= "alert" ) Abbrechen
