@@ -9,37 +9,43 @@ block main
     - var user = data?.user || {}
     - var s = user.settings || {}
 
-    div.box
-      h3 Persönliche Daten
-      div.box-col
-        input( type= "text", value= user.nick readonly )
-        input(
-          type= "email", name= "mail", required,
-          placeholder= "E-Mail-Adresse",
-          value= user.mail || ''
-        )
+    div.column
+      div.box
+        h3 Persönliche Daten
+        div.box-col
+          input( type= "text", value= user.nick readonly )
+          input(
+            type= "email", name= "mail", required,
+            placeholder= "E-Mail-Adresse",
+            value= user.mail || ''
+          )
 
-    div.box
-      h3 Passwort ändern
-      div.box-col
-        input(
-          type= "password", name= "password",
-          placeholder= "Neues Passwort (leer lassen um unverändert)"
-        )
-        input(
-          type= "password", name= "passwordConfirm",
-          placeholder= "Passwort wiederholen"
-        )
+      div.box
+        h3 Passwort ändern
+        div.box-col
+          input(
+            type= "password", name= "password",
+            placeholder= "Neues Passwort (leer lassen um unverändert)"
+          )
+          input(
+            type= "password", name= "passwordConfirm",
+            placeholder= "Passwort wiederholen"
+          )
 
-    div.box
-      h3 Einstellungen
-      div.box-col
-        select( name= "currency" )
-          option( value= "EUR", selected= ( s.currency == 'EUR' ) ) EUR
-          option( value= "USD", selected= ( s.currency == 'USD' ) ) USD
-        select( name= "lang" )
-          option( value= "de-DE", selected= ( s.lang == 'de-DE' ) ) Deutsch
-          option( value= "en-US", selected= ( s.lang == 'en-US' ) ) English
+      div.box
+        h3 Einstellungen
+        div.box-col
+          select( name= "currency" )
+            option( value= "EUR", selected= ( s.currency == 'EUR' ) ) EUR
+            option( value= "USD", selected= ( s.currency == 'USD' ) ) USD
+            option( value= "GBP", selected= ( s.currency == 'GBP' ) ) GBP
+            option( value= "CHF", selected= ( s.currency == 'CHF' ) ) CHF
+          select( name= "lang" )
+            option( value= "de-DE", selected= ( s.lang == 'de-DE' ) ) Deutsch
+            option( value= "en-US", selected= ( s.lang == 'en-US' ) ) English
+          select( name= "layer" )
+            option( value= "carto", selected= ( s.layer == 'carto' ) ) Carto Light
+            option( value= "osm", selected= ( s.layer == 'osm' ) ) OpenStreetMap
 
     div.box-row
       button( type= "submit" ) Speichern
