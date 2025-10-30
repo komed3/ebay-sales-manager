@@ -123,6 +123,11 @@
     border-radius: 5px;
 }
 
+.box.alert {
+    color: var( --red );
+    border-color: var( --red );
+}
+
 .box h2 {
     margin: 0;
     width: 100%;
