@@ -67,7 +67,7 @@
     }
   },
   "generic": {
-    "actions": {
+    "action": {
       "delete": "Löschen",
       "edit": "Bearbeiten",
       "export": "Exportieren"
@@ -115,7 +115,11 @@
   "order": {
     "_meta": {
       "title": "Bestellung Nr. {{record}}"
-    }
+    },
+    "action": {
+      "invoice": "Rechnung anzeigen"
+    },
+    "title": "Bestellübersicht #{{order}}"
   },
   "orders": {
     "_meta": {

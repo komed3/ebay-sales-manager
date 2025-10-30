@@ -12,15 +12,15 @@ append styles
 block main
   div.box
     div.box-row
-      h2 Bestellübersicht ##{data.orderNumber}
+      h2= t( 'order.title', { order: data.orderNumber } )
       if data.invoicePDF
         +icon_nav( [
-          { path: '/upload/' + data.invoicePDF, label: 'Rechnung', icon: 'report.svg' }
+          { path: '/upload/' + data.invoicePDF, label: t( 'order.action.invoice' ), icon: 'report.svg' }
         ] )
       +icon_nav( [
-        { path: '/export?uuid=' + data.__uuid, label: t( 'generic.actions.export' ), icon: 'download.svg' },
-        { path: '/form?uuid=' + data.__uuid, label: t( 'generic.actions.edit' ), icon: 'tool.svg' },
-        { path: '/delete?uuid=' + data.__uuid, label: t( 'generic.actions.delete' ), icon: 'trash.svg' }
+        { path: '/export?uuid=' + data.__uuid, label: t( 'generic.action.export' ), icon: 'download.svg' },
+        { path: '/form?uuid=' + data.__uuid, label: t( 'generic.action.edit' ), icon: 'tool.svg' },
+        { path: '/delete?uuid=' + data.__uuid, label: t( 'generic.action.delete' ), icon: 'trash.svg' }
       ] )
 
   div.column
