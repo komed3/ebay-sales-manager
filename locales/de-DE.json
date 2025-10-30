@@ -35,6 +35,15 @@
   "form": {
     "_meta": {
       "title": "Neue Bestellung"
+    },
+    "form": {
+      "invoice": "Rechnung (PDF)",
+      "invoiceExists": "(Datei wurde bereit hochgeladen)",
+      "number": "Bestellnummer",
+      "pickup": "Abholung",
+      "record": "Verkaufsprotokoll",
+      "shipping": "Versand",
+      "shippingCosts": "Versandkosten / Abholgebühr [{{currency}}]"
     }
   },
   "generic": {

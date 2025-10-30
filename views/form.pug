@@ -10,12 +10,12 @@ block main
       div.box-row
         input(
           type= "text", name= "orderNumber", required,
-          placeholder= "Bestellnummer",
+          placeholder= t( 'form.form.number' ),
           value= data && data.orderNumber
         )
         input(
           type= "text", name= "recordNumber", required,
-          placeholder= "Verkaufsprotokoll",
+          placeholder= t( 'form.form.record' ),
           value= data && data.recordNumber
         )
         input(
@@ -25,22 +25,22 @@ block main
 
     div.column
       div.box
-        h3 Rechnung (PDF)
+        h3= t( 'form.form.invoice' )
         if data && data.invoicePDF
-          span (Datei wurde bereit hochgeladen)
+          span= t( 'form.form.invoiceExists' )
         else
           input( type= "file", name= "invoicePDF", accept= ".pdf" )
 
       div.box
-        h3 Versand
+        h3= t( 'form.form.shipping' )
         div.box-col
           - var orderType = data && data.orderType
           select( name= "orderType", required )
-            option( value= "shipping", selected= ( orderType == 'shipping' ) ) Versand
-            option( value= "pickup", selected= ( orderType == 'pickup' ) ) Abholung
+            each type in [ 'shipping', 'pickup' ]
+              option( value= type, selected= ( orderType == type ) )= t( 'form.form.' + type )
           input(
             type= "number", name= "shipping", required,
-            placeholder= "Versandkosten / Abholgebühr [€]", min= 0, step= 0.01,
+            placeholder= t( 'form.form.shippingCosts', { currency } ), min= 0, step= 0.01,
             value= data && data.shipping
           )
 

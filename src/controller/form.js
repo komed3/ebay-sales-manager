@@ -5,7 +5,7 @@ export function form ( req, res ) {
     const order = getOrder( req.query.uuid ?? '' );
 
     if ( ! req.query.uuid || isOrder( order ) ) res.render( 'form', {
-        path: '/form', title: 'Neue Bestellung',
+        path: '/form', title: req.t( 'form._meta.title' ),
         data: order
     } );
 
