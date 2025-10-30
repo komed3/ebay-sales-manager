@@ -3,7 +3,10 @@ extends ./_layout
 block main
   if error
     div.box.alert.noselect
-      span= error
+      strong= error
+  if message
+    div.box.ok.noselect
+      strong= message
 
   form( method= "POST", action= "/settings" )
     - var user = data?.user || {}
@@ -11,29 +14,29 @@ block main
 
     div.column
       div.box
-        h3 Persönliche Daten
+        h3= t( 'settings.form.info' )
         div.box-col
           input( type= "text", value= user.nick readonly )
           input(
             type= "email", name= "mail", required,
-            placeholder= "E-Mail-Adresse",
+            placeholder= t( 'settings.form.mail' ),
             value= user.mail || ''
           )
 
       div.box
-        h3 Passwort ändern
+        h3= t( 'settings.form.password' )
         div.box-col
           input(
             type= "password", name= "password",
-            placeholder= "Neues Passwort (leer lassen um unverändert)"
+            placeholder= t( 'settings.form.passwordNew' )
           )
           input(
             type= "password", name= "passwordConfirm",
-            placeholder= "Passwort wiederholen"
+            placeholder= t( 'settings.form.passwordConfirm' )
           )
 
       div.box
-        h3 Einstellungen
+        h3= t( 'settings.form.preferences' )
         div.box-col
           select( name= "currency" )
             option( value= "EUR", selected= ( s.currency == 'EUR' ) ) EUR
@@ -48,5 +51,8 @@ block main
             option( value= "osm", selected= ( s.layer == 'osm' ) ) OpenStreetMap
 
     div.box-row
-      button( type= "submit" ) Speichern
-      button( type= "button", onclick= "location.href='/'", class= "alert" ) Abbrechen
+      button( type= "submit" )= t( 'generic.form.submit' )
+      button(
+        type= "button", onclick= "location.href='/'",
+        class= "alert"
+      )= t( 'generic.form.abort' )

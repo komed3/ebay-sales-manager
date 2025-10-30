@@ -42,6 +42,10 @@
     "finance": {
       "margin": "Gewinnmarge"
     },
+    "form": {
+      "abort": "Abbrechen",
+      "submit": "Speichern"
+    },
     "name": "eBay Sales Manager",
     "title": "{{site}} — eBay Sales Manager"
   },
@@ -63,6 +67,20 @@
   "settings": {
     "_meta": {
       "title": "Einstellungen"
+    },
+    "error": {
+      "matchPassword": "Passwörter stimmen nicht überein."
+    },
+    "form": {
+      "info": "Persönliche Daten",
+      "mail": "E-Mail-Adresse",
+      "password": "Passwort ändern",
+      "passwordConfirm": "Passwort wiederholen",
+      "passwordNew": "Neues Passwort (leer lassen um unverändert)",
+      "preferences": "Einstellungen"
+    },
+    "msg": {
+      "saved": "Einstellungen gespeichert."
     }
   },
   "stats": {

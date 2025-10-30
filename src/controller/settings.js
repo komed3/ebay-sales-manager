@@ -7,7 +7,7 @@ export function settings ( req, res ) {
 	const user = getUser( nick );
 
 	res.render( 'settings', {
-		path: '/settings', title: 'Einstellungen',
+		path: '/settings', title: req.t( 'settings._meta.title' ),
 		data: { user }
 	} );
 
@@ -19,9 +19,9 @@ export async function updateSettings ( req, res ) {
 	const { mail, password, passwordConfirm, currency, lang, layer } = req.body;
 
 	if ( password && password !== passwordConfirm ) return res.render( 'settings', {
-		path: '/settings', title: 'Einstellungen',
+		path: '/settings', title: req.t( 'settings._meta.title' ),
 		data: { user: getUser( nick ) },
-		error: 'Passwörter stimmen nicht überein.'
+		error: req.t( 'settings.error.matchPassword' )
 	} );
 
 	const payload = { mail, settings: { currency, lang, layer } };
@@ -40,9 +40,9 @@ export async function updateSettings ( req, res ) {
 	req.session.user.settings = updated.settings;
 
 	res.render( 'settings', {
-		path: '/settings', title: 'Einstellungen',
+		path: '/settings', title: req.t( 'settings._meta.title' ),
 		data: { user: updated },
-		message: 'Einstellungen gespeichert.'
+		message: req.t( 'settings.msg.saved' )
 	} );
 
 }

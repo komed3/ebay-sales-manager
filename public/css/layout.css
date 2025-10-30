@@ -128,6 +128,11 @@
     border-color: var( --red );
 }
 
+.box.ok {
+    color: var( --green );
+    border-color: var( --green );
+}
+
 .box h2 {
     margin: 0;
     width: 100%;
