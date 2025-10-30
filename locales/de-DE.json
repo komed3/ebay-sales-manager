@@ -67,6 +67,11 @@
     }
   },
   "generic": {
+    "actions": {
+      "delete": "Löschen",
+      "edit": "Bearbeiten",
+      "export": "Exportieren"
+    },
     "credits": "Copyright &copy; 2025 <a href=\"https://komed3.de\" target=\"_blank\">komed3</a>. Alle Rechte vorbehalten.",
     "filter": {
       "clear": "Zurücksetzen",

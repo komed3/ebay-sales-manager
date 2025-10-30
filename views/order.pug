@@ -18,9 +18,9 @@ block main
           { path: '/upload/' + data.invoicePDF, label: 'Rechnung', icon: 'report.svg' }
         ] )
       +icon_nav( [
-        { path: '/export?uuid=' + data.__uuid, label: 'Exportieren', icon: 'download.svg' },
-        { path: '/form?uuid=' + data.__uuid, label: 'Bearbeiten', icon: 'tool.svg' },
-        { path: '/delete?uuid=' + data.__uuid, label: 'Löschen', icon: 'trash.svg' }
+        { path: '/export?uuid=' + data.__uuid, label: t( 'generic.actions.export' ), icon: 'download.svg' },
+        { path: '/form?uuid=' + data.__uuid, label: t( 'generic.actions.edit' ), icon: 'tool.svg' },
+        { path: '/delete?uuid=' + data.__uuid, label: t( 'generic.actions.delete' ), icon: 'trash.svg' }
       ] )
 
   div.column
