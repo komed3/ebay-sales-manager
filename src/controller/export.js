@@ -2,30 +2,33 @@ import { getCustomer, getOrder, getReport, isCustomer, isOrder } from '../storag
 
 export function exportData ( req, res ) {
 
-    if ( req.query.uuid ) {
+    const { uuid, customer, report } = req.query;
+    let filename, data;
 
-        const order = getOrder( req.query.uuid );
+    if ( uuid ) {
 
-        if ( isOrder( order ) ) res.json( order );
-        else res.redirect( '/orders' );
+        if ( ! isOrder( data = getOrder( uuid ) ) ) return res.redirect( '/orders' );
+        filename = `order-${uuid}.json`;
 
-    } else if ( req.query.customer ) {
+    } else if ( customer ) {
 
-        const customer = getCustomer( req.query.customer );
+        if ( ! isCustomer( data = getCustomer( customer ) ) ) return res.redirect( '/customers' );
+        filename = `customer-${customer}.json`;
 
-        if ( isCustomer( customer ) ) res.json( customer );
-        else res.redirect( '/customers' );
+    } else if ( report ) {
 
-    } else if ( req.query.report ) {
-
-        const report = getReport( req.query.report );
-        if ( report ) res.json( report );
-        else res.redirect( '/report' );
+        if ( ! ( data = getReport( report ) ) ) return res.redirect( '/report' );
+        filename = `report-${report}.json`;
 
     } else {
 
-        res.redirect( '/' );
+        return res.redirect( '/' );
 
     }
+
+    // Generate JSON file and send as download
+    res.setHeader( 'Content-Disposition', `attachment; filename="${filename}"` );
+    res.setHeader( 'Content-Type', 'application/json; charset=utf-8' );
+    res.send( JSON.stringify( data, null, 2 ) );
 
 }
