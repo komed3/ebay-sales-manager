@@ -54,19 +54,20 @@ router.use( ( req, res, next ) => {
 
         const user = getUser( nick );
         res.locals.currentUser = { name: nick, mail: user?.mail };
-        res.locals.lang = user?.settings?.lang || 'de-DE';
-        res.locals.currency = user?.settings?.currency || 'EUR';
+        res.locals.lang = user?.settings?.lang || 'en-US';
+        res.locals.currency = user?.settings?.currency || 'USD';
         res.locals.layer = user?.settings?.layer || 'carto';
 
     } else {
 
         res.locals.currentUser = null;
-        res.locals.lang = 'de-DE';
-        res.locals.currency = 'EUR';
+        res.locals.lang = 'en-US';
+        res.locals.currency = 'USD';
         res.locals.layer = 'carto';
 
     }
 
+    req.i18n.changeLanguage( res.locals.lang );
     next();
 
 } );
