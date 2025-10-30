@@ -1,5 +1,5 @@
 import { cwd } from './config.js';
-import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import deepmerge from 'deepmerge';
 import fetch from 'node-fetch';
@@ -10,8 +10,10 @@ const calendarFile = join( cwd, 'data/calendar.json' );
 const statsFile = join( cwd, 'data/stats.json' );
 const monthlyReportsFile = join( cwd, 'data/monthlyReports.json' );
 const annualReportsFile = join( cwd, 'data/annualReports.json' );
-const reports = join( cwd, 'data/reports' );
 const customerFile = join( cwd, 'data/customers.json' );
+
+const reports = join( cwd, 'data/reports' );
+const uploads = join( cwd, 'data/upload' );
 
 function numberOrAny( value ) {
 
@@ -158,7 +160,7 @@ export async function updateOrder ( raw, files ) {
     if ( files?.invoicePDF?.size ) {
 
         const pdfName = `${ uuidv4() }.pdf`;
-        const pdfPath = join( cwd, 'data/upload', pdfName );
+        const pdfPath = join( uploads, pdfName );
 
         files.invoicePDF.mv( pdfPath );
         data.invoicePDF = pdfName;
@@ -202,14 +204,15 @@ export function deleteOrder ( uuid ) {
 
     if ( idx >= 0 ) {
 
-        const dateStr = orders[ idx ].orderDate;
-        const nick = orders[ idx ].customer.nick;
+        const order = orders[ idx ];
         orders.splice( idx, 1 );
+
+        if ( order.invoicePDF ) unlinkSync( join( uploads, order.invoicePDF ) );
 
         writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
         updateOrderStats();
-        updateReport( dateStr );
-        updateCustomerStats( nick );
+        updateReport( order.orderDate );
+        updateCustomerStats( order.customer.nick );
 
         return true;
 
