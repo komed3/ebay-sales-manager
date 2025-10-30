@@ -134,5 +134,5 @@ block main
               )
 
     div.box-row
-      button( type= "submit" ) Speichern
-      button( onclick= "location.href='/orders'", class= "alert" ) Abbrechen
+      button( type= "submit" )= t( 'generic.form.submit' )
+      button( onclick= "location.href='/orders'", class= "alert" )= t( 'generic.form.abort' )
