@@ -4,37 +4,31 @@ include ./mixin/pagination
 block main
   form.box( method= "GET", action= "/orders" )
     div.box-row
-      img( src= "/images/icons/filter.svg", alt= "Filter" )
+      img( src= "/images/icons/filter.svg", alt= t( 'generic.filter.filter' ) )
       input(
         type= "text", name= "search", value= query && query.search
-        placeholder= "Suche nach …"
+        placeholder= t( 'generic.filter.search' )
       )
-      span Zeitraum:
-      input(
-        type= "date", name= "from", value= query && query.from
-        placeholder= "von"
-      )
-      input(
-        type= "date", name= "to", value= query && query.to
-        placeholder= "bis"
-      )
-      button.icon( type= "submit", title= "Filtern" )
-        img( src= "/images/icons/search.svg", alt= "Filtern" )
-      a( href= "/orders", title= "Filter löschen" )
-        img( src= "/images/icons/clear.svg", alt= "Zurücksetzen" )
+      span= t( 'generic.filter.range' )
+      input( type= "date", name= "from", value= query && query.from )
+      input( type= "date", name= "to", value= query && query.to )
+      button.icon( type= "submit", title= t( 'generic.filter.filter' ) )
+        img( src= "/images/icons/search.svg", alt= t( 'generic.filter.filter' ) )
+      a( href= "/orders", title= t( 'generic.filter.clear' ) )
+        img( src= "/images/icons/clear.svg", alt= t( 'generic.filter.clear' ) )
 
   div.box
     table#orders
       thead
         tr
-          th Bestellnummer
-          th Datum
-          th Kunde
-          th Typ
-          th.right Umsatz
-          th.right Gebühren
-          th.right Versand
-          th.right Gewinn
+          th= t( 'orders.table.orderNumber' )
+          th= t( 'orders.table.orderDate' )
+          th= t( 'orders.table.customer' )
+          th= t( 'orders.table.orderType' )
+          th.right= t( 'orders.table.revenue' )
+          th.right= t( 'orders.table.fees' )
+          th.right= t( 'orders.table.shipping' )
+          th.right= t( 'orders.table.profit' )
       tbody
         each order in data
           tr
@@ -43,7 +37,7 @@ block main
             )= '#' + order.orderNumber
             td: date= order.orderDate
             td= order.customer.name + ' (@' + order.customer.nick + ')'
-            td= { shipping: 'Versand', pickup: 'Abholung' }[ order.orderType ]
+            td= t( 'orders.table.' + order.orderType )
             td.right: money= order.revenue
             td.right: money= order.fees
             td.right: money= order.shipping

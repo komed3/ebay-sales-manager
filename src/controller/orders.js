@@ -5,7 +5,7 @@ export function orders ( req, res ) {
     const { results, max } = filterOrders( req.query ?? {} );
 
     res.render( 'orders', {
-        path: '/orders', title: 'Bestellungen',
+        path: '/orders', title: req.t( 'orders._meta.title' ),
         query: req.query ?? {},
         data: results,
         pagination: {
@@ -22,7 +22,7 @@ export function order ( req, res ) {
     const order = getOrder( req.query.uuid ?? '' );
 
     if ( isOrder( order ) ) res.render( 'order', {
-        path: '/orders', title: 'Bestellung Nr. ' + order.recordNumber,
+        path: '/orders', title: req.t( 'order._meta.title', { record: order.recordNumber } ),
         data: order
     } );
 

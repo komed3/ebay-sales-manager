@@ -68,6 +68,12 @@
   },
   "generic": {
     "credits": "Copyright &copy; 2025 <a href=\"https://komed3.de\" target=\"_blank\">komed3</a>. Alle Rechte vorbehalten.",
+    "filter": {
+      "clear": "Zurücksetzen",
+      "filter": "Filtern",
+      "range": "Zeitraum:",
+      "search": "Suche nach …"
+    },
     "form": {
       "abort": "Abbrechen",
       "submit": "Speichern"
@@ -101,9 +107,25 @@
       "title": "Karte"
     }
   },
+  "order": {
+    "_meta": {
+      "title": "Bestellung Nr. {{record}}"
+    }
+  },
   "orders": {
     "_meta": {
       "title": "Bestellungen"
+    },
+    "table": {
+      "customer": "Kunde",
+      "fees": "Gebühren",
+      "orderDate": "Datum",
+      "orderNumber": "Bestellnummer",
+      "orderType": "Typ",
+      "pickup": "Abholung",
+      "profit": "Gewinn",
+      "revenue": "Umsatz",
+      "shipping": "Versand"
     }
   },
   "report": {
