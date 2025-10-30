@@ -7,10 +7,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 const ordersFile = join( cwd, 'data/orders.json' );
 const calendarFile = join( cwd, 'data/calendar.json' );
-const statsFile = join( cwd, 'data/stats.json' );
-const monthlyReportsFile = join( cwd, 'data/monthlyReports.json' );
-const annualReportsFile = join( cwd, 'data/annualReports.json' );
 const customerFile = join( cwd, 'data/customers.json' );
+const statsFile = join( cwd, 'data/stats.json' );
+const usersFile = join( cwd, 'data/users.json' );
+const annualReportsFile = join( cwd, 'data/annualReports.json' );
+const monthlyReportsFile = join( cwd, 'data/monthlyReports.json' );
 
 const reports = join( cwd, 'data/reports' );
 const uploads = join( cwd, 'data/upload' );
@@ -273,6 +274,54 @@ export function getReport ( report ) {
 export function getCustomers () {
 
     return JSON.parse( readFileSync( customerFile, 'utf8' ) );
+
+}
+
+export function getUsers () {
+
+    try { return JSON.parse( readFileSync( usersFile, 'utf8' ) || '{}' ) }
+    catch { return {} }
+
+}
+
+export function getUser ( nick ) {
+
+    return getUsers()[ nick ?? '' ] || null;
+
+}
+
+export function updateUser ( nick, payload ) {
+
+    if ( ! nick || typeof payload !== 'object' ) return null;
+
+    const users = getUsers();
+    const now = new Date().toISOString();
+
+    const existing = users[ nick ] || {};
+
+    const merged = deepmerge( existing, { ...payload, nick } );
+
+    if ( ! existing.__created ) merged.__created = now;
+    merged.__updated = now;
+
+    users[ nick ] = merged;
+    writeFileSync( usersFile, JSON.stringify( users, null, 2 ), 'utf8' );
+
+    return merged;
+
+}
+
+export function deleteUser ( nick ) {
+
+    const users = getUsers();
+
+    if ( ! users[ nick ] ) return false;
+
+    delete users[ nick ];
+
+    writeFileSync( usersFile, JSON.stringify( users, null, 2 ), 'utf8' );
+
+    return true;
 
 }
 
