@@ -1,4 +1,5 @@
 import { cwd, config } from './config.js';
+import { i18nHandler } from './i18n.js';
 import { router } from './controller/index.js';
 import { join } from 'node:path';
 import express, { static as serveStatic } from 'express';
@@ -15,6 +16,7 @@ app.set( 'view engine', 'pug' );
 // Middlewares
 app.use( express.urlencoded( { extended: true } ) );
 app.use( express.json() );
+app.use( i18nHandler );
 
 app.use( fileUpload( {
     useTempFiles: true,

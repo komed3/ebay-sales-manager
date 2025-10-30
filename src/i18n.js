@@ -1,4 +1,5 @@
 import { cwd } from './config.js';
+import { join } from 'node:path';
 import i18next from 'i18next';
 import FsBackend from 'i18next-fs-backend';
 import { handle } from 'i18next-http-middleware';
