@@ -45,52 +45,38 @@ block main
           )
 
       div.box
-        h3 Umsatz &amp; Gebühren
+        h3= t( 'form.form.profitAndFees' )
         div.box-col
-          input(
-            type= "number", name= "revenue", required,
-            placeholder= "Umsatz / Gesamtbetrag inkl. Versand [€]", min= 0, step= 0.01,
-            value= data && data.revenue
-          )
-          input(
-            type= "number", name= "fees", required,
-            placeholder= "Gebühren (Werbekosten) [€]", min= 0, step= 0.01,
-            value= data && data.fees
-          )
-          input(
-            type= "number", name= "refund",
-            placeholder= "Rückerstattung [€]", min= 0, step= 0.01,
-            value= data && data.refund
-          )
-          input(
-            type= "number", name= "profit", required,
-            placeholder= "Bestelleinnahmen [€]", min= 0, step= 0.01,
-            value= data && data.profit
-          )
+          each field in [ 'revenue', 'fees', 'refund', 'profit' ]
+            input(
+              type= "number", name= field, required,
+              placeholder= t( 'form.form.' + field, { currency } ),
+              min= 0, step= 0.01, value= data && data[ field ]
+            )
 
       div.box
-        h3 Kundendaten
+        h3= t( 'form.form.customer' )
         div.box-col
           - var customer = data?.customer || {}
           - var address = customer?.address || {}
           input(
             type= "text", name= "customer.nick", required,
-            placeholder= "Benutzername",
+            placeholder= t( 'form.form.customerNick' ),
             value= customer.nick || ''
           )
           input(
             type= "text", name= "customer.name", required,
-            placeholder= "Name (Realname)",
+            placeholder= t( 'form.form.customerName' ),
             value= customer.name || ''
           )
           input(
             type= "tel", name= "customer.tel",
-            placeholder= "Telefonnummer",
+            placeholder= t( 'form.form.customerTel' ),
             value= customer.tel || ''
           )
           input(
             type= "email", name= "customer.mail", required,
-            placeholder= "E-Mail-Adresse",
+            placeholder= t( 'form.form.customerMail' ),
             value= customer.mail || ''
           )
           h4 Lieferanschrift (bei Versand)

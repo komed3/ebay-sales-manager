@@ -37,11 +37,21 @@
       "title": "Neue Bestellung"
     },
     "form": {
+      "customer": "Kundendaten",
+      "customerMail": "E-Mail-Adresse",
+      "customerName": "Name (Realname)",
+      "customerNick": "Benutzername",
+      "customerTel": "Telefonnummer",
+      "fees": "Gebühren (Werbekosten) [{{currency}}]",
       "invoice": "Rechnung (PDF)",
       "invoiceExists": "(Datei wurde bereit hochgeladen)",
       "number": "Bestellnummer",
       "pickup": "Abholung",
+      "profit": "Bestelleinnahmen [{{currency}}]",
+      "profitAndFees": "Umsatz & Gebühren",
       "record": "Verkaufsprotokoll",
+      "refund": "Rückerstattung [{{currency}}]",
+      "revenue": "Umsatz / Gesamtbetrag inkl. Versand [{{currency}}]",
       "shipping": "Versand",
       "shippingCosts": "Versandkosten / Abholgebühr [{{currency}}]"
     }
