@@ -2,7 +2,7 @@ extends ./_base
 include ./mixin/nav
 
 block title
-  title= title + ' — eBay Sales Manager'
+  title= t( 'generic.title', { site: title } )
 
 block scripts
   script( src= "/js/global.min.js", defer )
@@ -12,23 +12,23 @@ block styles
 
 block content
   header#header.header.noselect
-    h1= title + ' — eBay Sales Manager'
+    h1= t( 'generic.title', { site: title } )
     div.header-actions
       +icon_nav( [
-        { path: '/settings', label: 'Einstellungen', icon: 'settings.svg' },
-        { path: '/logout', label: 'Abmelden', icon: 'logout.svg' }
+        { path: '/settings', label: t( 'generic.settings' ), icon: 'settings.svg' },
+        { path: '/logout', label: t( 'generic.logout' ), icon: 'logout.svg' }
       ] )
 
   nav#nav.nav.noselect
     img.logo( src= "/images/favicon.svg", alt= "eBay Sales Manager" )
     +icon_nav( [
-      { path: '/', label: 'Dashboard', icon: 'app.svg' },
-      { path: '/orders', label: 'Bestellungen', icon: 'table.svg' },
-      { path: '/form', label: 'Neue Bestellung', icon: 'add.svg' },
-      { path: '/customers', label: 'Kunden', icon: 'user.svg' },
-      { path: '/stats', label: 'Statistik', icon: 'chart.svg' },
-      { path: '/map', label: 'Karte', icon: 'map.svg' },
-      { path: '/report', label: 'Finanzberichte', icon: 'database.svg' }
+      { path: '/', label: t( 'dashboard._meta.title' ), icon: 'app.svg' },
+      { path: '/orders', label: t( 'orders._meta.title' ), icon: 'table.svg' },
+      { path: '/form', label: t( 'form._meta.title' ), icon: 'add.svg' },
+      { path: '/customers', label: t( 'customers._meta.title' ), icon: 'user.svg' },
+      { path: '/stats', label: t( 'stats._meta.title' ), icon: 'chart.svg' },
+      { path: '/map', label: t( 'map._meta.title' ), icon: 'map.svg' },
+      { path: '/report', label: t( 'report._meta.title' ), icon: 'database.svg' }
     ] )
 
   div.wrapper
@@ -36,4 +36,4 @@ block content
       block main
 
     footer#footer.footer.noselect
-      span Copyright &copy; 2025 <a href= "https://komed3.de" target="_blank">komed3</a>. Alle Rechte vorbehalten.
+      span= t( 'generic.credits' )

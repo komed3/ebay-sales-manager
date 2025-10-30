@@ -14,9 +14,46 @@
       "username": "Benutzername"
     }
   },
+  "customers": {
+    "_meta": {
+      "title": "Kunden"
+    }
+  },
+  "dashboard": {
+    "_meta": {
+      "title": "Dashboard"
+    }
+  },
+  "form": {
+    "_meta": {
+      "title": "Neue Bestellung"
+    }
+  },
   "generic": {
     "credits": "Copyright &copy; 2025 <a href=\"https://komed3.de\" target=\"_blank\">komed3</a>. Alle Rechte vorbehalten.",
+    "logout": "Abmelden",
     "name": "eBay Sales Manager",
+    "settings": "Einstellungen",
     "title": "{{site}} — eBay Sales Manager"
+  },
+  "map": {
+    "_meta": {
+      "title": "Karte"
+    }
+  },
+  "orders": {
+    "_meta": {
+      "title": "Bestellungen"
+    }
+  },
+  "reports": {
+    "_meta": {
+      "title": "Finanzberichte"
+    }
+  },
+  "stats": {
+    "_meta": {
+      "title": "Umsatz & Statistik"
+    }
   }
 }
