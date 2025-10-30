@@ -35,6 +35,35 @@
   "form": {
     "_meta": {
       "title": "New Order"
+    },
+    "form": {
+      "address": "Shipping address (for delivery)",
+      "addressCity": "City",
+      "addressStreet": "Street + house no.",
+      "addressZipCode": "ZIP code",
+      "article": "Item",
+      "articleFee": "Fees [{{currency}}]",
+      "articleName": "Name",
+      "articleNumber": "Item no.",
+      "articlePrice": "Item price [{{currency}}]",
+      "articleQuantity": "Quantity",
+      "customer": "Customer data",
+      "customerMail": "Email address",
+      "customerName": "Full name",
+      "customerNick": "Username",
+      "customerTel": "Phone number",
+      "fees": "Fees (advertising costs) [{{currency}}]",
+      "invoice": "Invoice (PDF)",
+      "invoiceExists": "(File already uploaded)",
+      "number": "Order number",
+      "pickup": "Pickup",
+      "profit": "Order income [{{currency}}]",
+      "profitAndFees": "Revenue & fees",
+      "record": "Sales record",
+      "refund": "Refund [{{currency}}]",
+      "revenue": "Revenue / total amount incl. shipping [{{currency}}]",
+      "shipping": "Shipping",
+      "shippingCosts": "Shipping costs / pickup fee [{{currency}}]"
     }
   },
   "generic": {
