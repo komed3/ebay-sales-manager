@@ -16,6 +16,11 @@
     border-radius: 5px;
 }
 
+.header a.active, .nav a.active {
+    outline: 2px solid var( --primary-color );
+    outline-offset: -2px;
+}
+
 .header {
     left: 72px;
     right: 0;
@@ -45,11 +50,6 @@
 
 .nav .logo {
     margin-bottom: 22px;
-}
-
-.nav a.active {
-    outline: 2px solid var( --primary-color );
-    outline-offset: -2px;
 }
 
 .wrapper {

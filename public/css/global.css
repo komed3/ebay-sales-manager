@@ -37,7 +37,7 @@
     box-sizing: border-box;
 }
 
-img, .noselect {
+img, input, select, button, .noselect {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
