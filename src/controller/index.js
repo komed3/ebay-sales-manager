@@ -1,3 +1,4 @@
+import { getUser } from '../storage.js';
 import { login, logout, auth } from './auth.js';
 import { customer, customers } from './customers.js';
 import { dashboard } from './dashboard.js';
@@ -38,6 +39,32 @@ router.use( '/', ( req, res, next ) => {
 
     if ( ! req.session?.user && ! isLoginPath ) {
         return res.redirect( '/login/' );
+    }
+
+    next();
+
+} );
+
+// Expose current user settings globally for templates
+router.use( ( req, res, next ) => {
+
+    const nick = req.session?.user?.name;
+
+    if ( nick ) {
+
+        const user = getUser( nick );
+        res.locals.currentUser = { name: nick, mail: user?.mail };
+        res.locals.lang = user?.settings?.lang || 'de-DE';
+        res.locals.currency = user?.settings?.currency || 'EUR';
+        res.locals.layer = user?.settings?.layer || 'carto';
+
+    } else {
+
+        res.locals.currentUser = null;
+        res.locals.lang = 'de-DE';
+        res.locals.currency = 'EUR';
+        res.locals.layer = 'carto';
+
     }
 
     next();

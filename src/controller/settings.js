@@ -16,7 +16,7 @@ export function settings ( req, res ) {
 export async function updateSettings ( req, res ) {
 
 	const nick = req.session.user.name;
-	const { mail, password, passwordConfirm, currency, lang } = req.body;
+	const { mail, password, passwordConfirm, currency, lang, layer } = req.body;
 
 	if ( password && password !== passwordConfirm ) return res.render( 'settings', {
 		path: '/settings', title: 'Einstellungen',
@@ -24,7 +24,7 @@ export async function updateSettings ( req, res ) {
 		error: 'Passwörter stimmen nicht überein.'
 	} );
 
-	const payload = { mail, settings: { currency, lang } };
+	const payload = { mail, settings: { currency, lang, layer } };
 
 	if ( password ) {
 
