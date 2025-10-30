@@ -108,4 +108,4 @@ block main
               td.right: number= article.quantity
               td.right: money= article.price
               td.right: money= article.fee
-              td.right: money= article.price - article.fee
+              td.right: money= ( article.price * article.quantity ) - ( article.fee || 0 )
