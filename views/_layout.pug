@@ -15,8 +15,8 @@ block content
     h1= t( 'generic.title', { site: title } )
     div.header-actions
       +icon_nav( [
-        { path: '/settings', label: t( 'generic.settings' ), icon: 'settings.svg' },
-        { path: '/logout', label: t( 'generic.logout' ), icon: 'logout.svg' }
+        { path: '/settings', label: t( 'settings._meta.title' ), icon: 'settings.svg' },
+        { path: '/logout', label: t( 'auth.action.logout' ), icon: 'logout.svg' }
       ] )
 
   nav#nav.nav.noselect

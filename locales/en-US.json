@@ -3,6 +3,10 @@
     "_meta": {
       "title": "Login"
     },
+    "action": {
+      "login": "Login",
+      "logout": "Logout"
+    },
     "error": {
       "missingInput": "Please enter your username and password.",
       "unknownUser": "Unknown username.",
@@ -38,9 +42,7 @@
     "finance": {
       "margin": "Profit margin"
     },
-    "logout": "Logout",
     "name": "eBay Sales Manager",
-    "settings": "Settings",
     "title": "{{site}} — eBay Sales Manager"
   },
   "map": {
@@ -56,6 +58,11 @@
   "report": {
     "_meta": {
       "title": "Reports"
+    }
+  },
+  "settings": {
+    "_meta": {
+      "title": "Settings"
     }
   },
   "stats": {
