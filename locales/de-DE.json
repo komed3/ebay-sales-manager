@@ -76,7 +76,8 @@
       "submit": "Speichern"
     },
     "name": "eBay Sales Manager",
-    "title": "{{site}} — eBay Sales Manager"
+    "title": "{{site}} — eBay Sales Manager",
+    "wd": "MDMDFSS"
   },
   "map": {
     "_meta": {

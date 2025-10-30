@@ -17,9 +17,9 @@ mixin calendar( dates )
         const startDay = ( first.getDay() + 6 ) % 7
         const total = startDay + last.getDate()
       div.month
-        h4.label= month.toLocaleString( 'default', { month: 'short', year: 'numeric' } )
+        h4.label= month.toLocaleString( lang, { month: 'short', year: 'numeric' } )
         div.grid
-          each wd in [ 'M', 'D', 'M', 'D', 'F', 'S', 'S' ]
+          each wd in t( 'generic.wd' ).split( '' )
             div.wd= wd
           - for (let i = 0; i < total; i++) {
             - const dayNum = i - startDay + 1

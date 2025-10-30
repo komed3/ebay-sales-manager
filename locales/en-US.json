@@ -76,7 +76,8 @@
       "submit": "Submit"
     },
     "name": "eBay Sales Manager",
-    "title": "{{site}} — eBay Sales Manager"
+    "title": "{{site}} — eBay Sales Manager",
+    "wd": "MTWTFSS"
   },
   "map": {
     "_meta": {
