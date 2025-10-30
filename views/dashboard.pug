@@ -19,27 +19,19 @@ block main
 
   div.column
     div.box
-      h3 eBay Sales Manager
-      p
-       | Verwaltung von privaten eBay Bestellungen hilft bei der Erfassung von Umsätzen,
-       | Profiten und Kundendaten. Unterstützt werden der Export von Reporten und Statistiken,
-       | Einblick in detaillierte Umsatzdaten und eine Kartenansicht aller Kundenstandorte.
-      p
-       | Neue Bestellungen können schnell und einfach über das Formular erfasst werden.
-       | Berichte und Statistiken helfen dabei, den Überblick über Verkäufe und Gewinne zu
-       | behalten und werden vom System automatisch generiert. Eine filterbare Liste aller
-       | Bestellungen erleichtert die Verwaltung und Nachverfolgung von Verkäufen, über die
-       | Kartenansicht werden Bestellungen nach Standort visualisiert.
+      h3= t( 'generic.name' )
+      p= t( 'dashboard.intro.first' )
+      p= t( 'dashboard.intro.second' )
       div.box-col.dashboard-links
         +text_nav( [
-          { path: '/orders', label: 'Bestellungen', icon: 'table.svg' },
-          { path: '/form', label: 'Neue Bestellung', icon: 'add.svg' },
-          { path: '/customers', label: 'Kunden', icon: 'user.svg' },
-          { path: '/stats', label: 'Umsatz & Statistik', icon: 'chart.svg' },
-          { path: '/map', label: 'Karte', icon: 'map.svg' },
-          { path: '/report', label: 'Finanzberichte', icon: 'database.svg' }
+          { path: '/orders', label: t( 'orders._meta.title' ), icon: 'table.svg' },
+          { path: '/form', label: t( 'form._meta.title' ), icon: 'add.svg' },
+          { path: '/customers', label: t( 'customers._meta.title' ), icon: 'user.svg' },
+          { path: '/stats', label: t( 'stats._meta.title' ), icon: 'chart.svg' },
+          { path: '/map', label: t( 'map._meta.title' ), icon: 'map.svg' },
+          { path: '/report', label: t( 'report._meta.title' ), icon: 'database.svg' }
         ] )
 
     div.box
-      h3 Gewinnmarge
+      h3= t( 'generic.finance.margin' )
       +chart( 'margin', stats )

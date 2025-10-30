@@ -1,9 +1,9 @@
 import { getOrderStats } from '../storage.js';
 
-export function dashboard ( _, res ) {
+export function dashboard ( req, res ) {
 
     res.render( 'dashboard', {
-        path: '/', title: 'Dashboard',
+        path: '/', title: req.t( 'dashboard._meta.title' ),
         stats: getOrderStats()
     } );
 

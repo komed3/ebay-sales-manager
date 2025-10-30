@@ -22,6 +22,10 @@
   "dashboard": {
     "_meta": {
       "title": "Dashboard"
+    },
+    "intro": {
+      "first": "Verwaltung von privaten eBay Bestellungen hilft bei der Erfassung von Umsätzen, Profiten und Kundendaten. Unterstützt werden der Export von Reporten und Statistiken, Einblick in detaillierte Umsatzdaten und eine Kartenansicht aller Kundenstandorte.",
+      "second": "Neue Bestellungen können schnell und einfach über das Formular erfasst werden. Berichte und Statistiken helfen dabei, den Überblick über Verkäufe und Gewinne zu behalten und werden vom System automatisch generiert. Eine filterbare Liste aller Bestellungen erleichtert die Verwaltung und Nachverfolgung von Verkäufen, über die Kartenansicht werden Bestellungen nach Standort visualisiert."
     }
   },
   "form": {
@@ -31,6 +35,9 @@
   },
   "generic": {
     "credits": "Copyright &copy; 2025 <a href=\"https://komed3.de\" target=\"_blank\">komed3</a>. Alle Rechte vorbehalten.",
+    "finance": {
+      "margin": "Gewinnmarge"
+    },
     "logout": "Abmelden",
     "name": "eBay Sales Manager",
     "settings": "Einstellungen",
@@ -46,7 +53,7 @@
       "title": "Bestellungen"
     }
   },
-  "reports": {
+  "report": {
     "_meta": {
       "title": "Finanzberichte"
     }
