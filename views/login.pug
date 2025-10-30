@@ -1,7 +1,7 @@
 extends ./_base
 
 block title
-  title Login — eBay Sales Manager
+  title= t( 'generic.title', { site: t( 'auth._meta.title' ) } )
 
 block styles
   link( rel= "stylesheet", href= "/css/login.min.css" )
@@ -13,13 +13,13 @@ block content
 
   div.login-container.noselect
     h2
-      img( src= "/images/favicon.svg", alt= "eBay Sales Manager" )
-      span eBay Sales Manager
+      img( src= "/images/favicon.svg", alt= t( 'generic.name' ) )
+      span= t( 'generic.name' )
     form( method= "POST" action= "/login" )
-      label( for="username" ) Benutzername
+      label( for="username" )= t( 'auth.form.username' )
       input( type="text" id="username" name="username" required )
-      label( for="password" ) Passwort
+      label( for="password" )= t( 'auth.form.password' )
       input( type="password" id="password" name="password" required )
-      button( type="submit" ) Anmelden
+      button( type="submit" )= t( 'auth.form.submit' )
 
-  div.login-credits Copyright &copy; 2025 <a href= "https://komed3.de" target="_blank">komed3</a>. Alle Rechte vorbehalten.
+  div.login-credits!= t( 'generic.credits' )

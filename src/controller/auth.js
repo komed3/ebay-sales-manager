@@ -12,21 +12,21 @@ export async function auth ( req, res ) {
     const { username, password } = req.body;
 
     if ( ! username || ! password ) return res.render( 'login', {
-        error: 'Bitte Benutzername und Passwort angeben.'
+        error: req.t( 'auth.error.missingInput' )
     } );
 
     // Get user from storage
     const user = getUser( username );
 
     if ( ! user ) return res.render( 'login', {
-        error: 'Unbekannter Benutzer.'
+        error: req.t( 'auth.error.unknownUser' )
     } );
 
     // Check the password
     const valid = await bcrypt.compare( password, user.pass );
 
     if ( ! valid ) return res.render( 'login', {
-        error: 'Falsches Passwort.'
+        error: req.t( 'auth.error.wrongPassword' )
     } );
 
     // Success

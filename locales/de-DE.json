@@ -1,1 +1,22 @@
-{}
+{
+  "auth": {
+    "_meta": {
+      "title": "Anmeldung"
+    },
+    "error": {
+      "missingInput": "Bitte Benutzername und Passwort angeben.",
+      "unknownUser": "Unbekannter Benutzer.",
+      "wrongPassword": "Falsches Passwort."
+    },
+    "form": {
+      "password": "Passwort",
+      "submit": "Anmelden",
+      "username": "Benutzername"
+    }
+  },
+  "generic": {
+    "credits": "Copyright &copy; 2025 <a href=\"https://komed3.de\" target=\"_blank\">komed3</a>. Alle Rechte vorbehalten.",
+    "name": "eBay Sales Manager",
+    "title": "{{site}} — eBay Sales Manager"
+  }
+}
