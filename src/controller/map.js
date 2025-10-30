@@ -1,6 +1,6 @@
 import { getOrders } from '../storage.js';
 
-export function map ( _, res ) {
+export function map ( req, res ) {
 
     const locations = getOrders().map( o => o.location ? {
         ...o.location, ...{
@@ -12,7 +12,7 @@ export function map ( _, res ) {
     } : null ).filter( Boolean );
 
     res.render( 'map', {
-        path: '/map', title: 'Karte',
+        path: '/map', title: req.t( 'map._meta.title' ),
         data: locations
     } );
 
