@@ -36,7 +36,13 @@ block main
           th.right Gewinn
           th.right Marge
       tbody
+        - var total = { revenue: 0, fees: 0, shipping: 0, refund: 0, profit: 0 }
         each order in report.data
+          - total.revenue += order.revenue
+          - total.fees += order.fees
+          - total.shipping += order.shipping
+          - total.refund += order.refund
+          - total.profit += order.profit
           tr
             td: a( href= '/order?uuid=' + order.uuid ): number= order.orderNumber
             td: date= order.orderDate
@@ -47,3 +53,12 @@ block main
             td.right: money= order.refund
             td.right: b: money= order.profit
             td.right: b: pct= order.profit / order.revenue
+      tfoot
+        tr
+          td( colspan= 3 ) Gesamt
+          td.right: money= total.revenue
+          td.right: money= total.fees
+          td.right: money= total.shipping
+          td.right: money= total.refund
+          td.right: b: money= total.profit
+          td.right: b: pct= total.profit / total.revenue
