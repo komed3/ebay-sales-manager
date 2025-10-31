@@ -19,6 +19,7 @@
   "type": "module",
   "scripts": {
     "install": "node scripts/install.js",
+    "newUser": "node scripts/createUser.js",
     "start": "node src/app.js"
   },
   "dependencies": {
