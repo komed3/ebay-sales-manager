@@ -65,12 +65,14 @@ block main
           div.box-row
             span= t( 'order.data.nick' )
             strong: a( href= '/customer?nick=' + data.customer.nick )= data.customer.nick
-          div.box-row
-            span= t( 'order.data.name' )
-            strong= data.customer.name
-          div.box-row
-            span= t( 'order.data.mail' )
-            strong= data.customer.mail
+          if data.customer.name
+            div.box-row
+              span= t( 'order.data.name' )
+              strong= data.customer.name
+          if data.customer.mail
+            div.box-row
+              span= t( 'order.data.mail' )
+              strong= data.customer.mail
           if data.customer.tel
             div.box-row
               span= t( 'order.data.tel' )
