@@ -115,13 +115,15 @@ function renderReportChart ( ctx, data ) {
 
 function renderMarginChart ( ctx, data ) {
 
+    const locals = I18N.chart.margin;
+
     new Chart( ctx, {
         type: 'doughnut',
         data: {
             datasets: [ {
                 data: [
-                    { x: 'Umsatz d. Versand', value: data.shippingRevenue },
-                    { x: 'Umsatz d. Abholung', value: data.pickupRevenue }
+                    { x: locals.shipping, value: data.shippingRevenue },
+                    { x: locals.pickup, value: data.pickupRevenue }
                 ],
                 backgroundColor: [ '#2f88ff', '#1060d6' ],
                 hoverBackgroundColor: [ '#2f88ff', '#1060d6' ],
@@ -131,10 +133,10 @@ function renderMarginChart ( ctx, data ) {
                 borderRadius: 12
             }, {
                 data: [
-                    { x: 'Gewinn', value: data.totalProfit },
-                    { x: 'Versandkosten', value: data.totalShipping },
-                    { x: 'Gebühren', value: data.totalFees },
-                    { x: 'Rückerstattung', value: data.totalRefund }
+                    { x: locals.profit, value: data.totalProfit },
+                    { x: locals.shippingCosts, value: data.totalShipping },
+                    { x: locals.fees, value: data.totalFees },
+                    { x: locals.refund, value: data.totalRefund }
                 ],
                 backgroundColor: [ '#78ac4c', '#ffbb00', '#fb6542', '#698bbe' ],
                 hoverBackgroundColor: [ '#78ac4c', '#ffbb00', '#fb6542', '#698bbe' ],
@@ -144,7 +146,7 @@ function renderMarginChart ( ctx, data ) {
                 borderRadius: 12
             }, {
                 data: [
-                    { x: 'Profitmarge', value: data.profitMargin },
+                    { x: locals.margin, value: data.profitMargin },
                     { value: 100 - data.profitMargin }
                 ],
                 backgroundColor: [ '#000', 'rgba( 0 0 0 / 0 )' ],
@@ -164,13 +166,13 @@ function renderMarginChart ( ctx, data ) {
                         font: { size: 15 },
                         boxWidth: 24,
                         generateLabels: () => [
-                            { text: 'Umsatz d. Versand', fillStyle: '#2f88ff' },
-                            { text: 'Umsatz d. Abholung', fillStyle: '#1060d6' },
-                            { text: 'Gewinn', fillStyle: '#78ac4c' },
-                            { text: 'Versandkosten', fillStyle: '#ffbb00' },
-                            { text: 'Gebühren', fillStyle: '#fb6542' },
-                            { text: 'Rückerstattung', fillStyle: '#698bbe' },
-                            { text: 'Profitmarge', fillStyle: '#000' }
+                            { text: locals.shipping, fillStyle: '#2f88ff' },
+                            { text: locals.pickup, fillStyle: '#1060d6' },
+                            { text: locals.profit, fillStyle: '#78ac4c' },
+                            { text: locals.shippingCosts, fillStyle: '#ffbb00' },
+                            { text: locals.fees, fillStyle: '#fb6542' },
+                            { text: locals.refund, fillStyle: '#698bbe' },
+                            { text: locals.margin, fillStyle: '#000' }
                         ]
                     }
                 },

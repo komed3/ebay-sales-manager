@@ -1,5 +1,18 @@
 {
   "_client": {
+    "chart": {
+      "flow": {},
+      "margin": {
+        "fees": "Sales fees",
+        "margin": "Profit margin",
+        "pickup": "Pickup revenue",
+        "profit": "Total profit",
+        "refund": "Refund",
+        "shipping": "Shipping revenue",
+        "shippingCosts": "Shipping"
+      },
+      "report": {}
+    },
     "map": {
       "more": "Show order"
     }
