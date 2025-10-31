@@ -5,7 +5,7 @@ export function customers ( req, res ) {
     const { results, max } = filterCustomers( req.query ?? {} );
 
     res.render( 'customers', {
-        path: '/customers', title: 'Kunden',
+        path: '/customers', title: req.t( 'customers._meta.title' ),
         query: req.query ?? {},
         data: results,
         pagination: {
