@@ -157,6 +157,7 @@ export async function updateOrder ( raw, files ) {
     const orders = getOrders();
     const idx = orders.findIndex( o => o.__uuid == data.__uuid ) ?? null;
     const now = new Date().toISOString();
+    const uuid = data.__uuid ?? uuidv4();
 
     // Handle invoice PDF upload
     if ( files?.invoicePDF?.size ) {
@@ -187,7 +188,7 @@ export async function updateOrder ( raw, files ) {
         arrayMerge: ( _, source ) => source
     } );
 
-    else orders.push( { ...data, ...{ __created: now, __uuid: uuidv4() } } );
+    else orders.push( { ...data, ...{ __created: now, __uuid: uuid } } );
 
     // Save orders and update stats/reports
     writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
@@ -195,7 +196,7 @@ export async function updateOrder ( raw, files ) {
     updateReport( data.orderDate );
     updateCustomerStats( data.customer.nick );
 
-    return data.__uuid;
+    return uuid;
 
 }
 
