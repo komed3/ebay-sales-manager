@@ -18,6 +18,30 @@
       "username": "Benutzername"
     }
   },
+  "customer": {
+    "action": {
+      "orders": "Bestellungen"
+    },
+    "data": {
+      "addresses": "Adressen",
+      "label": "Stammdaten",
+      "mail": "E-Mail-Adresse:",
+      "name": "Name:",
+      "nick": "Benutzername:",
+      "noAddresses": "(keine Adressen angegeben)",
+      "tel": "Telefonnummer:"
+    },
+    "finance": {
+      "itemCount": "Bestellte Artikel:",
+      "label": "Umsatzdaten",
+      "orderCount": "Anzahl d. Bestellungen:",
+      "margin": "Gewinnmarge:",
+      "profit": "Gewinn:",
+      "refund": "Rückerstattung:",
+      "revenue": "Gesamtumsatz:"
+    },
+    "title": "Kundendaten"
+  },
   "customers": {
     "_meta": {
       "title": "Kunden"

@@ -18,6 +18,30 @@
       "username": "Username"
     }
   },
+  "customer": {
+    "action": {
+      "orders": "Orders"
+    },
+    "data": {
+      "addresses": "Addresses",
+      "label": "Master data",
+      "mail": "Email address:",
+      "name": "Name:",
+      "nick": "Username:",
+      "noAddresses": "(no addresses provided)",
+      "tel": "Phone number:"
+    },
+    "finance": {
+      "itemCount": "Items ordered:",
+      "label": "Financial data",
+      "orderCount": "Number of orders:",
+      "margin": "Profit margin:",
+      "profit": "Profit:",
+      "refund": "Refund:",
+      "revenue": "Total revenue:"
+    },
+    "title": "Customer data"
+  },
   "customers": {
     "_meta": {
       "title": "Customers"

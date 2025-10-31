@@ -4,57 +4,48 @@ include ./mixin/nav
 block main
   div.box
     div.box-row
-      h2 Kundendaten
+      h2= t( 'customer.title' )
       +icon_nav( [
-        { path: '/export?customer=' + data.data.nick, label: 'Exportieren', icon: 'download.svg' },
-        { path: '/orders?search=' + data.data.nick, label: 'Bestellungen', icon: 'table.svg' }
+        { path: '/export?customer=' + data.data.nick, label: t( 'generic.action.export' ), icon: 'download.svg' },
+        { path: '/orders?search=' + data.data.nick, label: t( 'customer.action.orders' ), icon: 'table.svg' }
       ] )
 
   div.column
     div.box
-      h3 Stammdaten
+      h3= t( 'customer.data.label' )
       div.box-col
-        div.box-row
-          span Benutzername:
-          strong= data.data.nick
-        div.box-row
-          span Name:
-          strong= data.data.name
-        div.box-row
-          span E-Mail:
-          strong= data.data.mail
-        if data.data.tel
+        each val, key in data.data
           div.box-row
-            span Telefon:
-            strong= data.data.tel
+            span= t( 'customer.data.' + key )
+            strong= val || '—'
 
     div.box
-      h3 Adressen
+      h3= t( 'customer.data.addresses' )
       if data.addresses.length > 0
         each address in data.addresses
           div.box-row
             span= address.street + ', ' + address.zipCode + ' ' + address.city
       else
-        span (keine Adressen angegeben)
+        span= t( 'customer.data.noAddresses' )
 
     div.box
-      h3 Umsatz
+      h3= t( 'customer.finance.label' )
       div.box-col
         div.box-row
-          span Anzahl d. Bestellungen:
+          span= t( 'customer.finance.orderCount' )
           strong: number= data.stats.orderCount
         div.box-row
-          span Bestellte Artikel:
+          span= t( 'customer.finance.itemCount' )
           strong: number= data.stats.itemCount
         div.box-row
-          span Gesamtumsatz:
+          span= t( 'customer.finance.revenue' )
           strong: money= data.stats.totalRevenue
         div.box-row
-          span Rückerstattung:
+          span= t( 'customer.finance.refund' )
           strong: money= data.stats.totalRefund
         div.box-row
-          span Gewinn:
+          span= t( 'customer.finance.profit' )
           strong: money= data.stats.totalProfit
         div.box-row
-          span Gewinnmarge:
+          span= t( 'customer.finance.margin' )
           strong: pct= data.stats.profitMargin
