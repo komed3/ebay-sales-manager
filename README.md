@@ -28,6 +28,12 @@ Clone the repository:
 git clone https://github.com/komed3/ebay-sales-manager.git
 ```
 
+Create a `.env` file based on the provided `config.env-example` and set your environment variables:
+
+```bash
+cp config.env-example .env
+```
+
 Install dependencies:
 
 ```bash
