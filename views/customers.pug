@@ -7,23 +7,23 @@ block main
       img( src= "/images/icons/filter.svg", alt= "Filter" )
       input(
         type= "text", name= "search", value= query && query.search
-        placeholder= "Suche nach …"
+        placeholder= t( 'generic.filter.search' )
       )
-      button.icon( type= "submit", title= "Filtern" )
-        img( src= "/images/icons/search.svg", alt= "Filtern" )
-      a( href= "/customers", title= "Filter löschen" )
-        img( src= "/images/icons/clear.svg", alt= "Zurücksetzen" )
+      button.icon( type= "submit", title= t( 'generic.filter.filter' ) )
+        img( src= "/images/icons/search.svg", alt= t( 'generic.filter.filter' ) )
+      a( href= "/customers", title= t( 'generic.filter.clear' ) )
+        img( src= "/images/icons/clear.svg", alt= t( 'generic.filter.clear' ) )
 
   div.box
     table#customers
       thead
         tr
-          th Benutzername
-          th Name
-          th.right Bestellungen
-          th.right Umsatz
-          th.right Gewinn
-          th.right Marge
+          th= t( 'customers.table.nick' )
+          th= t( 'customers.table.name' )
+          th.right= t( 'customers.table.count' )
+          th.right= t( 'customers.table.revenue' )
+          th.right= t( 'customers.table.profit' )
+          th.right= t( 'customers.table.margin' )
       tbody
         each customer in data
           tr

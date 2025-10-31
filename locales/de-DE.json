@@ -21,6 +21,14 @@
   "customers": {
     "_meta": {
       "title": "Kunden"
+    },
+    "table": {
+      "nick": "Benutzername",
+      "name": "Name",
+      "count": "Bestellungen",
+      "revenue": "Umsatz",
+      "profit": "Gewinn",
+      "margin": "Marge"
     }
   },
   "dashboard": {

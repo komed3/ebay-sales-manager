@@ -21,6 +21,14 @@
   "customers": {
     "_meta": {
       "title": "Customers"
+    },
+    "table": {
+      "nick": "Username",
+      "name": "Name",
+      "count": "Orders",
+      "revenue": "Revenue",
+      "profit": "Profit",
+      "margin": "Margin"
     }
   },
   "dashboard": {
