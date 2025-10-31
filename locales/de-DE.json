@@ -1,4 +1,9 @@
 {
+  "_client": {
+    "map": {
+      "more": "Weitere Details"
+    }
+  },
   "auth": {
     "_meta": {
       "title": "Anmeldung"

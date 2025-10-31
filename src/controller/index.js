@@ -67,8 +67,11 @@ router.use( ( req, res, next ) => {
 
     }
 
-    res.locals.langISO = res.locals.lang.split( '-' )[ 0 ];
     req.i18n.changeLanguage( res.locals.lang );
+
+    res.locals.i18n = req.t( '_client', { returnObjects: true } );
+    res.locals.langISO = res.locals.lang.split( '-' )[ 0 ];
+
     next();
 
 } );

@@ -11,6 +11,8 @@ html( lang= lang, currency= currency, layer= layer )
       title= t( 'generic.name' )
 
     link( rel= "stylesheet", href= "/css/global.min.css" )
+    script.
+      const I18N = !{ JSON.stringify( i18n ) };
 
     block scripts
     block styles

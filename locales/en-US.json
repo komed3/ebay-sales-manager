@@ -1,4 +1,9 @@
 {
+  "_client": {
+    "map": {
+      "more": "Show order"
+    }
+  },
   "auth": {
     "_meta": {
       "title": "Login"
