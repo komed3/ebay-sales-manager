@@ -28,7 +28,7 @@ function renderReportChart ( ctx, data ) {
                 data: profitMargin,
                 type: 'line',
                 yAxisID: 'y2',
-                label: 'Gewinnmarge',
+                label: I18N.chart.margin,
                 pointRadius: 6,
                 pointHoverRadius: 6,
                 tension: 0.3,
@@ -41,28 +41,28 @@ function renderReportChart ( ctx, data ) {
             }, {
                 data: totalShipping,
                 stack: 'finances',
-                label: 'Versandkosten',
+                label: I18N.chart.shippingCosts,
                 backgroundColor: '#ffbb00',
                 hoverBackgroundColor: '#ffbb00',
                 borderWidth: 0
             }, {
                 data: totalFees,
                 stack: 'finances',
-                label: 'Gebühren',
+                label: I18N.chart.fees,
                 backgroundColor: '#fb6542',
                 hoverBackgroundColor: '#fb6542',
                 borderWidth: 0
             }, {
                 data: totalRefund,
                 stack: 'finances',
-                label: 'Erstattungen',
+                label: I18N.chart.refund,
                 backgroundColor: '#698bbe',
                 hoverBackgroundColor: '#698bbe',
                 borderWidth: 0
             }, {
                 data: totalProfit,
                 stack: 'finances',
-                label: 'Gewinn',
+                label: I18N.chart.profit,
                 backgroundColor: '#78ac4c',
                 hoverBackgroundColor: '#78ac4c',
                 borderWidth: 0
@@ -115,15 +115,13 @@ function renderReportChart ( ctx, data ) {
 
 function renderMarginChart ( ctx, data ) {
 
-    const locals = I18N.chart.margin;
-
     new Chart( ctx, {
         type: 'doughnut',
         data: {
             datasets: [ {
                 data: [
-                    { x: locals.shipping, value: data.shippingRevenue },
-                    { x: locals.pickup, value: data.pickupRevenue }
+                    { x: I18N.chart.shipping, value: data.shippingRevenue },
+                    { x: I18N.chart.pickup, value: data.pickupRevenue }
                 ],
                 backgroundColor: [ '#2f88ff', '#1060d6' ],
                 hoverBackgroundColor: [ '#2f88ff', '#1060d6' ],
@@ -133,10 +131,10 @@ function renderMarginChart ( ctx, data ) {
                 borderRadius: 12
             }, {
                 data: [
-                    { x: locals.profit, value: data.totalProfit },
-                    { x: locals.shippingCosts, value: data.totalShipping },
-                    { x: locals.fees, value: data.totalFees },
-                    { x: locals.refund, value: data.totalRefund }
+                    { x: I18N.chart.profit, value: data.totalProfit },
+                    { x: I18N.chart.shippingCosts, value: data.totalShipping },
+                    { x: I18N.chart.fees, value: data.totalFees },
+                    { x: I18N.chart.refund, value: data.totalRefund }
                 ],
                 backgroundColor: [ '#78ac4c', '#ffbb00', '#fb6542', '#698bbe' ],
                 hoverBackgroundColor: [ '#78ac4c', '#ffbb00', '#fb6542', '#698bbe' ],
@@ -146,7 +144,7 @@ function renderMarginChart ( ctx, data ) {
                 borderRadius: 12
             }, {
                 data: [
-                    { x: locals.margin, value: data.profitMargin },
+                    { x: I18N.chart.margin, value: data.profitMargin },
                     { value: 100 - data.profitMargin }
                 ],
                 backgroundColor: [ '#000', 'rgba( 0 0 0 / 0 )' ],
@@ -166,13 +164,13 @@ function renderMarginChart ( ctx, data ) {
                         font: { size: 15 },
                         boxWidth: 24,
                         generateLabels: () => [
-                            { text: locals.shipping, fillStyle: '#2f88ff' },
-                            { text: locals.pickup, fillStyle: '#1060d6' },
-                            { text: locals.profit, fillStyle: '#78ac4c' },
-                            { text: locals.shippingCosts, fillStyle: '#ffbb00' },
-                            { text: locals.fees, fillStyle: '#fb6542' },
-                            { text: locals.refund, fillStyle: '#698bbe' },
-                            { text: locals.margin, fillStyle: '#000' }
+                            { text: I18N.chart.shipping, fillStyle: '#2f88ff' },
+                            { text: I18N.chart.pickup, fillStyle: '#1060d6' },
+                            { text: I18N.chart.profit, fillStyle: '#78ac4c' },
+                            { text: I18N.chart.shippingCosts, fillStyle: '#ffbb00' },
+                            { text: I18N.chart.fees, fillStyle: '#fb6542' },
+                            { text: I18N.chart.refund, fillStyle: '#698bbe' },
+                            { text: I18N.chart.margin, fillStyle: '#000' }
                         ]
                     }
                 },

@@ -1,17 +1,13 @@
 {
   "_client": {
     "chart": {
-      "flow": {},
-      "margin": {
-        "fees": "Gebühren",
-        "margin": "Profitmarge",
-        "pickup": "Umsatz d. Abholung",
-        "profit": "Einnahmen",
-        "refund": "Rückerstattung",
-        "shipping": "Umsatz d. Versand",
-        "shippingCosts": "Versandkosten"
-      },
-      "report": {}
+      "fees": "Gebühren",
+      "margin": "Gewinnmarge",
+      "pickup": "Umsatz d. Abholung",
+      "profit": "Einnahmen",
+      "refund": "Rückerstattung",
+      "shipping": "Umsatz d. Versand",
+      "shippingCosts": "Versandkosten"
     },
     "map": {
       "more": "Weitere Details"
