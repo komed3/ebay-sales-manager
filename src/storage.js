@@ -2,6 +2,7 @@ import { cwd } from './config.js';
 import { existsSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import deepmerge from 'deepmerge';
+import countries from 'i18n-iso-countries';
 import fetch from 'node-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -174,20 +175,17 @@ export async function updateOrder ( raw, files ) {
         arrayMerge: ( _, source ) => source
     } );
 
-    else {
+    const coords = await getCoordinates( [
+        data.customer?.address?.street,
+        data.customer?.address?.zipCode,
+        data.customer?.address?.city,
+        countries.getName( data.customer?.address?.country, 'en' )
+    ].filter( Boolean ).join( ', ' ) );
 
-        const coords = await getCoordinates( [
-            data.customer?.address?.street,
-            data.customer?.address?.zipCode,
-            data.customer?.address?.city
-        ].filter( Boolean ).join( ', ' ) );
-
-        orders.push( { ...data, ...{
-            __created: now, __uuid: uuidv4(),
-            location: coords
-        } } );
-
-    }
+    orders.push( { ...data, ...{
+        __created: now, __uuid: uuidv4(),
+        location: coords
+    } } );
 
     writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
     updateOrderStats();
