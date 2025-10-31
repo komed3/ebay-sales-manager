@@ -9,32 +9,32 @@ append scripts
 
 block main
   div.box
-    h3 Finanzbericht
+    h3= t( 'report.report.label' )
     div.box-col
       +chart( 'flow', report.data )
       div.box-row
-        span Bericht:
+        span= t( 'report.report.select' )
         select( onchange= "location.href='/report?month='+this.value" )
           each item in list
             option( value= item, selected= ( item === report.name ) )= item.replace( '-', ' / ' )
         +icon_nav( [
-          { path: '/export?report=' + report.name, label: 'Exportieren', icon: 'download.svg' }
+          { path: '/export?report=' + report.name, label: t( 'generic.action.export' ), icon: 'download.svg' }
         ] )
 
   div.box
-    h3 Rechnungen in diesem Bericht
+    h3= t( 'report.table.label' )
     table
       thead
         tr
-          th Bestellnummer
-          th Datum
-          th Typ
-          th.right Umsatz
-          th.right Gebühren
-          th.right Versand
-          th.right Erstattung
-          th.right Gewinn
-          th.right Marge
+          th= t( 'report.table.orderNumber' )
+          th= t( 'report.table.orderDate' )
+          th= t( 'report.table.orderType' )
+          th.right= t( 'report.table.revenue' )
+          th.right= t( 'report.table.fees' )
+          th.right= t( 'report.table.shipping' )
+          th.right= t( 'report.table.refund' )
+          th.right= t( 'report.table.profit' )
+          th.right= t( 'report.table.margin' )
       tbody
         - var total = { revenue: 0, fees: 0, shipping: 0, refund: 0, profit: 0 }
         each order in report.data
@@ -46,7 +46,7 @@ block main
           tr
             td: a( href= '/order?uuid=' + order.uuid ): number= order.orderNumber
             td: date= order.orderDate
-            td= { shipping: 'Versand', pickup: 'Abholung' }[ order.orderType ]
+            td= t( 'report.table.' + order.orderType )
             td.right: money= order.revenue
             td.right: money= order.fees
             td.right: money= order.shipping

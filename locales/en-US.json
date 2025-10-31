@@ -198,7 +198,25 @@
   "report": {
     "_meta": {
       "title": "Reports"
-    }
+    },
+    "report": {
+      "label": "Financial report",
+      "select": "Report:"
+    },
+    "table": {
+      "fees": "Fees",
+      "label": "Invoices in this report",
+      "margin": "Margin",
+      "orderDate": "Date",
+      "orderNumber": "Order number",
+      "orderType": "Type",
+      "pickup": "Pickup",
+      "profit": "Profit",
+      "refund": "Refund",
+      "revenue": "Revenue",
+      "shipping": "Shipping"
+    },
+    "title": "Report for {{report}}"
   },
   "settings": {
     "_meta": {

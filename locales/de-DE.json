@@ -198,7 +198,25 @@
   "report": {
     "_meta": {
       "title": "Finanzberichte"
-    }
+    },
+    "report": {
+      "label": "Finanzbericht",
+      "select": "Bericht:"
+    },
+    "table": {
+      "fees": "Gebühren",
+      "label": "Rechnungen in diesem Bericht",
+      "margin": "Marge",
+      "orderDate": "Datum",
+      "orderNumber": "Bestellnummer",
+      "orderType": "Typ",
+      "pickup": "Abholung",
+      "profit": "Gewinn",
+      "refund": "Erstattung",
+      "revenue": "Umsatz",
+      "shipping": "Versand"
+    },
+    "title": "Finanzbericht für {{report}}"
   },
   "settings": {
     "_meta": {

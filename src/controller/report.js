@@ -12,12 +12,12 @@ export function report ( req, res ) {
 
     } else {
 
-        const label = new Date( req.query.month + '-01' ).toLocaleDateString( 'de-DE', {
+        const label = new Date( req.query.month + '-01' ).toLocaleDateString( res.locals.lang, {
             month: 'long', year: 'numeric'
         } );
 
         res.render( 'report', {
-            path: '/report', title: 'Finanzbericht für ' + label,
+            path: '/report', title: req.t( 'report.title', { report: label } ),
             list: list,
             report: {
                 name: req.query.month,
