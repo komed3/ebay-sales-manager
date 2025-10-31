@@ -36,9 +36,11 @@ export async function auth ( req, res ) {
 
 }
 
-export function logout ( _, res ) {
+export function logout ( req, res ) {
 
-    req.session = null
+    // Destroy current session
+    req.session = null;
+
     res.clearCookie( 'connect.sid' );
     res.redirect( '/login' );
 
