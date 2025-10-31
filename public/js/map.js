@@ -41,7 +41,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
                 ${entry.address.street}<br />
                 ${entry.address.zipCode} ${entry.address.city}<br />
                 ${entry.country}<br />
-                <a href="${ new URL( '/order?uuid=' + entry.uuid, __url ).toString() }">Weitere Details</a>
+                <a href="${ new URL( '/order?uuid=' + entry.uuid, __url ).toString() }">${ I18N.map.more }</a>
             ` ).addTo( markers );
 
         } );

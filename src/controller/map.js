@@ -10,8 +10,8 @@ export function map ( req, res ) {
             name: o.customer.name,
             address: o.customer.address,
             country: countries.getName(
-                res.locals.langISO,
                 o.customer.address.country,
+                res.locals.langISO,
                 { select: 'official' }
             )
         }
