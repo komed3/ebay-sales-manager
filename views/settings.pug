@@ -10,7 +10,7 @@ block main
 
   form( method= "POST", action= "/settings" )
     - var user = data?.user || {}
-    - var s = user.settings || {}
+    - var s = { ...{ currency: 'USD', lang: 'en-US', layer: 'carto' }, ...( user.settings || {} ) }
 
     div.column
       div.box
