@@ -1,4 +1,5 @@
 import { filterCustomers, getCustomer, isCustomer } from '../storage.js';
+import countries from 'i18n-iso-countries';
 
 export function customers ( req, res ) {
 
@@ -23,6 +24,7 @@ export function customer ( req, res ) {
 
     if ( isCustomer( customer ) ) res.render( 'customer', {
         path: '/customers', title: '@' + customer.data.nick,
+        getName: countries.getName,
         data: customer
     } );
 

@@ -22,9 +22,11 @@ block main
     div.box
       h3= t( 'customer.data.addresses' )
       if data.addresses.length > 0
-        each address in data.addresses
-          div.box-row
-            span= address.street + ', ' + address.zipCode + ' ' + address.city
+        div.box-col
+          each address in data.addresses
+            - var countryName = getName( langISO, address.country, { select: 'official' } )
+            div.box-row
+              span!= address.street + '<br />' + address.zipCode + ' ' + address.city + '<br />' + countryName
       else
         span= t( 'customer.data.noAddresses' )
 
