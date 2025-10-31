@@ -3,10 +3,6 @@ import bcrypt from 'bcrypt';
 
 export function login ( _, res ) { res.render( 'login' ) }
 
-export function logout ( req, res ) { req.session.destroy(
-    () => res.redirect( '/login/' )
-) }
-
 export async function auth ( req, res ) {
 
     const { username, password } = req.body;
@@ -37,5 +33,13 @@ export async function auth ( req, res ) {
     };
 
     res.redirect( '/' );
+
+}
+
+export function logout ( _, res ) {
+
+    req.session = null
+    res.clearCookie( 'connect.sid' );
+    res.redirect( '/login' );
 
 }
