@@ -41,4 +41,4 @@ app.use( '/upload', serveStatic( join( cwd, 'data/upload' ) ) );
 app.use( router );
 
 // Listen on port 3000
-app.listen( 3000, () => console.log( `Server is running!` ) );
+app.listen( process.env.PORT || config.PORT || 3000, () => console.log( `Server is running!` ) );
