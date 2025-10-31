@@ -1,4 +1,5 @@
 import { deleteOrder, getOrder, isOrder, updateOrder } from '../storage.js';
+import countries from 'i18n-iso-countries';
 
 export function form ( req, res ) {
 
@@ -6,6 +7,7 @@ export function form ( req, res ) {
 
     if ( ! req.query.uuid || isOrder( order ) ) res.render( 'form', {
         path: '/form', title: req.t( 'form._meta.title' ),
+        countries: countries.getNames( res.locals.lang.substring( 0, 2 ), { select: 'official' } ),
         data: order
     } );
 

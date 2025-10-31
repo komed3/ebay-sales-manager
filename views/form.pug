@@ -98,7 +98,8 @@ block main
             )
           - var country = address.country || 'de'
           select( name= "customer.address.country", required )
-            option( value= "de", selected= ( country == 'de' ) ) Deutschland
+            each label, key in countries
+              option( value= key, selected= ( country == key ) )= label
 
     div.box
       h3= t( 'form.form.article' )
