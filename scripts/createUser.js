@@ -33,7 +33,7 @@ users[ nick ] = {
 };
 
 // Save to file
-writeFileSync( usersFile, JSON.stringify( users, null, 4 ), 'utf8' );
+writeFileSync( usersFile, JSON.stringify( users, null, 2 ), 'utf8' );
 console.log( `User "${ nick }" created successfully.` );
 
 rl.close();

@@ -19,8 +19,8 @@
   "type": "module",
   "scripts": {
     "install": "node scripts/install.js",
-    "newUser": "node scripts/createUser.js",
-    "start": "node src/app.js"
+    "start": "node src/app.js",
+    "user": "node scripts/createUser.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
