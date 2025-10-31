@@ -2,7 +2,8 @@
 
 > [!WARNING]
 > **Only for private eBay sellers!**
-> This application is intended for private eBay sellers to manage their sales and customer data. It is not designed for business or commercial use.
+> This application is intended for private eBay sellers to manage their sales and customer data.
+> It is not designed for business or commercial use.
 
 Managing private eBay orders helps you track sales, profits, and customer data. The system supports the export of reports and statistics, provides insight into detailed sales data, and offers a map view of all customer locations.
 
