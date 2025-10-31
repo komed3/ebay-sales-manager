@@ -3,7 +3,7 @@ import { i18nHandler } from './i18n.js';
 import { router } from './controller/index.js';
 import { join } from 'node:path';
 import express, { static as serveStatic } from 'express';
-import session from 'express-session';
+import session from 'cookie-session';
 import fileUpload from 'express-fileupload';
 
 // Express app
