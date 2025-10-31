@@ -152,7 +152,8 @@
       "profitMargin": "Gewinnmarge"
     },
     "title": "{{site}} — eBay Sales Manager",
-    "wd": "MDMDFSS"
+    "wd": "MDMDFSS",
+    "welcome": "Willkommen <q>{{name}}</q>"
   },
   "map": {
     "_meta": {

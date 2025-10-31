@@ -19,7 +19,7 @@ block main
 
   div.column
     div.box
-      h3= t( 'generic.name' )
+      h3!= t( 'generic.welcome', currentUser )
       p= t( 'dashboard.intro.first' )
       p= t( 'dashboard.intro.second' )
       div.box-col.dashboard-links

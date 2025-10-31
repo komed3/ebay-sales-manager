@@ -152,7 +152,8 @@
       "profitMargin": "Profit margin"
     },
     "title": "{{site}} — eBay Sales Manager",
-    "wd": "MTWTFSS"
+    "wd": "MTWTFSS",
+    "welcome": "Welcome <q>{{name}}</q>"
   },
   "map": {
     "_meta": {
