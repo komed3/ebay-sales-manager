@@ -7,7 +7,7 @@ export function form ( req, res ) {
 
     if ( ! req.query.uuid || isOrder( order ) ) res.render( 'form', {
         path: '/form', title: req.t( 'form._meta.title' ),
-        countries: countries.getNames( res.locals.lang.substring( 0, 2 ), { select: 'official' } ),
+        countries: countries.getNames( res.locals.langISO, { select: 'official' } ),
         data: order
     } );
 
