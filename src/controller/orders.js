@@ -1,4 +1,5 @@
 import { filterOrders, getOrder, isOrder } from '../storage.js';
+import countries from 'i18n-iso-countries';
 
 export function orders ( req, res ) {
 
@@ -23,6 +24,7 @@ export function order ( req, res ) {
 
     if ( isOrder( order ) ) res.render( 'order', {
         path: '/orders', title: req.t( 'order._meta.title', { record: order.recordNumber } ),
+        getName: countries.getName,
         data: order
     } );
 

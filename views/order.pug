@@ -77,17 +77,19 @@ block main
               strong= data.customer.tel
 
       if data.customer.address && data.location
-        - var { street, zipCode, city } = data.customer.address
+        - var { street, zipCode, city, country } = data.customer.address
+        - var countryName = getName( langISO, country, {select: 'official' } )
         div.box
           h3= t( 'order.data.address' )
           +map( [ { ...data.location, ...{
             type: data.orderType, uuid: data.__uuid,
             number: data.orderNumber,
             name: data.customer.name,
-            address: data.customer.address
+            address: data.customer.address,
+            country: countryName
           } } ] )
           div.box-row
-            span= street + ', ' + zipCode + ' ' + city
+            span!= street + ', ' + zipCode + ' ' + city + '<br />' + countryName
 
   if data.article && data.article.length
     div.box
