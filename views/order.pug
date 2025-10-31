@@ -91,7 +91,7 @@ block main
             country: countryName
           } } ] )
           div.box-row
-            span!= street + ', ' + zipCode + ' ' + city + '<br />' + countryName
+            span!= street + '<br />' + zipCode + ' ' + city + '<br />' + countryName
 
   if data.article && data.article.length
     div.box
