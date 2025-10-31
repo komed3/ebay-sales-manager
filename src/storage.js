@@ -2,7 +2,6 @@ import { cwd } from './config.js';
 import { existsSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import deepmerge from 'deepmerge';
-import countries from 'i18n-iso-countries';
 import fetch from 'node-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -174,8 +173,7 @@ export async function updateOrder ( raw, files ) {
     const address = [
         data.customer?.address?.street,
         data.customer?.address?.zipCode,
-        data.customer?.address?.city,
-        countries.getName( data.customer?.address?.country, 'en' )
+        data.customer?.address?.city
     ].filter( Boolean );
 
     if ( address.length > 1 ) data.location = await getCoordinates( address.join( ', ' ) );
