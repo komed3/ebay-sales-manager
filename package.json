@@ -17,6 +17,7 @@
     "url": "https://github.com/komed3/ebay-sales-manager/issues"
   },
   "type": "module",
+  "main": "src/app.js",
   "scripts": {
     "createUser": "node scripts/createUser.js",
     "install": "node scripts/install.js",
