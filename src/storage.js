@@ -159,6 +159,7 @@ export async function updateOrder ( raw, files ) {
     const idx = orders.findIndex( o => o.__uuid == data.__uuid ) ?? null;
     const now = new Date().toISOString();
 
+    // Handle invoice PDF upload
     if ( files?.invoicePDF?.size ) {
 
         const pdfName = `${ uuidv4() }.pdf`;
@@ -169,24 +170,31 @@ export async function updateOrder ( raw, files ) {
 
     }
 
-    data.__updated = now;
-
-    if ( idx >= 0 ) orders[ idx ] = deepmerge( orders[ idx ], data, {
-        arrayMerge: ( _, source ) => source
-    } );
-
-    const coords = await getCoordinates( [
+    // Fetch coordinates from address
+    const address = [
         data.customer?.address?.street,
         data.customer?.address?.zipCode,
         data.customer?.address?.city,
         countries.getName( data.customer?.address?.country, 'en' )
-    ].filter( Boolean ).join( ', ' ) );
+    ].filter( Boolean );
 
-    orders.push( { ...data, ...{
+    if ( address.length > 1 ) data.location = await getCoordinates( address.join( ', ' ) );
+    else data.location = null;
+
+    // Update timestamp
+    data.__updated = now;
+
+    // Update existing or add new order
+    if ( idx >= 0 ) orders[ idx ] = deepmerge( orders[ idx ], data, {
+        arrayMerge: ( _, source ) => source
+    } );
+
+    else orders.push( { ...data, ...{
         __created: now, __uuid: uuidv4(),
         location: coords
     } } );
 
+    // Save orders and update stats/reports
     writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
     updateOrderStats();
     updateReport( data.orderDate );
