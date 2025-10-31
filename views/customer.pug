@@ -24,7 +24,7 @@ block main
       if data.addresses.length > 0
         div.box-col
           each address in data.addresses
-            - var countryName = getName( langISO, address.country, { select: 'official' } )
+            - var countryName = getName( address.country, langISO, { select: 'official' } )
             div.box-row
               span!= address.street + '<br />' + address.zipCode + ' ' + address.city + '<br />' + countryName
       else

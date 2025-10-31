@@ -78,7 +78,7 @@ block main
 
       if data.customer.address && data.location
         - var { street, zipCode, city, country } = data.customer.address
-        - var countryName = getName( langISO, country, {select: 'official' } )
+        - var countryName = getName( country, langISO, {select: 'official' } )
         div.box
           h3= t( 'order.data.address' )
           +map( [ { ...data.location, ...{
