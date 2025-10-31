@@ -30,7 +30,7 @@ block main
             td: a(
               href= '/customer?nick=' + customer.data.nick
             )= '@' + customer.data.nick
-            td= customer.data.name
+            td= customer.data.name || '—'
             td.right: number= customer.stats.orderCount
             td.right: money= customer.stats.totalRevenue
             td.right: money= customer.stats.totalProfit

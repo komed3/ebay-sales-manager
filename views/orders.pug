@@ -36,7 +36,7 @@ block main
               href= '/order?uuid=' + order.__uuid
             )= '#' + order.orderNumber
             td: date= order.orderDate
-            td= order.customer.name + ' (@' + order.customer.nick + ')'
+            td= ( order.customer.name || '—' ) + ' (@' + order.customer.nick + ')'
             td= t( 'orders.table.' + order.orderType )
             td.right: money= order.revenue
             td.right: money= order.fees
