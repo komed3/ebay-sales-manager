@@ -3,6 +3,7 @@
     "chart": {
       "fees": "Gebühren",
       "margin": "Gewinnmarge",
+      "order": "Bestellung",
       "pickup": "Umsatz d. Abholung",
       "profit": "Einnahmen",
       "refund": "Rückerstattung",

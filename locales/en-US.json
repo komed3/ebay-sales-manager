@@ -3,6 +3,7 @@
     "chart": {
       "fees": "Sales fees",
       "margin": "Profit margin",
+      "order": "Order",
       "pickup": "Pickup revenue",
       "profit": "Total profit",
       "refund": "Refund",

@@ -192,13 +192,13 @@ function renderMarginChart ( ctx, data ) {
 function renderFlowChart ( ctx, data ) {
 
     const labels = {
-        order: { label: 'Bestellung', color: '#ccc' },
-        shipping: { label: 'Versand', color: '#89b5f6' },
-        pickup: { label: 'Abholung', color: '#89b5f6' },
-        profit: { label: 'Gewinn', color: '#9fc67e' },
-        shippingCost: { label: 'Versandkosten', color: '#ffcf4d' },
-        fees: { label: 'Gebühren', color: '#fda28d' },
-        refund: { label: 'Rückerstattung', color: '#c2d0e4' }
+        order: { label: I18N.chart.order, color: '#ccc' },
+        shipping: { label: I18N.chart.shipping, color: '#89b5f6' },
+        pickup: { label: I18N.chart.pickup, color: '#89b5f6' },
+        profit: { label: I18N.chart.profit, color: '#9fc67e' },
+        shippingCost: { label: I18N.chart.shippingCosts, color: '#ffcf4d' },
+        fees: { label: I18N.chart.fees, color: '#fda28d' },
+        refund: { label: I18N.chart.refund, color: '#c2d0e4' }
     };
 
     const flowMap = new Map();
@@ -229,7 +229,6 @@ function renderFlowChart ( ctx, data ) {
         type: 'sankey',
         data: {
             datasets: [ {
-                label: 'Bestellungen',
                 labels: Object.fromEntries(
                     Object.entries( labels ).map( ( [ k, v ] ) => [ k, v.label ] )
                 ),
