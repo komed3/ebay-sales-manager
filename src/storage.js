@@ -187,10 +187,7 @@ export async function updateOrder ( raw, files ) {
         arrayMerge: ( _, source ) => source
     } );
 
-    else orders.push( { ...data, ...{
-        __created: now, __uuid: uuidv4(),
-        location: coords
-    } } );
+    else orders.push( { ...data, ...{ __created: now, __uuid: uuidv4() } } );
 
     // Save orders and update stats/reports
     writeFileSync( ordersFile, JSON.stringify( orders, null, 2 ), 'utf8' );
