@@ -12,12 +12,16 @@ append styles
   link( rel= "stylesheet", href= "/css/stats.min.css" )
 
 block main
-  h2 Umsatz
+  h2= t( 'stats.revenue' )
     div.actions
-      a( href= "/stats?type=monthly", class= ( query.type === 'monthly' ? 'active' : '' ) ) Monatlich
-      a( href= "/stats?type=annual", class= ( query.type === 'annual' ? 'active' : '' ) ) Jährlich
+      each type in [ 'monthly', 'annual' ]
+        a(
+          href= '/stats?type=' + type,
+          class= ( query.type === type ? 'active' : '' )
+        )= t( 'stats.type.' + type )
+
   +chart( 'report', reports )
-  h2 Statistik
+  h2= t( 'stats.stats' )
   +stats( stats )
-  h2 Kalender
+  h2= t( 'stats.calendar' )
   +calendar( dates )

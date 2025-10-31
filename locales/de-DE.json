@@ -222,6 +222,13 @@
   "stats": {
     "_meta": {
       "title": "Umsatz & Statistik"
+    },
+    "calendar": "Kalender",
+    "revenue": "Umsatz",
+    "stats": "Statistik",
+    "type": {
+      "annual": "Jährlich",
+      "monthly": "Monatlich"
     }
   }
 }

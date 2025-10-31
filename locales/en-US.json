@@ -222,6 +222,13 @@
   "stats": {
     "_meta": {
       "title": "Statistics"
+    },
+    "calendar": "Calendar",
+    "revenue": "Revenue",
+    "stats": "Stats",
+    "type": {
+      "annual": "Annual",
+      "monthly": "Monthly"
     }
   }
 }
