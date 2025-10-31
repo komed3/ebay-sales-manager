@@ -18,6 +18,7 @@
   },
   "type": "module",
   "scripts": {
+    "install": "node scripts/install.js",
     "start": "node src/app.js"
   },
   "dependencies": {
