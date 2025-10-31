@@ -1,4 +1,5 @@
 import { getOrders } from '../storage.js';
+import countries from 'i18n-iso-countries';
 
 export function map ( req, res ) {
 
@@ -7,7 +8,12 @@ export function map ( req, res ) {
             type: o.orderType, uuid: o.__uuid,
             number: o.orderNumber,
             name: o.customer.name,
-            address: o.customer.address
+            address: o.customer.address,
+            country: countries.getName(
+                res.locals.langISO,
+                o.customer.address.country,
+                { select: 'official' }
+            )
         }
     } : null ).filter( Boolean );
 
