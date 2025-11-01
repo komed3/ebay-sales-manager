@@ -1,0 +1,12 @@
+mixin table_header( entries, query, defSort, defDir )
+  - var hrefQuery = new URLSearchParams( query )
+  - var sortDir = hrefQuery.get( 'dir' ) || query.dir || defDir
+  - hrefQuery.set( 'dir', sortDir === 'asc' ? 'desc' : 'asc' )
+  thead
+    tr
+      each entry in entries
+        - hrefQuery.set( 'sort', entry.sort || entry.key )
+        th( class= ( entry.class || '' ) + (
+          query.sort === ( entry.sort || entry.key ) ? ' sorted ' + sortDir : ''
+        ) )
+          a( href= '?' + hrefQuery.toString() )= entry.label
