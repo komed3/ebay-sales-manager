@@ -1,5 +1,6 @@
 extends ./_layout
 include ./mixin/pagination
+include ./mixin/table
 
 block main
   form.box( method= "GET", action= "/orders" )
@@ -19,16 +20,16 @@ block main
 
   div.box
     table#orders
-      thead
-        tr
-          th= t( 'orders.table.orderNumber' )
-          th= t( 'orders.table.orderDate' )
-          th= t( 'orders.table.customer' )
-          th= t( 'orders.table.orderType' )
-          th.right= t( 'orders.table.revenue' )
-          th.right= t( 'orders.table.fees' )
-          th.right= t( 'orders.table.shipping' )
-          th.right= t( 'orders.table.profit' )
+      +table_header( [
+        { label: t( 'orders.table.orderNumber' ), sort: 'orderNumber' },
+        { label: t( 'orders.table.orderDate' ), sort: 'orderDate' },
+        { label: t( 'orders.table.customer' ), sort: 'customer.nick' },
+        { label: t( 'orders.table.orderType' ), sort: 'orderType' },
+        { label: t( 'orders.table.revenue' ), sort: 'revenue', class: 'right' },
+        { label: t( 'orders.table.fees' ), sort: 'fees', class: 'right' },
+        { label: t( 'orders.table.shipping' ), sort: 'shipping', class: 'right' },
+        { label: t( 'orders.table.profit' ), sort: 'profit', class: 'right' }
+      ], query, 'orderDate', 'desc' )
       tbody
         each order in data
           tr
