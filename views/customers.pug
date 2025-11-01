@@ -1,5 +1,6 @@
 extends ./_layout
 include ./mixin/pagination
+include ./mixin/table
 
 block main
   form.box( method= "GET", action= "/customers" )
@@ -16,14 +17,14 @@ block main
 
   div.box
     table#customers
-      thead
-        tr
-          th= t( 'customers.table.nick' )
-          th= t( 'customers.table.name' )
-          th.right= t( 'customers.table.count' )
-          th.right= t( 'customers.table.revenue' )
-          th.right= t( 'customers.table.profit' )
-          th.right= t( 'customers.table.margin' )
+      +table_header( [
+        { label: t( 'customers.table.nick' ), sort: 'data.nick' },
+        { label: t( 'customers.table.name' ), sort: 'data.name' },
+        { label: t( 'customers.table.count' ), sort: 'stats.orderCount', class: 'right' },
+        { label: t( 'customers.table.revenue' ), sort: 'stats.totalRevenue', class: 'right' },
+        { label: t( 'customers.table.profit' ), sort: 'stats.totalProfit', class: 'right' },
+        { label: t( 'customers.table.margin' ), sort: 'stats.profitMargin', class: 'right' }
+      ], query, 'data.nick', 'asc' )
       tbody
         each customer in data
           tr

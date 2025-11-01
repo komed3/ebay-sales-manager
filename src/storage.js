@@ -330,14 +330,30 @@ export function deleteUser ( nick ) {
 export function filterCustomers ( query ) {
 
     const {
-        offset = 0, limit = 32, search = ''
+        search = '', sort = 'data.nick', dir = 'asc',
+        offset = 0, limit = 32
     } = expandDotNotation( query ?? {} );
 
+    // Filter customers
     const customer = Object.values( getCustomers() ).filter( c =>
         JSON.stringify( c ).match( new RegExp( search, 'i' ) )
     );
 
+    // Sort customers
+    customer.sort( ( a, b ) => {
+
+        const aValue = String( sort.split( '.' ).reduce( ( obj, key ) => obj?.[ key ], a ) ?? '' ).toLowerCase();
+        const bValue = String( sort.split( '.' ).reduce( ( obj, key ) => obj?.[ key ], b ) ?? '' ).toLowerCase();
+
+        return dir === 'asc'
+            ? aValue.localeCompare( bValue, undefined, { numeric: true } )
+            : bValue.localeCompare( aValue, undefined, { numeric: true } );
+
+    } );
+
+    // Paginate customers
     const results = customer.slice( offset, offset + limit );
+
     return { results, count: results.length, max: customer.length };
 
 }
