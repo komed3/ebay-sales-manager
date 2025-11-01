@@ -83,6 +83,23 @@ function mergeFields ( obj ) {
 
 }
 
+function sortResults ( results, sort, dir = 'asc' ) {
+
+    results.sort( ( a, b ) => {
+
+        const aValue = String( sort.split( '.' ).reduce( ( obj, key ) => obj?.[ key ], a ) ?? '' ).toLowerCase();
+        const bValue = String( sort.split( '.' ).reduce( ( obj, key ) => obj?.[ key ], b ) ?? '' ).toLowerCase();
+
+        return dir === 'asc'
+            ? aValue.localeCompare( bValue, undefined, { numeric: true } )
+            : bValue.localeCompare( aValue, undefined, { numeric: true } );
+
+    } );
+
+    return results;
+
+}
+
 export async function getCoordinates ( address ) {
 
     if ( ! address || address.trim() === '' ) return null;
@@ -123,17 +140,24 @@ export function getOrders () {
 export function filterOrders ( query ) {
 
     const {
-        offset = 0, limit = 32, search = '',
-        from = '1900-01-01', to = '2100-12-31'
+        search = '', from = '1900-01-01', to = '2100-12-31',
+        sort = 'orderDate', dir = 'desc',
+        offset = 0, limit = 32
     } = expandDotNotation( query ?? {} );
 
+    // Filter orders
     const orders = getOrders().filter( o =>
         JSON.stringify( o ).match( new RegExp( search, 'i' ) ) &&
         new Date( o.orderDate ).getTime() >= new Date( from ).getTime() &&
         new Date( o.orderDate ).getTime() <= new Date( to ).getTime()
     );
 
+    // Sort orders
+    sortResults( orders, sort, dir );
+
+    // Paginate orders
     const results = orders.slice( offset, offset + limit );
+
     return { results, count: results.length, max: orders.length };
 
 }
@@ -340,16 +364,7 @@ export function filterCustomers ( query ) {
     );
 
     // Sort customers
-    customer.sort( ( a, b ) => {
-
-        const aValue = String( sort.split( '.' ).reduce( ( obj, key ) => obj?.[ key ], a ) ?? '' ).toLowerCase();
-        const bValue = String( sort.split( '.' ).reduce( ( obj, key ) => obj?.[ key ], b ) ?? '' ).toLowerCase();
-
-        return dir === 'asc'
-            ? aValue.localeCompare( bValue, undefined, { numeric: true } )
-            : bValue.localeCompare( aValue, undefined, { numeric: true } );
-
-    } );
+    sortResults( customer, sort, dir );
 
     // Paginate customers
     const results = customer.slice( offset, offset + limit );
