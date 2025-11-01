@@ -232,6 +232,20 @@ table th {
     border-bottom: var( --box-border );
 }
 
+table th a:link, table th a:visited {
+    color: inherit;
+}
+
+table th.sorted.asc::after {
+    content: ' ▲';
+    font-size: 0.8em;
+}
+
+table th.sorted.desc::after {
+    content: ' ▼';
+    font-size: 0.8em;
+}
+
 table tbody tr:nth-child( even ) td {
     background: var( --background-color );
 }
