@@ -7,6 +7,7 @@ import { handle } from 'i18next-http-middleware';
 await i18next.use( FsBackend ).init( {
     fallbackLng: 'en-US',
     preload: [ 'en-US', 'de-DE' ],
+    showSupportNotice: false,
     backend: {
         loadPath: join( cwd, 'locales/{{lng}}.json' )
     },
