@@ -36,6 +36,6 @@
     "i18next-http-middleware": "^3.9.2",
     "node-fetch": "^3.3.2",
     "pug": "^3.0.4",
-    "uuid": "^13.0.0"
+    "uuid": "^14.0.0"
   }
 }
