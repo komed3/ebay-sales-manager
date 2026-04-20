@@ -33,7 +33,7 @@
     "i18n-iso-countries": "^7.14.0",
     "i18next": "^26.0.4",
     "i18next-fs-backend": "^2.6.3",
-    "i18next-http-middleware": "^3.9.2",
+    "i18next-http-middleware": "^3.9.3",
     "node-fetch": "^3.3.2",
     "pug": "^3.0.4",
     "uuid": "^14.0.0"
