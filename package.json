@@ -37,5 +37,8 @@
     "node-fetch": "^3.3.2",
     "pug": "^3.0.4",
     "uuid": "^14.0.1"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true
   }
 }
