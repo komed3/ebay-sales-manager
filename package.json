@@ -29,7 +29,7 @@
     "deepmerge": "^4.3.1",
     "dotenv": "^18.0.9",
     "express": "^5.3.0",
-    "express-fileupload": "^1.5.2",
+    "express-fileupload": "^1.6.0",
     "i18n-iso-countries": "^7.14.0",
     "i18next": "^26.7.2",
     "i18next-fs-backend": "^2.6.9",
